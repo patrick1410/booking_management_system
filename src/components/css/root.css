@@ -1,11 +1,21 @@
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
 .root {
+  height: 100vh;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   grid-template-areas:
-    "header header header header"
-    "nav main main main"
-    "footer footer footer footer";
+    "header header header header header"
+    "nav main main main main"
+    "nav main main main main"
+    "nav main main main main"
+    "nav main main main main"
+    "footer footer footer footer footer";
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }

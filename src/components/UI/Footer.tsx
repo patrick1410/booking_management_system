@@ -11,7 +11,7 @@ export const Footer = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Text>
+      <Text textAlign="center">
         &copy;2024 Made by{" "}
         <Link
           _hover={{ textDecoration: "none" }}

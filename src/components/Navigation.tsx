@@ -5,7 +5,16 @@ import { Box, UnorderedList, ListItem } from "@chakra-ui/react";
 export const Navigation = () => {
   return (
     <Box gridArea="nav" as="nav">
-      <UnorderedList style={{ listStyle: "none" }}>
+      <UnorderedList
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-evenly" // adjust later?
+        alignItems="center" // adjust later?
+        height="100%"
+        style={{
+          listStyle: "none",
+        }}
+      >
         <ListItem>
           <Link to={"/login"}>Login</Link>
         </ListItem>
