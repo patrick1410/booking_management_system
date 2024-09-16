@@ -1,0 +1,321 @@
+{
+  "users": [
+    {
+      "id": "a1234567-89ab-cdef-0123-456789abcdef",
+      "username": "jdoe",
+      "password": "password123",
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "phoneNumber": "123-456-7890",
+      "profilePicture": "https://global-uploads.webflow.com/5eecfecbe625d195e35b89f2/624bfb093da7d92733c001c0_Ignacio%20Villafruela%20Rodr%C3%ADguez.jpg"
+    },
+    {
+      "id": "b2345678-90cd-ef01-2345-6789abcdef01",
+      "username": "asimpson",
+      "password": "password234",
+      "name": "Anna Simpson",
+      "email": "annasimpson@example.com",
+      "phoneNumber": "123-456-7891",
+      "profilePicture": "https://example.com/asimpson-profile-pic.jpg"
+    },
+    {
+      "id": "c3456789-01de-f012-3456-789abcdef012",
+      "username": "rjames",
+      "password": "password345",
+      "name": "Robert James",
+      "email": "robertjames@example.com",
+      "phoneNumber": "123-456-7892",
+      "profilePicture": "https://example.com/rjames-profile-pic.jpg"
+    },
+    {
+      "id": "d4567890-12ef-0123-4567-89abcdef0123",
+      "username": "klopez",
+      "password": "password456",
+      "name": "Karen Lopez",
+      "email": "karenlopez@example.com",
+      "phoneNumber": "123-456-7893",
+      "profilePicture": "https://example.com/klopez-profile-pic.jpg"
+    },
+    {
+      "id": "e5678901-23f0-1234-5678-9abcdef01234",
+      "username": "smiller",
+      "password": "password567",
+      "name": "Steve Miller",
+      "email": "stevemiller@example.com",
+      "phoneNumber": "123-456-7894",
+      "profilePicture": "https://example.com/smiller-profile-pic.jpg"
+    }
+  ],
+  "hosts": [
+    {
+      "id": "f1234567-89ab-cdef-0123-456789abcdef",
+      "username": "johnDoe",
+      "password": "johnDoe123",
+      "name": "John Doe",
+      "email": "johndoe@email.com",
+      "phoneNumber": "+11234567890",
+      "profilePicture": "https://example.com/images/johndoe.jpg",
+      "aboutMe": "I'm a passionate traveler who loves to share my home with fellow explorers. Welcome!"
+    },
+    {
+      "id": "e2345678-90bc-def0-0123-456789abcdef",
+      "username": "lindaSmith",
+      "password": "lindaS123",
+      "name": "Linda Smith",
+      "email": "lindasmith@email.com",
+      "phoneNumber": "+12234567891",
+      "profilePicture": "https://example.com/images/lindasmith.jpg",
+      "aboutMe": "A professional chef and a part-time host. I love curating unique experiences for my guests."
+    },
+    {
+      "id": "d3456789-01cd-def0-1234-56789abcdef0",
+      "username": "mikeBrown",
+      "password": "mikeB2023",
+      "name": "Mike Brown",
+      "email": "mikebrown@email.com",
+      "phoneNumber": "+13234567892",
+      "profilePicture": "https://example.com/images/mikebrown.jpg",
+      "aboutMe": "Nature enthusiast, hiker, and a lover of arts. My home reflects my passions. Stay and enjoy!"
+    },
+    {
+      "id": "c4567890-12de-f012-3456-789abcdef012",
+      "username": "sarahLee",
+      "password": "sarahL456",
+      "name": "Sarah Lee",
+      "email": "sarahlee@email.com",
+      "phoneNumber": "+14234567893",
+      "profilePicture": "https://example.com/images/sarahlee.jpg",
+      "aboutMe": "Travel blogger turned host. My home is filled with artifacts from around the world. Feel the global vibe!"
+    },
+    {
+      "id": "b5678901-23ef-0123-4567-89abcdef0123",
+      "username": "paulGreen",
+      "password": "greenP789",
+      "name": "Paul Green",
+      "email": "paulgreen@email.com",
+      "phoneNumber": "+15234567894",
+      "profilePicture": "https://example.com/images/paulgreen.jpg",
+      "aboutMe": "Engineer by profession, passionate about history. Stay in my vintage-themed home and relive the past."
+    }
+  ],
+  "properties": [
+    {
+      "id": "g9012345-67ef-0123-4567-89abcdef0123",
+      "title": "Cozy Mountain Retreat",
+      "description": "Experience tranquility in our cozy cabin situated on a serene mountain peak.",
+      "location": "Rocky Mountains, Colorado",
+      "pricePerNight": 120.5,
+      "bedroomCount": 3,
+      "bathRoomCount": 2,
+      "maxGuestCount": 5,
+      "hostId": "f1234567-89ab-cdef-0123-456789abcdef",
+      "rating": 5,
+      "amenityIds": [
+        "l4567890-12gh-ijkl-1234-56789abcdef0",
+        "o7890123-45lm-nopq-4567-89abcdef0123",
+        "q9012345-67no-pqrs-6789-abcdef012345"
+      ]
+    },
+    {
+      "id": "h0123456-78f0-1234-5678-9abcdef01234",
+      "title": "Modern City Apartment",
+      "description": "Stay in our sleek and modern apartment right in the heart of the city.",
+      "location": "New York, NY",
+      "pricePerNight": 150.75,
+      "bedroomCount": 2,
+      "bathRoomCount": 2,
+      "maxGuestCount": 4,
+      "hostId": "e2345678-90bc-def0-0123-456789abcdef",
+      "rating": 4,
+      "amenityIds": [
+        "l4567890-12gh-ijkl-1234-56789abcdef0",
+        "t2345678-90qr-stuv-90bc-def012345678",
+        "u3456789-01rs-tuvw-01cd-ef0123456789"
+      ]
+    },
+    {
+      "id": "i1234567-89f0-1234-5678-9abcdef01234",
+      "title": "Lakeside Cottage",
+      "description": "Unwind by the lake in our rustic cottage, perfect for weekend getaways.",
+      "location": "Lake Tahoe, California",
+      "pricePerNight": 95.0,
+      "bedroomCount": 1,
+      "bathRoomCount": 1,
+      "maxGuestCount": 3,
+      "hostId": "d3456789-01cd-def0-1234-56789abcdef0",
+      "rating": 5,
+      "amenityIds": [
+        "l4567890-12gh-ijkl-1234-56789abcdef0",
+        "n6789012-34kl-mnop-3456-789abcdef012",
+        "q9012345-67no-pqrs-6789-abcdef012345"
+      ]
+    },
+    {
+      "id": "j2345678-90f1-2345-6789-abcdef012345",
+      "title": "Beachfront Villa",
+      "description": "Experience paradise in our luxurious villa right on the beach.",
+      "location": "Malibu, California",
+      "pricePerNight": 310.25,
+      "bedroomCount": 4,
+      "bathRoomCount": 3,
+      "maxGuestCount": 8,
+      "hostId": "c4567890-12de-f012-3456-789abcdef012",
+      "rating": 5,
+      "amenityIds": [
+        "l4567890-12gh-ijkl-1234-56789abcdef0",
+        "o7890123-45lm-nopq-4567-89abcdef0123",
+        "n6789012-34kl-mnop-3456-789abcdef012",
+        "t2345678-90qr-stuv-90bc-def012345678",
+        "u3456789-01rs-tuvw-01cd-ef0123456789"
+      ]
+    },
+    {
+      "id": "k3456789-01f2-3456-789a-bcdef0123456",
+      "title": "Country Farmhouse",
+      "description": "Step back in time and enjoy the simple pleasures of our traditional farmhouse.",
+      "location": "Nashville, Tennessee",
+      "pricePerNight": 85.0,
+      "bedroomCount": 3,
+      "bathRoomCount": 2,
+      "maxGuestCount": 6,
+      "hostId": "b5678901-23ef-0123-4567-89abcdef0123",
+      "rating": 4,
+      "amenityIds": [
+        "o7890123-45lm-nopq-4567-89abcdef0123",
+        "q9012345-67no-pqrs-6789-abcdef012345",
+        "r0123456-78op-qrst-789a-bcdef0123456"
+      ]
+    }
+  ],
+  "bookings": [
+    {
+      "id": "f0123456-78ab-cdef-0123-456789abcdef",
+      "userId": "a1234567-89ab-cdef-0123-456789abcdef",
+      "propertyId": "g9012345-67ef-0123-4567-89abcdef0123",
+      "checkinDate": "2023-03-10T18:00:00.000Z",
+      "checkoutDate": "2023-03-15T10:00:00.000Z",
+      "numberOfGuests": 2,
+      "totalPrice": 150.25,
+      "bookingStatus": "confirmed"
+    },
+    {
+      "id": "e2345678-90ab-cdef-0123-456789abcdef",
+      "userId": "b2345678-90cd-ef01-2345-6789abcdef01",
+      "propertyId": "g9012345-67ef-0123-4567-89abcdef0123",
+      "checkinDate": "2023-04-12T16:00:00.000Z",
+      "checkoutDate": "2023-04-19T11:00:00.000Z",
+      "numberOfGuests": 3,
+      "totalPrice": 220.0,
+      "bookingStatus": "pending"
+    },
+    {
+      "id": "d3456789-01bc-def0-0123-456789abcdef",
+      "userId": "c3456789-01de-f012-3456-789abcdef012",
+      "propertyId": "h0123456-78f0-1234-5678-9abcdef01234",
+      "checkinDate": "2023-05-01T14:00:00.000Z",
+      "checkoutDate": "2023-05-10T12:00:00.000Z",
+      "numberOfGuests": 4,
+      "totalPrice": 290.5,
+      "bookingStatus": "confirmed"
+    },
+    {
+      "id": "c4567890-12cd-ef01-2345-6789abcdef01",
+      "userId": "d4567890-12ef-0123-4567-89abcdef0123",
+      "propertyId": "h0123456-78f0-1234-5678-9abcdef01234",
+      "checkinDate": "2023-06-05T15:00:00.000Z",
+      "checkoutDate": "2023-06-12T10:00:00.000Z",
+      "numberOfGuests": 1,
+      "totalPrice": 80.75,
+      "bookingStatus": "canceled"
+    },
+    {
+      "id": "b5678901-23de-f012-3456-789abcdef012",
+      "userId": "e5678901-23f0-1234-5678-9abcdef01234",
+      "propertyId": "i1234567-89f0-1234-5678-9abcdef01234",
+      "checkinDate": "2023-07-20T13:00:00.000Z",
+      "checkoutDate": "2023-07-25T09:00:00.000Z",
+      "numberOfGuests": 2,
+      "totalPrice": 175.5,
+      "bookingStatus": "confirmed"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "g7890123-45cd-ef01-2345-6789abcdef01",
+      "userId": "a1234567-89ab-cdef-0123-456789abcdef",
+      "propertyId": "g9012345-67ef-0123-4567-89abcdef0123",
+      "rating": 5,
+      "comment": "The property was amazing, and the host was very accommodating!"
+    },
+    {
+      "id": "h8901234-56de-f012-3456-789abcdef012",
+      "userId": "b2345678-90cd-ef01-2345-6789abcdef01",
+      "propertyId": "k3456789-01f2-3456-789a-bcdef0123456",
+      "rating": 4,
+      "comment": "Lovely place, but the WiFi was a bit slow."
+    },
+    {
+      "id": "i9012345-67ef-0123-4567-89abcdef0123",
+      "userId": "c3456789-01de-f012-3456-789abcdef012",
+      "propertyId": "k3456789-01f2-3456-789a-bcdef0123456",
+      "rating": 3,
+      "comment": "Decent place for the price. Would visit again."
+    },
+    {
+      "id": "j0123456-78f0-1234-5678-9abcdef01234",
+      "userId": "d4567890-12ef-0123-4567-89abcdef0123",
+      "propertyId": "j2345678-90f1-2345-6789-abcdef012345",
+      "rating": 4,
+      "comment": "Beautiful view! However, there were some minor issues with the bathroom."
+    },
+    {
+      "id": "k1234567-89f0-1234-5678-9abcdef01234",
+      "userId": "e5678901-23f0-1234-5678-9abcdef01234",
+      "propertyId": "j2345678-90f1-2345-6789-abcdef012345",
+      "rating": 5,
+      "comment": "A perfect stay! Can't wait to come back."
+    }
+  ],
+  "amenities": [
+    {
+      "id": "l4567890-12gh-ijkl-1234-56789abcdef0",
+      "name": "Wifi"
+    },
+    {
+      "id": "m5678901-23ij-klmn-2345-6789abcdef01",
+      "name": "Gym"
+    },
+    {
+      "id": "n6789012-34kl-mnop-3456-789abcdef012",
+      "name": "Pool"
+    },
+    {
+      "id": "o7890123-45lm-nopq-4567-89abcdef0123",
+      "name": "Kitchen"
+    },
+    {
+      "id": "p8901234-56mn-opqr-5678-9abcdef01234",
+      "name": "Air Conditioning"
+    },
+    {
+      "id": "q9012345-67no-pqrs-6789-abcdef012345",
+      "name": "Heating"
+    },
+    {
+      "id": "r0123456-78op-qrst-789a-bcdef0123456",
+      "name": "Washer"
+    },
+    {
+      "id": "s1234567-89pq-rstu-89ab-cdef01234567",
+      "name": "Dryer"
+    },
+    {
+      "id": "t2345678-90qr-stuv-90bc-def012345678",
+      "name": "TV"
+    },
+    {
+      "id": "u3456789-01rs-tuvw-01cd-ef0123456789",
+      "name": "Free Parking"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import { HostsPage } from "./pages/hosts/HostsPage";
 import { UsersPage } from "./pages/users/UsersPage";
 import { ReviewsPage } from "./pages/reviews/ReviewsPage";
 import { PropertiesPage } from "./pages/properties/PropertiesPage";
+import { DataProvider } from "./components/DataProvider";
 
 const router = createBrowserRouter([
   {
@@ -48,10 +49,14 @@ const router = createBrowserRouter([
   },
 ]);
 
+// StrictMode causes double data render in development
+
 createRoot(document.getElementById("app")!).render(
-  <StrictMode>
-    <ChakraProvider>
+  // <StrictMode>
+  <ChakraProvider>
+    <DataProvider>
       <RouterProvider router={router} />
-    </ChakraProvider>
-  </StrictMode>
+    </DataProvider>
+  </ChakraProvider>
+  // </StrictMode>
 );

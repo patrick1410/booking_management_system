@@ -20,6 +20,11 @@
   grid-row-gap: 0px;
 }
 
+/* Page headers */
+.chakra-heading.css-1dklj6k {
+  margin-bottom: 10px !important;
+}
+
 /* Icon styles */
 .github-icon,
 .linkedin-icon {
