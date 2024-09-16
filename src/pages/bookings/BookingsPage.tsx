@@ -27,6 +27,7 @@ export const BookingsPage = () => {
         {bookings.map((booking) => (
           <Card key={booking.id}>
             <CardBody>
+              <Text>id: {booking.id}</Text>
               <Text>userId: {booking.userId}</Text>
               <Text>propertyId: {booking.propertyId}</Text>
               <Text>checkinDate: {booking.checkinDate}</Text>
