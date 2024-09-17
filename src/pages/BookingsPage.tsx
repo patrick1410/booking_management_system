@@ -21,9 +21,9 @@ export const BookingsPage = () => {
   const { bookings } = dataContext;
 
   return (
-    <Box style={{ gridArea: "main", overflow: "auto" }}>
+    <Box gridArea="main" display="flex" flexDir="column">
       <Heading as="h2">Bookings Page</Heading>
-      <SimpleGrid columns={1} gap={8}>
+      <SimpleGrid columns={1} gap={8} overflow="auto">
         {bookings.map((booking) => (
           <Card key={booking.id}>
             <CardBody>

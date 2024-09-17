@@ -21,9 +21,9 @@ export const HostsPage = () => {
   const { hosts } = dataContext;
 
   return (
-    <Box style={{ gridArea: "main", overflow: "auto" }}>
+    <Box gridArea="main" display="flex" flexDir="column">
       <Heading as="h2">Hosts Page</Heading>
-      <SimpleGrid columns={1} gap={8}>
+      <SimpleGrid columns={1} gap={8} overflow="auto">
         {hosts.map((host) => (
           <Card key={host.id}>
             <CardBody>

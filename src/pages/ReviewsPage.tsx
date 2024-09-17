@@ -39,12 +39,12 @@ export const ReviewsPage = () => {
   };
 
   return (
-    <Box style={{ gridArea: "main", overflow: "auto" }}>
+    <Box gridArea="main" display="flex" flexDir="column">
       <Box w="50%" display="flex" justifyContent="space-between">
         <Heading as="h2">Reviews Page</Heading>
         <CreateReview title="Create Review" />
       </Box>
-      <SimpleGrid columns={1} gap={8}>
+      <SimpleGrid columns={1} gap={8} overflow="auto">
         {reviews.map((review) => (
           <Card key={review.id}>
             <CardBody>

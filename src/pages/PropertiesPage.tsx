@@ -21,9 +21,9 @@ export const PropertiesPage = () => {
   const { properties } = dataContext;
 
   return (
-    <Box style={{ gridArea: "main", overflow: "auto" }}>
+    <Box gridArea="main" display="flex" flexDir="column">
       <Heading as="h2">Properties Page</Heading>
-      <SimpleGrid columns={1} gap={8}>
+      <SimpleGrid columns={1} gap={8} overflow="auto">
         {properties.map((property) => (
           <Card key={property.id}>
             <CardBody>
