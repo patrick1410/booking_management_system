@@ -7,7 +7,9 @@ import {
   Text,
   SimpleGrid,
   Heading,
+  Button,
 } from "@chakra-ui/react";
+import { CreateAmenity } from "../components/amenities/CreateAmenity";
 
 export const AmenitiesPage = () => {
   // Use the useContext hook to access context data
@@ -18,17 +20,39 @@ export const AmenitiesPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { amenities } = dataContext;
+  const { amenities, setAmenities } = dataContext || {};
+
+  const deleteAmenity = async (id: string) => {
+    try {
+      if (confirm("Are you sure you want to delete the amenity?")) {
+        const response = await fetch(`http://localhost:3000/amenities/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          setAmenities((prev) => prev.filter((amenity) => amenity.id !== id));
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting amenity:", error);
+    }
+  };
 
   return (
     <Box style={{ gridArea: "main", overflow: "auto" }}>
-      <Heading as="h2">Amenities Page</Heading>
+      <Box w="50%" display="flex" justifyContent="space-between">
+        <Heading as="h2">Amenities Page</Heading>
+        <CreateAmenity title="Create Amenity" />
+      </Box>
       <SimpleGrid columns={1} gap={8}>
         {amenities.map((amenity) => (
           <Card key={amenity.id}>
             <CardBody>
               <Text>id: {amenity.id}</Text>
               <Text>name: {amenity.name}</Text>
+              <Button onClick={() => deleteAmenity(amenity.id)}>
+                Delete Amenity
+              </Button>
             </CardBody>
           </Card>
         ))}

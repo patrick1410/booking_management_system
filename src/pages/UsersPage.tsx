@@ -30,7 +30,7 @@ export const UsersPage = () => {
         });
 
         if (response.ok) {
-          setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+          setUsers((prev) => prev.filter((user) => user.id !== id));
         }
       }
     } catch (error) {
