@@ -3,13 +3,13 @@ import { createRoot } from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./components/Root";
-import { BookingsPage } from "./pages/bookings/BookingsPage";
-import { AmenitiesPage } from "./pages/amenities/AmenitiesPage";
+import { BookingsPage } from "./pages/BookingsPage";
+import { AmenitiesPage } from "./pages/AmenitiesPage";
 import { LoginPage } from "./pages/LoginPage";
-import { HostsPage } from "./pages/hosts/HostsPage";
-import { UsersPage } from "./pages/users/UsersPage";
-import { ReviewsPage } from "./pages/reviews/ReviewsPage";
-import { PropertiesPage } from "./pages/properties/PropertiesPage";
+import { HostsPage } from "./pages/HostsPage";
+import { UsersPage } from "./pages/UsersPage";
+import { ReviewsPage } from "./pages/ReviewsPage";
+import { PropertiesPage } from "./pages/PropertiesPage";
 import { DataProvider } from "./components/DataProvider";
 
 const router = createBrowserRouter([

@@ -138,7 +138,7 @@
       "title": "Lakeside Cottage",
       "description": "Unwind by the lake in our rustic cottage, perfect for weekend getaways.",
       "location": "Lake Tahoe, California",
-      "pricePerNight": 95.0,
+      "pricePerNight": 95,
       "bedroomCount": 1,
       "bathRoomCount": 1,
       "maxGuestCount": 3,
@@ -174,7 +174,7 @@
       "title": "Country Farmhouse",
       "description": "Step back in time and enjoy the simple pleasures of our traditional farmhouse.",
       "location": "Nashville, Tennessee",
-      "pricePerNight": 85.0,
+      "pricePerNight": 85,
       "bedroomCount": 3,
       "bathRoomCount": 2,
       "maxGuestCount": 6,
@@ -205,7 +205,7 @@
       "checkinDate": "2023-04-12T16:00:00.000Z",
       "checkoutDate": "2023-04-19T11:00:00.000Z",
       "numberOfGuests": 3,
-      "totalPrice": 220.0,
+      "totalPrice": 220,
       "bookingStatus": "pending"
     },
     {

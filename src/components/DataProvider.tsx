@@ -52,7 +52,20 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 
   return (
     <DataContext.Provider
-      value={{ users, hosts, properties, bookings, reviews, amenities }}
+      value={{
+        users,
+        hosts,
+        properties,
+        bookings,
+        reviews,
+        amenities,
+        setUsers,
+        setHosts,
+        setProperties,
+        setBookings,
+        setReviews,
+        setAmenities,
+      }}
     >
       {children}
     </DataContext.Provider>

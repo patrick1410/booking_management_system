@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../../components/DataProvider";
+import { DataContext } from "../components/DataProvider";
 import {
   Box,
   Card,

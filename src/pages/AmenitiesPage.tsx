@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../../components/DataProvider";
+import { DataContext } from "../components/DataProvider";
 import {
   Box,
   Card,
@@ -9,29 +9,26 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-export const ReviewsPage = () => {
+export const AmenitiesPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
   // Ensure dataContext is not undefined and bookings data is available
-  if (!dataContext || dataContext.reviews.length === 0) {
+  if (!dataContext || dataContext.amenities.length === 0) {
     return <div>Loading...</div>;
   }
 
-  const { reviews } = dataContext;
+  const { amenities } = dataContext;
 
   return (
     <Box style={{ gridArea: "main", overflow: "auto" }}>
-      <Heading as="h2">Reviews Page</Heading>
+      <Heading as="h2">Amenities Page</Heading>
       <SimpleGrid columns={1} gap={8}>
-        {reviews.map((review) => (
-          <Card key={review.id}>
+        {amenities.map((amenity) => (
+          <Card key={amenity.id}>
             <CardBody>
-              <Text>id: {review.id}</Text>
-              <Text>userId: {review.userId}</Text>
-              <Text>propertyId: {review.propertyId}</Text>
-              <Text>rating: {review.rating}</Text>
-              <Text>comment: {review.comment}</Text>
+              <Text>id: {amenity.id}</Text>
+              <Text>name: {amenity.name}</Text>
             </CardBody>
           </Card>
         ))}

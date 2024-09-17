@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../../components/DataProvider";
+import { DataContext } from "../components/DataProvider";
 import {
   Box,
   Card,
@@ -7,7 +7,9 @@ import {
   Text,
   SimpleGrid,
   Heading,
+  Button,
 } from "@chakra-ui/react";
+import { CreateUser } from "../components/users/CreateUser";
 
 export const UsersPage = () => {
   // Use the useContext hook to access context data
@@ -18,11 +20,30 @@ export const UsersPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { users } = dataContext;
+  const { users, setUsers } = dataContext || {};
+
+  const deleteUser = async (id: string) => {
+    try {
+      if (confirm("Are you sure you want to delete the user?")) {
+        const response = await fetch(`http://localhost:3000/users/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
 
   return (
     <Box style={{ gridArea: "main", overflow: "auto" }}>
-      <Heading as="h2">Users Page</Heading>
+      <Box w="50%" display="flex" justifyContent="space-between">
+        <Heading as="h2">Users Page</Heading>
+        <CreateUser title="Create User" />
+      </Box>
       <SimpleGrid columns={1} gap={8}>
         {users.map((user) => (
           <Card key={user.id}>
@@ -34,6 +55,7 @@ export const UsersPage = () => {
               <Text>email: {user.email}</Text>
               <Text>phoneNumber: {user.phoneNumber}</Text>
               <Text>profilePicture: {user.profilePicture}</Text>
+              <Button onClick={() => deleteUser(user.id)}>Delete User</Button>
             </CardBody>
           </Card>
         ))}
