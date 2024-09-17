@@ -20,7 +20,7 @@ export const UsersPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { users, setUsers } = dataContext || {};
+  const { users, setUsers } = dataContext;
 
   const deleteUser = async (id: string) => {
     try {

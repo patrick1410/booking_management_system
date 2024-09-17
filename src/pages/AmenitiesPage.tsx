@@ -20,7 +20,7 @@ export const AmenitiesPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { amenities, setAmenities } = dataContext || {};
+  const { amenities, setAmenities } = dataContext;
 
   const deleteAmenity = async (id: string) => {
     try {
