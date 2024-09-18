@@ -10,6 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { CreateProperty } from "../components/properties/CreateProperty";
+import { EditProperty } from "../components/properties/EditProperty";
 
 export const PropertiesPage = () => {
   // Use the useContext hook to access context data
@@ -69,6 +70,7 @@ export const PropertiesPage = () => {
               <Button onClick={() => deleteProperty(property.id)}>
                 Delete Property
               </Button>
+              <EditProperty id={property.id} />
             </CardBody>
           </Card>
         ))}

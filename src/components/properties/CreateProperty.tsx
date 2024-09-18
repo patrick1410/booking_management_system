@@ -116,7 +116,10 @@ export const CreateProperty: React.FC<CreatePropertyProps> = ({ title }) => {
                 id="pricePerNight"
                 placeholder="Enter the price per night..."
                 step="0.01"
-                {...register("pricePerNight", { required: true })}
+                {...register("pricePerNight", {
+                  required: true,
+                  valueAsNumber: true,
+                })}
               />
 
               <FormLabel htmlFor="bedroomCount">Bedroom Count:</FormLabel>
@@ -124,7 +127,10 @@ export const CreateProperty: React.FC<CreatePropertyProps> = ({ title }) => {
                 type="number"
                 id="bedroomCount"
                 placeholder="Enter the number of bedrooms..."
-                {...register("bedroomCount", { required: true })}
+                {...register("bedroomCount", {
+                  required: true,
+                  valueAsNumber: true,
+                })}
               />
 
               <FormLabel htmlFor="bathRoomCount">Bathroom Count:</FormLabel>
@@ -132,7 +138,10 @@ export const CreateProperty: React.FC<CreatePropertyProps> = ({ title }) => {
                 type="number"
                 id="bathRoomCount"
                 placeholder="Enter the number of bathrooms..."
-                {...register("bathRoomCount", { required: true })}
+                {...register("bathRoomCount", {
+                  required: true,
+                  valueAsNumber: true,
+                })}
               />
 
               <FormLabel htmlFor="maxGuestCount">Max Guest Count:</FormLabel>
@@ -140,7 +149,10 @@ export const CreateProperty: React.FC<CreatePropertyProps> = ({ title }) => {
                 type="number"
                 id="maxGuestCount"
                 placeholder="Enter the maximum number of guests..."
-                {...register("maxGuestCount", { required: true })}
+                {...register("maxGuestCount", {
+                  required: true,
+                  valueAsNumber: true,
+                })}
               />
 
               <FormLabel htmlFor="hostId">Host ID:</FormLabel>
