@@ -20,9 +20,13 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
+// hardcode the title later this is unnecesary
 type CreatePropertyProps = {
   title: string;
 };
+
+// Optimize
+// type FormProps = Propery;
 
 type FormProps = {
   title: string;

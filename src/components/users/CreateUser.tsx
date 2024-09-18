@@ -17,9 +17,13 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
+// hardcode the title later this is unnecesary
 type CreateUserProps = {
   title: string;
 };
+
+// Optimize
+// type FormProps = User;
 
 type FormProps = {
   username: string;

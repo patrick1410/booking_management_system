@@ -21,6 +21,9 @@ type EditAmenityProps = {
   id: string; // The id of the amenity being edited
 };
 
+// Optimize
+// type FormProps = Amenity;
+
 type FormProps = {
   name: string;
   id: string;

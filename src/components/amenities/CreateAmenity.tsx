@@ -17,9 +17,13 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
+// hardcode the title later this is unnecesary
 type CreateAmenityProps = {
   title: string;
 };
+
+// Optimize
+// type FormProps = Amenity;
 
 type FormProps = {
   name: string;
