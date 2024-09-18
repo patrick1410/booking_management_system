@@ -11,6 +11,8 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Select,
+  Textarea,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
@@ -85,23 +87,19 @@ export const CreateReview: React.FC<CreateReviewProps> = ({ title }) => {
               />
 
               <FormLabel htmlFor="rating">Rating:</FormLabel>
-              <Input
-                type="number"
+              <Select
                 id="rating"
-                placeholder="Enter a rating..."
-                {...register("rating", {
-                  required: true,
-                  valueAsNumber: true,
-                  validate: {
-                    min: (value) => value >= 1,
-                    max: (value) => value <= 5,
-                  },
-                })}
-              />
+                {...register("rating", { required: true, valueAsNumber: true })}
+              >
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+              </Select>
 
               <FormLabel htmlFor="comment">Comment:</FormLabel>
-              <Input
-                type="tel"
+              <Textarea
                 id="comment"
                 placeholder="Enter a comment..."
                 {...register("comment", { required: true })}

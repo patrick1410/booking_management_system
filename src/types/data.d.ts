@@ -28,7 +28,7 @@ type Booking = {
   checkoutDate: string;
   numberOfGuests: number;
   totalPrice: number;
-  bookingStatus: string;
+  bookingStatus: "pending" | "confirmed" | "canceled";
 };
 
 type Review = {

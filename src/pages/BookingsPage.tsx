@@ -7,7 +7,9 @@ import {
   Text,
   SimpleGrid,
   Heading,
+  Button,
 } from "@chakra-ui/react";
+import { CreateBooking } from "../components/bookings/CreateBooking";
 
 export const BookingsPage = () => {
   // Use the useContext hook to access context data
@@ -18,11 +20,31 @@ export const BookingsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { bookings } = dataContext;
+  const { bookings, setBookings } = dataContext;
+
+  const deleteBooking = async (id: string) => {
+    try {
+      if (confirm("Are you sure you want to delete the booking?")) {
+        const response = await fetch(`http://localhost:3000/bookings/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          setBookings((prev) => prev.filter((booking) => booking.id !== id));
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+    }
+  };
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      <Heading as="h2">Bookings Page</Heading>
+      {/* Fixed header with heading and button */}
+      <Box w="50%" display="flex" justifyContent="space-between">
+        <Heading as="h2">Bookings Page</Heading>
+        <CreateBooking title="Create Booking" />
+      </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {bookings.map((booking) => (
           <Card key={booking.id}>
@@ -35,6 +57,9 @@ export const BookingsPage = () => {
               <Text>numberOfGuests: {booking.numberOfGuests}</Text>
               <Text>totalPrice: {booking.totalPrice}</Text>
               <Text>bookingStatus: {booking.bookingStatus}</Text>
+              <Button onClick={() => deleteBooking(booking.id)}>
+                Delete Review
+              </Button>
             </CardBody>
           </Card>
         ))}

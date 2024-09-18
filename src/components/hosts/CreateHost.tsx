@@ -11,6 +11,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Textarea,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
@@ -117,9 +118,8 @@ export const CreateHost: React.FC<CreateHostProps> = ({ title }) => {
                 placeholder="Enter an URL..."
                 {...register("profilePicture", { required: true })}
               />
-              <FormLabel htmlFor="aboutMe">Profile Picture:</FormLabel>
-              <Input
-                type="text"
+              <FormLabel htmlFor="aboutMe">About Me:</FormLabel>
+              <Textarea
                 id="aboutMe"
                 placeholder="Describe yourself..."
                 {...register("aboutMe", { required: true })}
