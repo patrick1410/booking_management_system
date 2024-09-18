@@ -78,6 +78,14 @@ export const CreateUser: React.FC<CreateUserProps> = ({ title }) => {
                 placeholder="Enter an username..."
                 {...register("username", { required: true })}
               />
+              <FormLabel htmlFor="password">Password:</FormLabel>
+              <Input
+                type="password"
+                autoComplete="off"
+                id="password"
+                placeholder="Enter a password..."
+                {...register("password", { required: true })}
+              />
               <FormLabel htmlFor="name">Name:</FormLabel>
               <Input
                 type="text"
@@ -101,16 +109,6 @@ export const CreateUser: React.FC<CreateUserProps> = ({ title }) => {
                 placeholder="Enter a phone number..."
                 {...register("phoneNumber", { required: true })}
               />
-
-              <FormLabel htmlFor="password">Password:</FormLabel>
-              <Input
-                type="password"
-                autoComplete="off"
-                id="password"
-                placeholder="Enter a password..."
-                {...register("password", { required: true })}
-              />
-
               <FormLabel htmlFor="profilePicture">Profile Picture:</FormLabel>
               <Input
                 type="url"

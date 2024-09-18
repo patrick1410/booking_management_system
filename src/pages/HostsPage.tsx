@@ -7,7 +7,9 @@ import {
   Text,
   SimpleGrid,
   Heading,
+  Button,
 } from "@chakra-ui/react";
+import { CreateHost } from "../components/hosts/CreateHost";
 
 export const HostsPage = () => {
   // Use the useContext hook to access context data
@@ -18,11 +20,32 @@ export const HostsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { hosts } = dataContext;
+  const { hosts, setHosts } = dataContext;
+
+  const deleteHost = async (id: string) => {
+    try {
+      if (confirm("Are you sure you want to delete the host?")) {
+        const response = await fetch(`http://localhost:3000/hosts/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          setHosts((prev) => prev.filter((host) => host.id !== id));
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting host:", error);
+    }
+  };
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      <Heading as="h2">Hosts Page</Heading>
+      {/* Fixed header with heading and button */}
+      <Box w="50%" display="flex" justifyContent="space-between">
+        <Heading as="h2">Hosts Page</Heading>
+        <CreateHost title="Create Host" />
+      </Box>
+      {/* Scrollable user list */}
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {hosts.map((host) => (
           <Card key={host.id}>
@@ -35,6 +58,7 @@ export const HostsPage = () => {
               <Text>phoneNumber: {host.phoneNumber}</Text>
               <Text>profilePicture: {host.profilePicture}</Text>
               <Text>aboutMe: {host.aboutMe}</Text>
+              <Button onClick={() => deleteHost(host.id)}>Delete User</Button>
             </CardBody>
           </Card>
         ))}
