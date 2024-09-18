@@ -1,3 +1,131 @@
-export const EditReview = () => {
-  return;
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  useDisclosure,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  Select,
+} from "@chakra-ui/react";
+
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { DataContext } from "../DataProvider";
+
+type EditReviewProps = {
+  id: string; // The id of the review being edited
+};
+
+type FormProps = Review; // FormProps is set to Review type
+
+export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
+  const dataContext = useContext(DataContext);
+  const { reviews = [], setReviews = () => {} } = dataContext || {}; // Default to empty array and noop function
+
+  // Find the review by id
+  const review = reviews.find((review) => review.id === id);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { register, handleSubmit } = useForm<FormProps>({
+    defaultValues: {
+      userId: review?.userId,
+      propertyId: review?.propertyId,
+      rating: review?.rating,
+      comment: review?.comment,
+    },
+  });
+
+  const editReview = async (review: FormProps) => {
+    try {
+      const response = await fetch(`http://localhost:3000/reviews/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          ...review,
+        }),
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+      });
+
+      const updatedReview = await response.json();
+
+      if (setReviews) {
+        setReviews(
+          reviews.map((review) =>
+            review.id === updatedReview.id ? updatedReview : review
+          )
+        );
+      }
+
+      onClose();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <>
+      <Button onClick={onOpen}>Edit Review</Button>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit Review</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl as="form">
+              <FormLabel htmlFor="userId">UserId:</FormLabel>
+              <Input
+                type="text"
+                id="userId"
+                placeholder="Enter an userId..."
+                {...register("userId", { required: true })}
+              />
+              <FormLabel htmlFor="propertyId">PropertyId:</FormLabel>
+              <Input
+                type="text"
+                id="propertyId"
+                placeholder="Enter a propertyId..."
+                {...register("propertyId", { required: true })}
+              />
+
+              <FormLabel htmlFor="rating">Rating:</FormLabel>
+              <Select
+                id="rating"
+                {...register("rating", { required: true, valueAsNumber: true })}
+              >
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+              </Select>
+
+              <FormLabel htmlFor="comment">Comment:</FormLabel>
+              <Textarea
+                id="comment"
+                placeholder="Enter a comment..."
+                {...register("comment", { required: true })}
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="ghost" onClick={handleSubmit(editReview)}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
 };

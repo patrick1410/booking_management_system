@@ -27,7 +27,7 @@ export const EditUser: React.FC<EditUserProps> = ({ id }) => {
   const dataContext = useContext(DataContext);
   const { users = [], setUsers = () => {} } = dataContext || {}; // Default to empty array and noop function
 
-  // Find the amenity by id
+  // Find the user by id
   const user = users.find((user) => user.id === id);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
