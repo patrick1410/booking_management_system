@@ -24,10 +24,7 @@ type EditAmenityProps = {
 // Optimize
 // type FormProps = Amenity;
 
-type FormProps = {
-  name: string;
-  id: string;
-};
+type FormProps = Amenity;
 
 export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
   const dataContext = useContext(DataContext);

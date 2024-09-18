@@ -10,6 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { CreateUser } from "../components/users/CreateUser";
+import { EditUser } from "../components/users/EditUser";
 
 export const UsersPage = () => {
   // Use the useContext hook to access context data
@@ -58,6 +59,7 @@ export const UsersPage = () => {
               <Text>phoneNumber: {user.phoneNumber}</Text>
               <Text>profilePicture: {user.profilePicture}</Text>
               <Button onClick={() => deleteUser(user.id)}>Delete User</Button>
+              <EditUser id={user.id} />
             </CardBody>
           </Card>
         ))}
