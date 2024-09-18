@@ -21,10 +21,7 @@ type EditAmenityProps = {
   id: string; // The id of the amenity being edited
 };
 
-// Optimize
-// type FormProps = Amenity;
-
-type FormProps = Amenity;
+type FormProps = Amenity; // FormProps is set to Amenity type
 
 export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
   const dataContext = useContext(DataContext);

@@ -18,10 +18,10 @@ import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
 type EditUserProps = {
-  id: string; // The id of the amenity being edited
+  id: string; // The id of the user being edited
 };
 
-type FormProps = User;
+type FormProps = User; // FormProps is set to User type
 
 export const EditUser: React.FC<EditUserProps> = ({ id }) => {
   const dataContext = useContext(DataContext);
@@ -70,12 +70,12 @@ export const EditUser: React.FC<EditUserProps> = ({ id }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit Amenity</Button>
+      <Button onClick={onOpen}>Edit User</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit Amenity</ModalHeader>
+          <ModalHeader>Edit User</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl as="form">

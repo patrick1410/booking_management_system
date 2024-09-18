@@ -10,6 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { CreateHost } from "../components/hosts/CreateHost";
+import { EditHost } from "../components/hosts/EditHost";
 
 export const HostsPage = () => {
   // Use the useContext hook to access context data
@@ -59,6 +60,7 @@ export const HostsPage = () => {
               <Text>profilePicture: {host.profilePicture}</Text>
               <Text>aboutMe: {host.aboutMe}</Text>
               <Button onClick={() => deleteHost(host.id)}>Delete Host</Button>
+              <EditHost id={host.id} />
             </CardBody>
           </Card>
         ))}
