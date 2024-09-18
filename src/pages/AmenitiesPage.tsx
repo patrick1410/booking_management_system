@@ -10,6 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { CreateAmenity } from "../components/amenities/CreateAmenity";
+import { EditAmenity } from "../components/amenities/EditAmenity";
 
 export const AmenitiesPage = () => {
   // Use the useContext hook to access context data
@@ -53,6 +54,7 @@ export const AmenitiesPage = () => {
               <Button onClick={() => deleteAmenity(amenity.id)}>
                 Delete Amenity
               </Button>
+              <EditAmenity id={amenity.id} />
             </CardBody>
           </Card>
         ))}
