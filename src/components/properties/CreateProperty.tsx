@@ -20,14 +20,6 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
-// hardcode the title later this is unnecesary
-type CreatePropertyProps = {
-  title: string;
-};
-
-// Optimize
-// type FormProps = Propery;
-
 type FormProps = {
   title: string;
   description: string;
@@ -41,7 +33,7 @@ type FormProps = {
   amenityIds: string[];
 };
 
-export const CreateProperty: React.FC<CreatePropertyProps> = ({ title }) => {
+export const CreateProperty = () => {
   const dataContext = useContext(DataContext);
   const {
     amenities,
@@ -77,7 +69,7 @@ export const CreateProperty: React.FC<CreatePropertyProps> = ({ title }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>{title}</Button>
+      <Button onClick={onOpen}>Create Property</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

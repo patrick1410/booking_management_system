@@ -19,14 +19,6 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
-// hardcode the title later this is unnecesary
-type CreateReviewProps = {
-  title: string;
-};
-
-// Optimize
-// type FormProps = Review;
-
 type FormProps = {
   userId: string;
   propertyId: string;
@@ -34,7 +26,7 @@ type FormProps = {
   comment: string;
 };
 
-export const CreateReview: React.FC<CreateReviewProps> = ({ title }) => {
+export const CreateReview = () => {
   const dataContext = useContext(DataContext);
   const { reviews = [], setReviews = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -66,7 +58,7 @@ export const CreateReview: React.FC<CreateReviewProps> = ({ title }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>{title}</Button>
+      <Button onClick={onOpen}>Create Review</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

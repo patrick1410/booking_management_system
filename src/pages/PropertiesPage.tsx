@@ -43,9 +43,14 @@ export const PropertiesPage = () => {
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      <Box w="50%" display="flex" justifyContent="space-between">
+      <Box
+        w="50%"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Heading as="h2">Properties Page</Heading>
-        <CreateProperty title="Create Property" />
+        <CreateProperty />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {properties.map((property) => (

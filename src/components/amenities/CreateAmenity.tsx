@@ -17,19 +17,11 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
-// hardcode the title later this is unnecesary
-type CreateAmenityProps = {
-  title: string;
-};
-
-// Optimize
-// type FormProps = Amenity;
-
 type FormProps = {
   name: string;
 };
 
-export const CreateAmenity: React.FC<CreateAmenityProps> = ({ title }) => {
+export const CreateAmenity = () => {
   const dataContext = useContext(DataContext);
   const { amenities = [], setAmenities = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -61,7 +53,7 @@ export const CreateAmenity: React.FC<CreateAmenityProps> = ({ title }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>{title}</Button>
+      <Button onClick={onOpen}>Create Amenity</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

@@ -17,14 +17,6 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
-// hardcode the title later this is unnecesary
-type CreateUserProps = {
-  title: string;
-};
-
-// Optimize
-// type FormProps = User;
-
 type FormProps = {
   username: string;
   password: string;
@@ -34,7 +26,7 @@ type FormProps = {
   profilePicture: string;
 };
 
-export const CreateUser: React.FC<CreateUserProps> = ({ title }) => {
+export const CreateUser = () => {
   const dataContext = useContext(DataContext);
   const { users = [], setUsers = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -66,7 +58,7 @@ export const CreateUser: React.FC<CreateUserProps> = ({ title }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>{title}</Button>
+      <Button onClick={onOpen}>Create User</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

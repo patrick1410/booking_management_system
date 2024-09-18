@@ -41,9 +41,14 @@ export const AmenitiesPage = () => {
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      <Box w="50%" display="flex" justifyContent="space-between">
+      <Box
+        w="50%"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Heading as="h2">Amenities Page</Heading>
-        <CreateAmenity title="Create Amenity" />
+        <CreateAmenity />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {amenities.map((amenity) => (

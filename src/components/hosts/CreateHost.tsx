@@ -18,14 +18,6 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
-// hardcode the title later this is unnecesary
-type CreateHostProps = {
-  title: string;
-};
-
-// Optimize
-// type FormProps = Host;
-
 type FormProps = {
   username: string;
   password: string;
@@ -36,7 +28,7 @@ type FormProps = {
   aboutMe: string;
 };
 
-export const CreateHost: React.FC<CreateHostProps> = ({ title }) => {
+export const CreateHost = () => {
   const dataContext = useContext(DataContext);
   const { hosts = [], setHosts = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -68,7 +60,7 @@ export const CreateHost: React.FC<CreateHostProps> = ({ title }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>{title}</Button>
+      <Button onClick={onOpen}>Create Host</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

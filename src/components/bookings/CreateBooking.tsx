@@ -18,14 +18,6 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
-// hardcode the title later this is unnecesary
-type CreateBookingProps = {
-  title: string;
-};
-
-// Optimize
-// type FormProps = Booking;
-
 type FormProps = {
   userId: string;
   propertyId: string;
@@ -36,7 +28,7 @@ type FormProps = {
   bookingStatus: string;
 };
 
-export const CreateBooking: React.FC<CreateBookingProps> = ({ title }) => {
+export const CreateBooking = () => {
   const dataContext = useContext(DataContext);
   const { bookings = [], setBookings = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -68,7 +60,7 @@ export const CreateBooking: React.FC<CreateBookingProps> = ({ title }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>{title}</Button>
+      <Button onClick={onOpen}>Create Booking</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { CreateBooking } from "../components/bookings/CreateBooking";
 import { EditBooking } from "../components/bookings/EditBooking";
+import { SearchBar } from "../components/UI/SearchBar";
 
 export const BookingsPage = () => {
   // Use the useContext hook to access context data
@@ -42,9 +43,15 @@ export const BookingsPage = () => {
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
-      <Box w="50%" display="flex" justifyContent="space-between">
+      <Box
+        w="80%"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Heading as="h2">Bookings Page</Heading>
-        <CreateBooking title="Create Booking" />
+        <SearchBar />
+        <CreateBooking />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {bookings.map((booking) => (

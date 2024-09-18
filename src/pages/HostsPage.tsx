@@ -42,9 +42,14 @@ export const HostsPage = () => {
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
-      <Box w="50%" display="flex" justifyContent="space-between">
+      <Box
+        w="50%"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Heading as="h2">Hosts Page</Heading>
-        <CreateHost title="Create Host" />
+        <CreateHost />
       </Box>
       {/* Scrollable user list */}
       <SimpleGrid columns={1} gap={8} overflow="auto">

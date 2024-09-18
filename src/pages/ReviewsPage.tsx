@@ -41,9 +41,14 @@ export const ReviewsPage = () => {
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      <Box w="50%" display="flex" justifyContent="space-between">
+      <Box
+        w="50%"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Heading as="h2">Reviews Page</Heading>
-        <CreateReview title="Create Review" />
+        <CreateReview />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {reviews.map((review) => (
