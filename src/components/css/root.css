@@ -43,3 +43,7 @@
   color: #000 !important;
   transition: 0.3s ease-in;
 }
+
+.checkbox-label {
+  margin-left: 5px !important;
+}

@@ -58,7 +58,7 @@ export const BookingsPage = () => {
               <Text>totalPrice: {booking.totalPrice}</Text>
               <Text>bookingStatus: {booking.bookingStatus}</Text>
               <Button onClick={() => deleteBooking(booking.id)}>
-                Delete Review
+                Delete Booking
               </Button>
             </CardBody>
           </Card>

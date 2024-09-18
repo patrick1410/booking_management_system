@@ -7,7 +7,9 @@ import {
   Text,
   SimpleGrid,
   Heading,
+  Button,
 } from "@chakra-ui/react";
+import { CreateProperty } from "../components/properties/CreateProperty";
 
 export const PropertiesPage = () => {
   // Use the useContext hook to access context data
@@ -18,11 +20,32 @@ export const PropertiesPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { properties } = dataContext;
+  const { properties, setProperties } = dataContext;
+
+  const deleteProperty = async (id: string) => {
+    try {
+      if (confirm("Are you sure you want to delete the property?")) {
+        const response = await fetch(`http://localhost:3000/properties/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          setProperties((prev) =>
+            prev.filter((property) => property.id !== id)
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting property:", error);
+    }
+  };
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      <Heading as="h2">Properties Page</Heading>
+      <Box w="50%" display="flex" justifyContent="space-between">
+        <Heading as="h2">Properties Page</Heading>
+        <CreateProperty title="Create Property" />
+      </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {properties.map((property) => (
           <Card key={property.id}>
@@ -37,7 +60,15 @@ export const PropertiesPage = () => {
               <Text>maxGuestCount: {property.maxGuestCount}</Text>
               <Text>hostId: {property.hostId}</Text>
               <Text>rating: {property.rating}</Text>
-              <Text>amenityIds: {property.amenityIds.join(", ")}</Text>
+              <Text>
+                amenityIds:{" "}
+                {property.amenityIds.length > 1
+                  ? property.amenityIds.join(", ")
+                  : property.amenityIds}
+              </Text>
+              <Button onClick={() => deleteProperty(property.id)}>
+                Delete Property
+              </Button>
             </CardBody>
           </Card>
         ))}

@@ -58,7 +58,7 @@ export const HostsPage = () => {
               <Text>phoneNumber: {host.phoneNumber}</Text>
               <Text>profilePicture: {host.profilePicture}</Text>
               <Text>aboutMe: {host.aboutMe}</Text>
-              <Button onClick={() => deleteHost(host.id)}>Delete User</Button>
+              <Button onClick={() => deleteHost(host.id)}>Delete Host</Button>
             </CardBody>
           </Card>
         ))}
