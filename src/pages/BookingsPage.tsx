@@ -10,6 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { CreateBooking } from "../components/bookings/CreateBooking";
+import { EditBooking } from "../components/bookings/EditBooking";
 
 export const BookingsPage = () => {
   // Use the useContext hook to access context data
@@ -60,6 +61,7 @@ export const BookingsPage = () => {
               <Button onClick={() => deleteBooking(booking.id)}>
                 Delete Booking
               </Button>
+              <EditBooking id={booking.id} />
             </CardBody>
           </Card>
         ))}
