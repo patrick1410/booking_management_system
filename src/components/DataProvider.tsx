@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 
+// MAKE A LOADING AND ERROR STATE IN THIS COMPONENT?!
+
 // Initialize the DataContext with an empty default value
 export const DataContext = createContext<DataContextType | undefined>(
   undefined
