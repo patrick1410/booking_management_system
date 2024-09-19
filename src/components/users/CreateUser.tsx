@@ -11,10 +11,15 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  Icon,
+  InputRightElement,
 } from "@chakra-ui/react";
 
+import { BiShow, BiHide } from "react-icons/bi";
+
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../DataProvider";
 
 type FormProps = {
@@ -32,6 +37,7 @@ export const CreateUser = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit } = useForm<FormProps>({});
+  const [show, setShow] = useState<boolean>(false);
 
   const createUser = async (user: FormProps) => {
     try {
@@ -75,13 +81,22 @@ export const CreateUser = () => {
                 {...register("username", { required: true })}
               />
               <FormLabel htmlFor="password">Password:</FormLabel>
-              <Input
-                type="password"
-                autoComplete="off"
-                id="password"
-                placeholder="Enter a password..."
-                {...register("password", { required: true })}
-              />
+
+              <InputGroup>
+                <Input
+                  type={show ? "text" : "password"}
+                  autoComplete="off"
+                  id="password"
+                  placeholder="Enter a password..."
+                  pr="2rem !important"
+                  {...register("password", { required: true })}
+                />{" "}
+                <InputRightElement
+                  cursor="pointer"
+                  onClick={() => setShow(!show)}
+                  children={<Icon boxSize={6} as={!show ? BiShow : BiHide} />}
+                />
+              </InputGroup>
               <FormLabel htmlFor="name">Name:</FormLabel>
               <Input
                 type="text"
