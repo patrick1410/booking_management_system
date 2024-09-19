@@ -102,6 +102,7 @@ export const EditHost: React.FC<EditHostProps> = ({ id }) => {
                   autoComplete="off"
                   id="password"
                   placeholder="Enter a password..."
+                  pr="2rem !important"
                   {...register("password", { required: true })}
                 />
                 <InputRightElement
