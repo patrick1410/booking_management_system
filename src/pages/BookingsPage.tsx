@@ -13,8 +13,11 @@ import { CreateBooking } from "../components/bookings/CreateBooking";
 import { EditBooking } from "../components/bookings/EditBooking";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
+import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 
 export const BookingsPage = () => {
+  useResetSearchTerm(); // Reset search term when page is loaded
+
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 

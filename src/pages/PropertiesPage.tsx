@@ -13,8 +13,11 @@ import { CreateProperty } from "../components/properties/CreateProperty";
 import { EditProperty } from "../components/properties/EditProperty";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
+import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 
 export const PropertiesPage = () => {
+  useResetSearchTerm(); // Reset search term when page is loaded
+
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
@@ -45,6 +48,7 @@ export const PropertiesPage = () => {
 
   const filteredProperties = filterData(properties, searchTerm, [
     "title",
+    "description", // Maybe..
     "location",
     "hostId",
   ]);

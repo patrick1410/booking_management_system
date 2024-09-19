@@ -13,8 +13,11 @@ import { CreateUser } from "../components/users/CreateUser";
 import { EditUser } from "../components/users/EditUser";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
+import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 
 export const UsersPage = () => {
+  useResetSearchTerm(); // Reset search term when page is loaded
+
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 

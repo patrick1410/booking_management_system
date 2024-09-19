@@ -13,8 +13,11 @@ import { CreateReview } from "../components/reviews/CreateReview";
 import { EditReview } from "../components/reviews/EditReview";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
+import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 
 export const ReviewsPage = () => {
+  useResetSearchTerm(); // Reset search term when page is loaded
+
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 

@@ -13,8 +13,11 @@ import { CreateAmenity } from "../components/amenities/CreateAmenity";
 import { EditAmenity } from "../components/amenities/EditAmenity";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
+import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 
 export const AmenitiesPage = () => {
+  useResetSearchTerm(); // Reset search term when page is loaded
+
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 

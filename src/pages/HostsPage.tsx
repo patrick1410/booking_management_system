@@ -13,8 +13,11 @@ import { CreateHost } from "../components/hosts/CreateHost";
 import { EditHost } from "../components/hosts/EditHost";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
+import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 
 export const HostsPage = () => {
+  useResetSearchTerm(); // Reset search term when page is loaded
+
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
