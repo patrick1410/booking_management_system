@@ -72,7 +72,7 @@ export const CreateProperty = () => {
       <Button onClick={onOpen}>Create Property</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent maxH="80vh" overflow="auto">
           <ModalHeader>Create Property</ModalHeader>
           <ModalCloseButton />
 
@@ -166,6 +166,7 @@ export const CreateProperty = () => {
                 <option value={4}>4</option>
                 <option value={5}>5</option>
               </Select>
+              <FormLabel>Amenities:</FormLabel>
               <SimpleGrid columns={3} gap={2}>
                 {amenities?.map((amenity, i) => (
                   <Box key={i}>

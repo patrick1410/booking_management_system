@@ -97,7 +97,7 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
       <Button onClick={onOpen}>Edit Property</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent maxH="80vh" overflow="auto">
           <ModalHeader>Edit Property</ModalHeader>
           <ModalCloseButton />
 
@@ -191,6 +191,7 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
                 <option value={4}>4</option>
                 <option value={5}>5</option>
               </Select>
+              <FormLabel>Amenities:</FormLabel>
               <SimpleGrid columns={3} gap={2}>
                 {amenities?.map((amenity, i) => (
                   <Box key={i}>
@@ -214,7 +215,7 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
               Close
             </Button>
             <Button onClick={handleSubmit(editProperty)} variant="ghost">
-              Submit
+              Save
             </Button>
           </ModalFooter>
         </ModalContent>

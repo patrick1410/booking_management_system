@@ -25,6 +25,23 @@
   margin-bottom: 10px !important;
 }
 
+/* Modal styles */
+.chakra-modal__content-container.css-1u2cvaz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chakra-modal__header.css-9fgtzh {
+  text-align: center;
+}
+
+.chakra-modal__footer.css-k0waxj {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Icon styles */
 .github-icon,
 .linkedin-icon {
