@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { CreateReview } from "../components/reviews/CreateReview";
 import { EditReview } from "../components/reviews/EditReview";
+import { SearchBar } from "../components/UI/SearchBar";
+import { filterData } from "../utils/filterData";
 
 export const ReviewsPage = () => {
   // Use the useContext hook to access context data
@@ -21,7 +23,7 @@ export const ReviewsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { reviews, setReviews } = dataContext;
+  const { reviews, setReviews, searchTerm, setSearchTerm } = dataContext;
 
   const deleteReview = async (id: string) => {
     try {
@@ -39,19 +41,29 @@ export const ReviewsPage = () => {
     }
   };
 
+  const filteredReviews = filterData(reviews, searchTerm, [
+    "userId",
+    "propertyId",
+  ]);
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <Box
-        w="50%"
+        w="80%"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
       >
         <Heading as="h2">Reviews Page</Heading>
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search Reviews..."
+        />
         <CreateReview />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {reviews.map((review) => (
+        {filteredReviews.map((review) => (
           <Card key={review.id}>
             <CardBody>
               <Text>id: {review.id}</Text>

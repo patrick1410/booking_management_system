@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { CreateProperty } from "../components/properties/CreateProperty";
 import { EditProperty } from "../components/properties/EditProperty";
+import { SearchBar } from "../components/UI/SearchBar";
+import { filterData } from "../utils/filterData";
 
 export const PropertiesPage = () => {
   // Use the useContext hook to access context data
@@ -21,7 +23,7 @@ export const PropertiesPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { properties, setProperties } = dataContext;
+  const { properties, setProperties, searchTerm, setSearchTerm } = dataContext;
 
   const deleteProperty = async (id: string) => {
     try {
@@ -41,19 +43,30 @@ export const PropertiesPage = () => {
     }
   };
 
+  const filteredProperties = filterData(properties, searchTerm, [
+    "title",
+    "location",
+    "hostId",
+  ]);
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <Box
-        w="50%"
+        w="80%"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
       >
         <Heading as="h2">Properties Page</Heading>
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search Properties..."
+        />
         <CreateProperty />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {properties.map((property) => (
+        {filteredProperties.map((property) => (
           <Card key={property.id}>
             <CardBody>
               <Text>id: {property.id}</Text>

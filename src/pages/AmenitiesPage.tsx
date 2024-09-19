@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { CreateAmenity } from "../components/amenities/CreateAmenity";
 import { EditAmenity } from "../components/amenities/EditAmenity";
+import { SearchBar } from "../components/UI/SearchBar";
+import { filterData } from "../utils/filterData";
 
 export const AmenitiesPage = () => {
   // Use the useContext hook to access context data
@@ -21,7 +23,7 @@ export const AmenitiesPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { amenities, setAmenities } = dataContext;
+  const { amenities, setAmenities, searchTerm, setSearchTerm } = dataContext;
 
   const deleteAmenity = async (id: string) => {
     try {
@@ -39,19 +41,26 @@ export const AmenitiesPage = () => {
     }
   };
 
+  const filteredAmenities = filterData(amenities, searchTerm, ["name"]);
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <Box
-        w="50%"
+        w="80%"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
       >
         <Heading as="h2">Amenities Page</Heading>
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search Amenities..."
+        />
         <CreateAmenity />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {amenities.map((amenity) => (
+        {filteredAmenities.map((amenity) => (
           <Card key={amenity.id}>
             <CardBody>
               <Text>id: {amenity.id}</Text>

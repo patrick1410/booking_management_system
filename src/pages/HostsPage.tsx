@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { CreateHost } from "../components/hosts/CreateHost";
 import { EditHost } from "../components/hosts/EditHost";
+import { SearchBar } from "../components/UI/SearchBar";
+import { filterData } from "../utils/filterData";
 
 export const HostsPage = () => {
   // Use the useContext hook to access context data
@@ -21,7 +23,7 @@ export const HostsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { hosts, setHosts } = dataContext;
+  const { hosts, setHosts, searchTerm, setSearchTerm } = dataContext;
 
   const deleteHost = async (id: string) => {
     try {
@@ -39,21 +41,32 @@ export const HostsPage = () => {
     }
   };
 
+  const filteredHosts = filterData(hosts, searchTerm, [
+    "username",
+    "email",
+    "name",
+  ]);
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
       <Box
-        w="50%"
+        w="80%"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
       >
         <Heading as="h2">Hosts Page</Heading>
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search Hosts..."
+        />
         <CreateHost />
       </Box>
       {/* Scrollable user list */}
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {hosts.map((host) => (
+        {filteredHosts.map((host) => (
           <Card key={host.id}>
             <CardBody>
               <Text>id: {host.id}</Text>
