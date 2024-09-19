@@ -36,8 +36,8 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
     defaultValues: {
       userId: booking?.userId,
       propertyId: booking?.propertyId,
-      checkinDate: booking?.checkinDate,
-      checkoutDate: booking?.checkoutDate,
+      checkinDate: booking?.checkinDate.slice(0, 16),
+      checkoutDate: booking?.checkoutDate.slice(0, 16),
       numberOfGuests: booking?.numberOfGuests,
       totalPrice: booking?.totalPrice,
       bookingStatus: booking?.bookingStatus,

@@ -14,6 +14,7 @@ import { EditBooking } from "../components/bookings/EditBooking";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { convertDate } from "../utils/convertDate";
 
 export const BookingsPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -74,10 +75,12 @@ export const BookingsPage = () => {
               <Text>id: {booking.id}</Text>
               <Text>userId: {booking.userId}</Text>
               <Text>propertyId: {booking.propertyId}</Text>
-              <Text>checkinDate: {booking.checkinDate}</Text>
-              <Text>checkoutDate: {booking.checkoutDate}</Text>
+              <Text>checkinDate: {convertDate(booking.checkinDate)}</Text>
+              <Text>checkoutDate: {convertDate(booking.checkoutDate)}</Text>
               <Text>numberOfGuests: {booking.numberOfGuests}</Text>
-              <Text>totalPrice: {booking.totalPrice}</Text>
+              <Text>
+                totalPrice: {booking.totalPrice.toString().replace(".", ",")}
+              </Text>
               <Text>bookingStatus: {booking.bookingStatus}</Text>
               <Button onClick={() => deleteBooking(booking.id)}>
                 Delete Booking

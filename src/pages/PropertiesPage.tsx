@@ -14,6 +14,7 @@ import { EditProperty } from "../components/properties/EditProperty";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { createAmenityMap } from "../utils/amenityMapper";
 
 export const PropertiesPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -26,7 +27,11 @@ export const PropertiesPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { properties, setProperties, searchTerm, setSearchTerm } = dataContext;
+  const { properties, setProperties, searchTerm, setSearchTerm, amenities } =
+    dataContext;
+
+  // Create a map of amenities
+  const amenityMap = createAmenityMap(amenities);
 
   const deleteProperty = async (id: string) => {
     try {
@@ -77,17 +82,20 @@ export const PropertiesPage = () => {
               <Text>title: {property.title}</Text>
               <Text>description: {property.description}</Text>
               <Text>location: {property.location}</Text>
-              <Text>pricePerNight: {property.pricePerNight}</Text>
+              <Text>
+                pricePerNight:{" "}
+                {property.pricePerNight.toString().replace(".", ",")}
+              </Text>
               <Text>bedroomCount: {property.bedroomCount}</Text>
               <Text>bathRoomCount: {property.bathRoomCount}</Text>
               <Text>maxGuestCount: {property.maxGuestCount}</Text>
               <Text>hostId: {property.hostId}</Text>
               <Text>rating: {property.rating}</Text>
               <Text>
-                amenityIds:{" "}
-                {property.amenityIds.length > 1
-                  ? property.amenityIds.join(", ")
-                  : property.amenityIds}
+                amenities:{" "}
+                {property.amenityIds
+                  .map((id) => amenityMap[id]) // Map IDs to names
+                  .join(", ")}
               </Text>
               <Button onClick={() => deleteProperty(property.id)}>
                 Delete Property
