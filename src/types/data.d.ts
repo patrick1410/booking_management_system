@@ -72,4 +72,6 @@ type DataContextType = {
   setBookings: React.Dispatch<React.SetStateAction<Booking[]>>;
   setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
   setAmenities: React.Dispatch<React.SetStateAction<Amenity[]>>;
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 };

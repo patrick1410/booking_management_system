@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { CreateUser } from "../components/users/CreateUser";
 import { EditUser } from "../components/users/EditUser";
+import { SearchBar } from "../components/UI/SearchBar";
+import { filterData } from "../utils/filterData";
 
 export const UsersPage = () => {
   // Use the useContext hook to access context data
@@ -21,7 +23,7 @@ export const UsersPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { users, setUsers } = dataContext;
+  const { users, setUsers, searchTerm, setSearchTerm } = dataContext;
 
   const deleteUser = async (id: string) => {
     try {
@@ -39,21 +41,32 @@ export const UsersPage = () => {
     }
   };
 
+  const filteredUsers = filterData(users, searchTerm, [
+    "username",
+    "email",
+    "name",
+  ]);
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
       <Box
-        w="50%"
+        w="80%"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
       >
         <Heading as="h2">Users Page</Heading>
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search Users..."
+        />
         <CreateUser />
       </Box>
       {/* Scrollable user list */}
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {users.map((user) => (
+        {filteredUsers.map((user) => (
           <Card key={user.id}>
             <CardBody>
               <Text>id: {user.id}</Text>

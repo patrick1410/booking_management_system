@@ -16,6 +16,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [amenities, setAmenities] = useState<Amenity[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +66,8 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         setBookings,
         setReviews,
         setAmenities,
+        searchTerm,
+        setSearchTerm,
       }}
     >
       {children}

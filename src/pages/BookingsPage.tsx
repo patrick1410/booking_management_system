@@ -12,6 +12,7 @@ import {
 import { CreateBooking } from "../components/bookings/CreateBooking";
 import { EditBooking } from "../components/bookings/EditBooking";
 import { SearchBar } from "../components/UI/SearchBar";
+import { filterData } from "../utils/filterData";
 
 export const BookingsPage = () => {
   // Use the useContext hook to access context data
@@ -22,7 +23,7 @@ export const BookingsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { bookings, setBookings } = dataContext;
+  const { bookings, setBookings, searchTerm, setSearchTerm } = dataContext;
 
   const deleteBooking = async (id: string) => {
     try {
@@ -40,6 +41,12 @@ export const BookingsPage = () => {
     }
   };
 
+  const filteredBookings = filterData(bookings, searchTerm, [
+    "userId",
+    "propertyId",
+    "bookingStatus",
+  ]);
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
@@ -50,11 +57,15 @@ export const BookingsPage = () => {
         alignItems="center"
       >
         <Heading as="h2">Bookings Page</Heading>
-        <SearchBar />
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search Bookings..."
+        />
         <CreateBooking />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {bookings.map((booking) => (
+        {filteredBookings.map((booking) => (
           <Card key={booking.id}>
             <CardBody>
               <Text>id: {booking.id}</Text>
