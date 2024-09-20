@@ -1,3 +1,5 @@
+import { Box } from "@chakra-ui/react";
+
 export const LoginPage = () => {
-  return <div style={{ gridArea: "main" }}>test</div>;
+  return <Box gridArea="main">test</Box>;
 };

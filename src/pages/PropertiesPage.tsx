@@ -91,6 +91,10 @@ export const PropertiesPage = () => {
               <Text>maxGuestCount: {property.maxGuestCount}</Text>
               <Text>hostId: {property.hostId}</Text>
               <Text>rating: {property.rating}</Text>
+              {/* amenityIds:{" "}
+                {property.amenityIds.length > 1
+                  ? property.amenityIds.join(", ")
+                  : property.amenityIds} */}
               <Text>
                 amenities:{" "}
                 {property.amenityIds
