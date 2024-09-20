@@ -28,16 +28,15 @@ export const HostPage = () => {
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      <Box display="flex" alignItems="center">
-        <Heading mr="0.5rem !important" as="h3">
-          {host.name}'s Details
-        </Heading>
-        <Avatar src={host.profilePicture} name={host.name} />
-      </Box>
-
       <SimpleGrid columns={1} overflow="auto">
+        <Box display="flex" alignItems="center">
+          <Avatar src={host.profilePicture} name={host.name} />
+          <Heading ml="0.5rem !important" as="h3">
+            {host.name}'s Details:
+          </Heading>
+        </Box>
         <Box>
-          <Text>Host Id: {host.id}</Text>
+          <Text>Id: {host.id}</Text>
           <Text>Username: {host.username}</Text>
           <Text>Email: {host.email}</Text>
           <Text>Phone: {host.phoneNumber}</Text>
