@@ -1,0 +1,19 @@
+/* Icon styles */
+
+.github-icon,
+.linkedin-icon {
+  color: #7d7d7d !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin: 10px 0px 0px 10px !important;
+}
+
+.linkedin-icon:hover {
+  color: #0a66c2 !important;
+  transition: 0.3s ease-in;
+}
+
+.github-icon:hover {
+  color: #000 !important;
+  transition: 0.3s ease-in;
+}

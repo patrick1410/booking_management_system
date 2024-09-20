@@ -1,5 +1,6 @@
 import { Box, Text, Link, Icon } from "@chakra-ui/react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import "../css/footer.css";
 
 export const Footer = () => {
   return (

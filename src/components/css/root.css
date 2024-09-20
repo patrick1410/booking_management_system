@@ -20,48 +20,6 @@
   grid-row-gap: 0px;
 }
 
-/* Navigation */
-
-ul > li.css-0 {
-  border-right: 4px solid;
-  margin-right: 2rem !important;
-}
-
-ul > li.css-0 > a {
-  padding: 0rem 1rem 0rem 0rem !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-ul > li.css-0 > a > svg {
-  width: 24px;
-  height: 24px;
-  margin-left: 0.5rem !important;
-}
-
-ul > li.css-0:nth-child(1) {
-  border-color: #4caf50;
-}
-ul > li.css-0:nth-child(2) {
-  border-color: #ff9800;
-}
-ul > li.css-0:nth-child(3) {
-  border-color: #2196f3;
-}
-ul > li.css-0:nth-child(4) {
-  border-color: #673ab7;
-}
-ul > li.css-0:nth-child(5) {
-  border-color: #009688;
-}
-ul > li.css-0:nth-child(6) {
-  border-color: #ff5722;
-}
-ul > li.css-0:nth-child(7) {
-  border-color: #8bc34a;
-}
-
 /* Page headers */
 .chakra-heading.css-1dklj6k {
   margin-bottom: 10px !important;
@@ -84,25 +42,7 @@ ul > li.css-0:nth-child(7) {
   align-items: center;
 }
 
-/* Icon styles */
-.github-icon,
-.linkedin-icon {
-  color: #7d7d7d !important;
-  width: 32px !important;
-  height: 32px !important;
-  margin: 10px 0px 0px 10px !important;
-}
-
-.linkedin-icon:hover {
-  color: #0a66c2 !important;
-  transition: 0.3s ease-in;
-}
-
-.github-icon:hover {
-  color: #000 !important;
-  transition: 0.3s ease-in;
-}
-
+/* This is for the amenities on create/edit property */
 .checkbox-label {
   margin-left: 5px !important;
 }

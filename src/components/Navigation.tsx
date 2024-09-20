@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import { Box, UnorderedList, ListItem } from "@chakra-ui/react";
 import { MdRateReview } from "react-icons/md";
 import {
@@ -10,6 +9,7 @@ import {
   FaBuilding,
 } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa6";
+import "./css/navigation.css";
 
 export const Navigation = () => {
   return (
