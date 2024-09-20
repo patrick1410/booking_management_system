@@ -55,7 +55,7 @@ type Property = {
   maxGuestCount: number;
   hostId: string;
   rating: number;
-  amenityIds: string[];
+  amenities: Amenity[];
 };
 
 // Define the context type

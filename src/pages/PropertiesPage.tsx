@@ -14,7 +14,7 @@ import { EditProperty } from "../components/properties/EditProperty";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
-import { createAmenityMap } from "../utils/amenityMapper";
+// import { createAmenityMap } from "../utils/amenityMapper";
 
 export const PropertiesPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -27,11 +27,10 @@ export const PropertiesPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { properties, setProperties, searchTerm, setSearchTerm, amenities } =
-    dataContext;
+  const { properties, setProperties, searchTerm, setSearchTerm } = dataContext;
 
   // Create a map of amenities
-  const amenityMap = createAmenityMap(amenities);
+  // const amenityMap = createAmenityMap(amenities);
 
   const deleteProperty = async (id: string) => {
     try {
@@ -91,15 +90,11 @@ export const PropertiesPage = () => {
               <Text>maxGuestCount: {property.maxGuestCount}</Text>
               <Text>hostId: {property.hostId}</Text>
               <Text>rating: {property.rating}</Text>
-              {/* amenityIds:{" "}
-                {property.amenityIds.length > 1
-                  ? property.amenityIds.join(", ")
-                  : property.amenityIds} */}
               <Text>
                 amenities:{" "}
-                {property.amenityIds
-                  .map((id) => amenityMap[id]) // Map IDs to names
-                  .join(", ")}
+                {property.amenities.length > 1
+                  ? property.amenities.map((amenity) => amenity.name).join(", ")
+                  : property.amenities.map((amenity) => amenity.name)}
               </Text>
               <Button onClick={() => deleteProperty(property.id)}>
                 Delete Property
