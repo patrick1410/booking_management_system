@@ -18,6 +18,7 @@ type Host = {
   phoneNumber: string;
   profilePicture: string;
   aboutMe: string;
+  listings: Property[];
 };
 
 type Booking = {

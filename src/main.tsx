@@ -6,7 +6,8 @@ import { Root } from "./components/Root";
 import { BookingsPage } from "./pages/BookingsPage";
 import { AmenitiesPage } from "./pages/AmenitiesPage";
 import { LoginPage } from "./pages/LoginPage";
-import { HostsPage } from "./pages/HostsPage";
+import { HostsPage } from "./pages/hosts/HostsPage";
+import { HostPage } from "./pages/hosts/HostPage";
 import { UsersPage } from "./pages/UsersPage";
 import { ReviewsPage } from "./pages/ReviewsPage";
 import { PropertiesPage } from "./pages/PropertiesPage";
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/hosts",
         element: <HostsPage />,
+      },
+      {
+        path: "/hosts/:id",
+        element: <HostPage />,
       },
       {
         path: "/properties",

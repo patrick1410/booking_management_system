@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../components/DataProvider";
+import { DataContext } from "../../components/DataProvider";
 import {
   Box,
   Card,
@@ -9,11 +9,12 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
-import { CreateHost } from "../components/hosts/CreateHost";
-import { EditHost } from "../components/hosts/EditHost";
-import { SearchBar } from "../components/UI/SearchBar";
-import { filterData } from "../utils/filterData";
-import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { CreateHost } from "../../components/hosts/CreateHost";
+import { EditHost } from "../../components/hosts/EditHost";
+import { SearchBar } from "../../components/UI/SearchBar";
+import { filterData } from "../../utils/filterData";
+import { useResetSearchTerm } from "../../hooks/ResetSearchTerm";
+import { Link } from "react-router-dom";
 
 export const HostsPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -70,20 +71,22 @@ export const HostsPage = () => {
       {/* Scrollable user list */}
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {filteredHosts.map((host) => (
-          <Card key={host.id}>
-            <CardBody>
-              <Text>id: {host.id}</Text>
-              <Text>username: {host.username}</Text>
-              <Text>password: {host.password}</Text>
-              <Text>name: {host.name}</Text>
-              <Text>email: {host.email}</Text>
-              <Text>phoneNumber: {host.phoneNumber}</Text>
-              <Text>profilePicture: {host.profilePicture}</Text>
-              <Text>aboutMe: {host.aboutMe}</Text>
-              <Button onClick={() => deleteHost(host.id)}>Delete Host</Button>
-              <EditHost id={host.id} />
-            </CardBody>
-          </Card>
+          <Link key={host.id} to={`/hosts/${host.id}`}>
+            <Card>
+              <CardBody>
+                <Text>id: {host.id}</Text>
+                <Text>username: {host.username}</Text>
+                <Text>password: {host.password}</Text>
+                <Text>name: {host.name}</Text>
+                <Text>email: {host.email}</Text>
+                <Text>phoneNumber: {host.phoneNumber}</Text>
+                <Text>profilePicture: {host.profilePicture}</Text>
+                <Text>aboutMe: {host.aboutMe}</Text>
+                <Button onClick={() => deleteHost(host.id)}>Delete Host</Button>
+                <EditHost id={host.id} />
+              </CardBody>
+            </Card>
+          </Link>
         ))}
       </SimpleGrid>
     </Box>
