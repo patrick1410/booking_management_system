@@ -7,6 +7,9 @@ type User = {
   email: string;
   phoneNumber: string;
   profilePicture: string;
+
+  reviews: Review[];
+  bookings: Booking[];
 };
 
 type Host = {
