@@ -34,7 +34,7 @@ type FormProps = {
   maxGuestCount: number;
   hostId: string;
   rating: number;
-  amenities: Amenity[];
+  amenityIds: string[];
 };
 
 export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
@@ -60,7 +60,7 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
       maxGuestCount: property?.maxGuestCount,
       hostId: property?.hostId,
       rating: property?.rating,
-      amenities: property?.amenities || [], // Keep the full objects
+      amenityIds: property?.amenities.map(({ id }) => id),
     },
   });
 
@@ -196,13 +196,10 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
                 {amenities?.map((amenity, i) => (
                   <Box key={i}>
                     <input
-                      checked={property?.amenities.some(
-                        (a) => a.id === amenity.id
-                      )}
                       type="checkbox"
                       id="amenityIds"
                       value={amenity.id}
-                      {...register("amenities", { required: true })}
+                      {...register("amenityIds", { required: true })}
                     />
                     <label className="checkbox-label" htmlFor="amenityIds">
                       {amenity.name}
