@@ -25,8 +25,8 @@ type Booking = {
   id: string;
   userId: string;
   propertyId: string;
-  checkinDate: string;
-  checkoutDate: string;
+  checkinDate: Date | string;
+  checkoutDate: Date | string;
   numberOfGuests: number;
   totalPrice: number;
   bookingStatus: "pending" | "confirmed" | "canceled";

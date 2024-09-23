@@ -17,16 +17,9 @@ import {
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
+import { convertToLocal } from "../../utils/convertToLocal";
 
-type FormProps = {
-  userId: string;
-  propertyId: string;
-  checkinDate: string;
-  checkoutDate: string;
-  numberOfGuests: number;
-  totalPrice: number;
-  bookingStatus: string;
-};
+type FormProps = Booking;
 
 export const CreateBooking = () => {
   const dataContext = useContext(DataContext);
@@ -40,7 +33,13 @@ export const CreateBooking = () => {
       const response = await fetch("http://localhost:3000/bookings", {
         method: "POST",
         body: JSON.stringify({
-          ...booking,
+          userId: booking.userId,
+          propertyId: booking.propertyId,
+          checkinDate: convertToLocal(booking.checkinDate),
+          checkoutDate: convertToLocal(booking.checkoutDate),
+          numberOfGuests: booking.numberOfGuests,
+          totalPrice: booking.totalPrice,
+          bookingStatus: booking.bookingStatus,
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",

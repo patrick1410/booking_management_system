@@ -71,9 +71,9 @@ export const HostsPage = () => {
       {/* Scrollable user list */}
       <SimpleGrid columns={1} gap={8} overflow="auto">
         {filteredHosts.map((host) => (
-          <Link key={host.id} to={`/hosts/${host.id}`}>
-            <Card>
-              <CardBody>
+          <Card key={host.id}>
+            <CardBody>
+              <Link to={`/hosts/${host.id}`}>
                 <Text>id: {host.id}</Text>
                 <Text>username: {host.username}</Text>
                 <Text>password: {host.password}</Text>
@@ -81,12 +81,12 @@ export const HostsPage = () => {
                 <Text>email: {host.email}</Text>
                 <Text>phoneNumber: {host.phoneNumber}</Text>
                 <Text>profilePicture: {host.profilePicture}</Text>
-                <Text>aboutMe: {host.aboutMe}</Text>
-                <Button onClick={() => deleteHost(host.id)}>Delete Host</Button>
-                <EditHost id={host.id} />
-              </CardBody>
-            </Card>
-          </Link>
+                <Text>aboutMe: {host.aboutMe}</Text>{" "}
+              </Link>
+              <Button onClick={() => deleteHost(host.id)}>Delete Host</Button>
+              <EditHost id={host.id} />
+            </CardBody>
+          </Card>
         ))}
       </SimpleGrid>
     </Box>

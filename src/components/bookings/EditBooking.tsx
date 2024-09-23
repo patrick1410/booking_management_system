@@ -18,6 +18,8 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
+import { convertToLocal } from "../../utils/convertToLocal";
+
 type EditBookingProps = {
   id: string; // The id of the booking being edited
 };
@@ -36,8 +38,8 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
     defaultValues: {
       userId: booking?.userId,
       propertyId: booking?.propertyId,
-      checkinDate: booking?.checkinDate.slice(0, 16),
-      checkoutDate: booking?.checkoutDate.slice(0, 16),
+      checkinDate: booking?.checkinDate.toString().slice(0, 16),
+      checkoutDate: booking?.checkoutDate.toString().slice(0, 16),
       numberOfGuests: booking?.numberOfGuests,
       totalPrice: booking?.totalPrice,
       bookingStatus: booking?.bookingStatus,
@@ -49,7 +51,13 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
       const response = await fetch(`http://localhost:3000/bookings/${id}`, {
         method: "PUT",
         body: JSON.stringify({
-          ...booking,
+          userId: booking.userId,
+          propertyId: booking.propertyId,
+          checkinDate: new Date(convertToLocal(booking.checkinDate)),
+          checkoutDate: new Date(convertToLocal(booking.checkoutDate)),
+          numberOfGuests: booking.numberOfGuests,
+          totalPrice: booking.totalPrice,
+          bookingStatus: booking.bookingStatus,
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
