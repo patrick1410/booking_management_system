@@ -18,6 +18,7 @@ type Host = {
   phoneNumber: string;
   profilePicture: string;
   aboutMe: string;
+
   listings: Property[];
 };
 
@@ -57,7 +58,10 @@ type Property = {
   hostId: string;
   rating: number;
   amenityIds: string[];
+
   amenities: Amenity[];
+  reviews: Review[];
+  bookings: Booking[];
 };
 
 // Define the context type
