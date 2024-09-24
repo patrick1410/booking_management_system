@@ -58,7 +58,7 @@ export const CreateProperty = () => {
 
       const newProperty = await response.json();
       if (setProperties) {
-        setProperties([newProperty, ...properties]);
+        setProperties([...properties, newProperty]);
       }
 
       onClose();

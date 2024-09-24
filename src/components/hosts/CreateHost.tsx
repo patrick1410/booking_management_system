@@ -55,7 +55,7 @@ export const CreateHost = () => {
 
       const newHost = await response.json();
       if (setHosts) {
-        setHosts([newHost, ...hosts]);
+        setHosts([...hosts, newHost]);
       }
 
       onClose();

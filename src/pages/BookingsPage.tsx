@@ -15,6 +15,7 @@ import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 import { convertDate } from "../utils/convertDate";
+import { Link } from "react-router-dom";
 
 export const BookingsPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -51,6 +52,8 @@ export const BookingsPage = () => {
     "bookingStatus",
   ]);
 
+  const orderedBookings = [...filteredBookings].reverse(); // New bookings first!
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
@@ -69,12 +72,20 @@ export const BookingsPage = () => {
         <CreateBooking />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {filteredBookings.map((booking) => (
+        {orderedBookings.map((booking) => (
           <Card key={booking.id}>
             <CardBody>
               <Text>id: {booking.id}</Text>
-              <Text>userId: {booking.userId}</Text>
-              <Text>propertyId: {booking.propertyId}</Text>
+              <Text>
+                <Link to={`/users/${booking.userId}`}>
+                  userId: {booking.userId}
+                </Link>
+              </Text>
+              <Text>
+                <Link to={`/properties/${booking.propertyId}`}>
+                  propertyId: {booking.propertyId}
+                </Link>
+              </Text>
               <Text>checkinDate: {convertDate(booking.checkinDate)}</Text>
               <Text>checkoutDate: {convertDate(booking.checkoutDate)}</Text>
               <Text>numberOfGuests: {booking.numberOfGuests}</Text>

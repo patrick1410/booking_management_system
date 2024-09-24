@@ -51,6 +51,8 @@ export const HostsPage = () => {
     "name",
   ]);
 
+  const orderedHosts = [...filteredHosts].reverse(); // New hosts first!
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
@@ -70,7 +72,7 @@ export const HostsPage = () => {
       </Box>
       {/* Scrollable user list */}
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {filteredHosts.map((host) => (
+        {orderedHosts.map((host) => (
           <Card key={host.id}>
             <CardBody>
               <Link to={`/hosts/${host.id}`}>

@@ -58,6 +58,8 @@ export const PropertiesPage = () => {
     "hostId",
   ]);
 
+  const orderedProperties = [...filteredProperties].reverse(); // New properties first!
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <Box
@@ -75,7 +77,7 @@ export const PropertiesPage = () => {
         <CreateProperty />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {filteredProperties.map((property) => (
+        {orderedProperties.map((property) => (
           <Card key={property.id}>
             <CardBody>
               <Link to={`/properties/${property.id}`}>

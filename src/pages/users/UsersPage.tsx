@@ -51,6 +51,8 @@ export const UsersPage = () => {
     "name",
   ]);
 
+  const orderedUsers = [...filteredUsers].reverse(); // New users first!
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
@@ -70,7 +72,7 @@ export const UsersPage = () => {
       </Box>
       {/* Scrollable user list */}
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {filteredUsers.map((user) => (
+        {orderedUsers.map((user) => (
           <Card key={user.id}>
             <CardBody>
               <Link to={`/users/${user.id}`}>

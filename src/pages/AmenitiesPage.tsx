@@ -46,6 +46,8 @@ export const AmenitiesPage = () => {
 
   const filteredAmenities = filterData(amenities, searchTerm, ["name"]);
 
+  const orderedAmenities = [...filteredAmenities].reverse(); // New amenities first!
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <Box
@@ -63,7 +65,7 @@ export const AmenitiesPage = () => {
         <CreateAmenity />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {filteredAmenities.map((amenity) => (
+        {orderedAmenities.map((amenity) => (
           <Card key={amenity.id}>
             <CardBody>
               <Text>id: {amenity.id}</Text>

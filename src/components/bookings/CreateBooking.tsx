@@ -48,7 +48,7 @@ export const CreateBooking = () => {
 
       const newBooking = await response.json();
       if (setBookings) {
-        setBookings([newBooking, ...bookings]);
+        setBookings([...bookings, newBooking]);
       }
 
       onClose();

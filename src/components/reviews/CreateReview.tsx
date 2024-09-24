@@ -47,7 +47,7 @@ export const CreateReview = () => {
 
       const newReview = await response.json();
       if (setReviews) {
-        setReviews([newReview, ...reviews]);
+        setReviews([...reviews, newReview]);
       }
 
       onClose();

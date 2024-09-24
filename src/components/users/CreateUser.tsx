@@ -53,7 +53,7 @@ export const CreateUser = () => {
 
       const newUser = await response.json();
       if (setUsers) {
-        setUsers([newUser, ...users]);
+        setUsers([...users, newUser]);
       }
 
       onClose();

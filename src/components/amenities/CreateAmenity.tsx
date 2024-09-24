@@ -42,7 +42,7 @@ export const CreateAmenity = () => {
 
       const newAmenity = await response.json();
       if (setAmenities) {
-        setAmenities([newAmenity, ...amenities]);
+        setAmenities([...amenities, newAmenity]);
       }
 
       onClose();

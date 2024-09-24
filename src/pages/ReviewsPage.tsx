@@ -14,6 +14,7 @@ import { EditReview } from "../components/reviews/EditReview";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { Link } from "react-router-dom";
 
 export const ReviewsPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -49,6 +50,8 @@ export const ReviewsPage = () => {
     "propertyId",
   ]);
 
+  const orderedReviews = [...filteredReviews].reverse(); // New reviews first!
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <Box
@@ -66,12 +69,20 @@ export const ReviewsPage = () => {
         <CreateReview />
       </Box>
       <SimpleGrid columns={1} gap={8} overflow="auto">
-        {filteredReviews.map((review) => (
+        {orderedReviews.map((review) => (
           <Card key={review.id}>
             <CardBody>
               <Text>id: {review.id}</Text>
-              <Text>userId: {review.userId}</Text>
-              <Text>propertyId: {review.propertyId}</Text>
+              <Text>
+                <Link to={`/users/${review.userId}`}>
+                  userId: {review.userId}
+                </Link>
+              </Text>
+              <Text>
+                <Link to={`/properties/${review.propertyId}`}>
+                  propertyId: {review.propertyId}
+                </Link>
+              </Text>
               <Text>rating: {review.rating}</Text>
               <Text>comment: {review.comment}</Text>
               <Button onClick={() => deleteReview(review.id)}>
