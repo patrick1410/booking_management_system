@@ -34,7 +34,7 @@ export const HostPage = () => {
           </Heading>
         </Box>
 
-        <Box>
+        <Box sx={{ mb: "0.75rem !important " }}>
           <Text>Id: {host.id}</Text>
           <Text>Username: {host.username}</Text>
           <Text>Email: {host.email}</Text>

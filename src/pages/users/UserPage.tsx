@@ -34,7 +34,7 @@ export const UserPage = () => {
             {user.name}'s Details:
           </Heading>
         </Box>
-        <Box>
+        <Box sx={{ mb: "0.75rem !important " }}>
           <Text>id: {user.id}</Text>
           <Text>username: {user.username}</Text>
           <Text>password {user.password}</Text>
@@ -54,7 +54,7 @@ export const UserPage = () => {
                 <Text>userId: {review.userId}</Text>
                 <Text>rating: {review.rating}</Text>
                 <Text>comment: {review.comment}</Text>
-                <hr style={{ width: "30%" }} />
+                <hr />
               </Box>
             ))}
           </Box>
@@ -83,7 +83,7 @@ export const UserPage = () => {
                   {booking.totalPrice.toString().replace(".", ",")}
                 </Text>
                 <Text>bookingStatus: {booking.bookingStatus}</Text>
-                <hr style={{ width: "30%" }} />
+                <hr />
               </Box>
             ))}
           </Box>

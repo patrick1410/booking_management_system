@@ -34,7 +34,7 @@ export const PropertyPage = () => {
           </Heading>
         </Box>
 
-        <Box>
+        <Box sx={{ mb: "0.75rem !important " }}>
           <Text>id: {property.id}</Text>
           <Text>description: {property.description}</Text>
           <Text>location: {property.location}</Text>
@@ -73,7 +73,7 @@ export const PropertyPage = () => {
                 </Text>
                 <Text>rating: {review.rating}</Text>
                 <Text>comment: {review.comment}</Text>
-                <hr style={{ width: "30%" }} />
+                <hr />
               </Box>
             ))}
           </Box>
@@ -97,7 +97,7 @@ export const PropertyPage = () => {
                   totalPrice: {booking.totalPrice.toString().replace(".", ",")}
                 </Text>
                 <Text>bookingStatus: {booking.bookingStatus}</Text>
-                <hr style={{ width: "30%" }} />
+                <hr />
               </Box>
             ))}
           </Box>
