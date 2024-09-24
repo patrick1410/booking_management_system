@@ -78,7 +78,8 @@ export const UserPage = () => {
                 <Text>checkoutDate: {convertDate(booking.checkoutDate)}</Text>
                 <Text>numberOfGuests: {booking.numberOfGuests}</Text>
                 <Text>
-                  totalPrice: {booking.totalPrice.toString().replace(".", ",")}
+                  totalPrice: &euro;
+                  {booking.totalPrice.toString().replace(".", ",")}
                 </Text>
                 <Text>bookingStatus: {booking.bookingStatus}</Text>
                 <hr style={{ width: "30%" }} />
