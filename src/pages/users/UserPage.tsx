@@ -1,4 +1,4 @@
-import { Heading, Text, Box, SimpleGrid } from "@chakra-ui/react";
+import { Heading, Text, Box, SimpleGrid, Avatar } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { convertDate } from "../../utils/convertDate";
@@ -29,6 +29,7 @@ export const UserPage = () => {
     <Box gridArea="main" display="flex" flexDir="column">
       <SimpleGrid columns={1} overflow="auto">
         <Box display="flex" alignItems="center">
+          <Avatar src={user.profilePicture} name={user.name} />
           <Heading ml="0.5rem !important" as="h3">
             {user.name}'s Details:
           </Heading>
