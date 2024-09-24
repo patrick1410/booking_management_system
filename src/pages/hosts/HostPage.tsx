@@ -24,8 +24,6 @@ export const HostPage = () => {
     return <div>Loading...</div>; // Show loading state while fetching
   }
 
-  // console.log(host);
-
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <SimpleGrid columns={1} overflow="auto">
@@ -35,6 +33,7 @@ export const HostPage = () => {
             {host.name}'s Details:
           </Heading>
         </Box>
+
         <Box>
           <Text>Id: {host.id}</Text>
           <Text>Username: {host.username}</Text>
@@ -43,26 +42,30 @@ export const HostPage = () => {
           <Text>About: {host.aboutMe}</Text>
         </Box>
 
-        <Box>
-          <Heading as="h4">Listings:</Heading>
-          {host.listings.map((listing, i) => (
-            <Box key={i}>
-              <Heading as="h5">- {listing.title}</Heading>
-              <Text>id: {listing.id}</Text>
-              <Text>description: {listing.description}</Text>
-              <Text>location: {listing.location}</Text>
-              <Text>
-                pricePerNight:{" "}
-                {listing.pricePerNight.toString().replace(".", ",")}
-              </Text>
-              <Text>bedroomCount: {listing.bedroomCount}</Text>
-              <Text>bathRoomCount: {listing.bathRoomCount}</Text>
-              <Text>maxGuestCount: {listing.maxGuestCount}</Text>
-              <Text>hostId: {listing.hostId}</Text>
-              <Text>rating: {listing.rating}</Text>
-            </Box>
-          ))}
-        </Box>
+        {host.listings.length >= 1 && (
+          <Box>
+            <Heading as="h4">
+              {host.listings.length > 1 ? "Listings:" : "Listing:"}
+            </Heading>
+            {host.listings.map((listing, i) => (
+              <Box sx={{ mb: "0.75rem !important " }} key={i}>
+                <Heading as="h5">- {listing.title}</Heading>
+                <Text>id: {listing.id}</Text>
+                <Text>description: {listing.description}</Text>
+                <Text>location: {listing.location}</Text>
+                <Text>
+                  pricePerNight:{" "}
+                  {listing.pricePerNight.toString().replace(".", ",")}
+                </Text>
+                <Text>bedroomCount: {listing.bedroomCount}</Text>
+                <Text>bathRoomCount: {listing.bathRoomCount}</Text>
+                <Text>maxGuestCount: {listing.maxGuestCount}</Text>
+                <Text>hostId: {listing.hostId}</Text>
+                <Text>rating: {listing.rating}</Text>
+              </Box>
+            ))}
+          </Box>
+        )}
       </SimpleGrid>
     </Box>
   );

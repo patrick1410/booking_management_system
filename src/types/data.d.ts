@@ -8,8 +8,8 @@ type User = {
   phoneNumber: string;
   profilePicture: string;
 
-  reviews: Review[];
-  bookings: Booking[];
+  Review: Review[];
+  Booking: Booking[];
 };
 
 type Host = {

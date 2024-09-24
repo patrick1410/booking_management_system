@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../components/DataProvider";
+import { DataContext } from "../../components/DataProvider";
 import {
   Box,
   Card,
@@ -9,11 +9,12 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
-import { CreateUser } from "../components/users/CreateUser";
-import { EditUser } from "../components/users/EditUser";
-import { SearchBar } from "../components/UI/SearchBar";
-import { filterData } from "../utils/filterData";
-import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { CreateUser } from "../../components/users/CreateUser";
+import { EditUser } from "../../components/users/EditUser";
+import { SearchBar } from "../../components/UI/SearchBar";
+import { filterData } from "../../utils/filterData";
+import { useResetSearchTerm } from "../../hooks/ResetSearchTerm";
+import { Link } from "react-router-dom";
 
 export const UsersPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -72,13 +73,15 @@ export const UsersPage = () => {
         {filteredUsers.map((user) => (
           <Card key={user.id}>
             <CardBody>
-              <Text>id: {user.id}</Text>
-              <Text>username: {user.username}</Text>
-              <Text>password {user.password}</Text>
-              <Text>name: {user.name}</Text>
-              <Text>email: {user.email}</Text>
-              <Text>phoneNumber: {user.phoneNumber}</Text>
-              <Text>profilePicture: {user.profilePicture}</Text>
+              <Link to={`/users/${user.id}`}>
+                <Text>id: {user.id}</Text>
+                <Text>username: {user.username}</Text>
+                <Text>password {user.password}</Text>
+                <Text>name: {user.name}</Text>
+                <Text>email: {user.email}</Text>
+                <Text>phoneNumber: {user.phoneNumber}</Text>
+                <Text>profilePicture: {user.profilePicture}</Text>
+              </Link>
               <Button onClick={() => deleteUser(user.id)}>Delete User</Button>
               <EditUser id={user.id} />
             </CardBody>

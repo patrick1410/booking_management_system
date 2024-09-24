@@ -3,25 +3,25 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { convertDate } from "../../utils/convertDate";
 
-export const PropertyPage = () => {
+export const UserPage = () => {
   const { id } = useParams(); // Get the ID from the URL
-  const [property, setProperty] = useState<Property | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchHost = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/properties/${id}`);
-        const propertyData = await response.json();
-        setProperty(propertyData);
+        const response = await fetch(`http://localhost:3000/users/${id}`);
+        const userData = await response.json();
+        setUser(userData);
       } catch (error) {
-        console.error("Error fetching property:", error);
+        console.error("Error fetching user:", error);
       }
     };
 
     fetchHost();
   }, []);
 
-  if (!property) {
+  if (!user) {
     return <div>Loading...</div>; // Show loading state while fetching
   }
 
@@ -30,47 +30,27 @@ export const PropertyPage = () => {
       <SimpleGrid columns={1} overflow="auto">
         <Box display="flex" alignItems="center">
           <Heading ml="0.5rem !important" as="h3">
-            {property.title}'s Details:
+            {user.name}'s Details:
           </Heading>
         </Box>
-
         <Box>
-          <Text>id: {property.id}</Text>
-          <Text>description: {property.description}</Text>
-          <Text>location: {property.location}</Text>
-          <Text>
-            pricePerNight: {property.pricePerNight.toString().replace(".", ",")}
-          </Text>
-          <Text>bedroomCount: {property.bedroomCount}</Text>
-          <Text>bathRoomCount: {property.bathRoomCount}</Text>
-          <Text>maxGuestCount: {property.maxGuestCount}</Text>
-          <Text>
-            <Link to={`/hosts/${property.hostId}`}>
-              hostId: {property.hostId}
-            </Link>
-          </Text>
-          <Text>rating: {property.rating}</Text>
-          <Text>
-            amenities:{" "}
-            {property.amenities.length > 1
-              ? property.amenities.map((amenity) => amenity.name).join(", ")
-              : property.amenities.map((amenity) => amenity.name)}
-          </Text>
+          <Text>id: {user.id}</Text>
+          <Text>username: {user.username}</Text>
+          <Text>password {user.password}</Text>
+          <Text>email: {user.email}</Text>
+          <Text>phoneNumber: {user.phoneNumber}</Text>
+          <Text>profilePicture: {user.profilePicture}</Text>
         </Box>
 
-        {property.reviews.length >= 1 && (
+        {user.Review.length >= 1 && (
           <Box>
             <Heading as="h4">
-              {property.reviews.length > 1 ? "Reviews:" : "Review:"}
+              {user.Review.length > 1 ? "Reviews:" : "Review:"}
             </Heading>
-            {property.reviews.map((review, i) => (
+            {user.Review.map((review, i) => (
               <Box sx={{ mb: "0.75rem !important " }} key={i}>
                 <Text>id: {review.id}</Text>
-                <Text>
-                  <Link to={`/users/${review.userId}`}>
-                    userId: {review.userId}
-                  </Link>
-                </Text>
+                <Text>userId: {review.userId}</Text>
                 <Text>rating: {review.rating}</Text>
                 <Text>comment: {review.comment}</Text>
                 <hr style={{ width: "30%" }} />
@@ -79,17 +59,21 @@ export const PropertyPage = () => {
           </Box>
         )}
 
-        {property.bookings.length >= 1 && (
+        {user.Booking.length >= 1 && (
           <Box>
             <Heading as="h4">
-              {property.bookings.length > 1 ? "Bookings:" : "Booking"}
+              {" "}
+              {user.Booking.length > 1 ? "Bookings:" : "Booking:"}
             </Heading>
-            {property.bookings.map((booking, i) => (
+            {user.Booking.map((booking, i) => (
               <Box sx={{ mb: "0.75rem !important " }} key={i}>
                 <Text>id: {booking.id}</Text>
-                <Link to={`/users/${booking.userId}`}>
-                  userId: {booking.userId}
-                </Link>
+                <Text>userId: {booking.userId}</Text>
+                <Text>
+                  <Link to={`/properties/${booking.propertyId}`}>
+                    propertyId: {booking.propertyId}
+                  </Link>
+                </Text>
                 <Text>checkinDate: {convertDate(booking.checkinDate)}</Text>
                 <Text>checkoutDate: {convertDate(booking.checkoutDate)}</Text>
                 <Text>numberOfGuests: {booking.numberOfGuests}</Text>

@@ -8,7 +8,8 @@ import { AmenitiesPage } from "./pages/AmenitiesPage";
 import { LoginPage } from "./pages/LoginPage";
 import { HostsPage } from "./pages/hosts/HostsPage";
 import { HostPage } from "./pages/hosts/HostPage";
-import { UsersPage } from "./pages/UsersPage";
+import { UsersPage } from "./pages/users/UsersPage";
+import { UserPage } from "./pages/users/UserPage";
 import { ReviewsPage } from "./pages/ReviewsPage";
 import { PropertiesPage } from "./pages/properties/PropertiesPage";
 import { PropertyPage } from "./pages/properties/PropertyPage";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <UsersPage />,
+      },
+      {
+        path: "/users/:id",
+        element: <UserPage />,
       },
       {
         path: "/hosts",
