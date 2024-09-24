@@ -68,7 +68,12 @@ export const ReviewsPage = () => {
         />
         <CreateReview />
       </Box>
-      <SimpleGrid columns={1} gap={8} overflow="auto">
+      <SimpleGrid
+        sx={{ mt: "8px !important" }}
+        columns={2}
+        gap={8}
+        overflow="auto"
+      >
         {orderedReviews.map((review) => (
           <Card key={review.id}>
             <CardBody>

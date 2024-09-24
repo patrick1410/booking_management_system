@@ -26,7 +26,7 @@ export const CreateAmenity = () => {
   const { amenities = [], setAmenities = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit } = useForm<FormProps>({});
+  const { register, handleSubmit, reset } = useForm<FormProps>({});
 
   const createAmenity = async (amenity: FormProps) => {
     try {
@@ -45,6 +45,7 @@ export const CreateAmenity = () => {
         setAmenities([...amenities, newAmenity]);
       }
 
+      reset();
       onClose();
     } catch (error) {
       console.error(error);

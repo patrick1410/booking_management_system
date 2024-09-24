@@ -64,7 +64,12 @@ export const AmenitiesPage = () => {
         />
         <CreateAmenity />
       </Box>
-      <SimpleGrid columns={1} gap={8} overflow="auto">
+      <SimpleGrid
+        sx={{ mt: "8px !important" }}
+        columns={3}
+        gap={8}
+        overflow="auto"
+      >
         {orderedAmenities.map((amenity) => (
           <Card key={amenity.id}>
             <CardBody>

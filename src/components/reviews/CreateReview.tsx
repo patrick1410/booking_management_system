@@ -31,7 +31,7 @@ export const CreateReview = () => {
   const { reviews = [], setReviews = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit } = useForm<FormProps>({});
+  const { register, handleSubmit, reset } = useForm<FormProps>({});
 
   const CreateReview = async (review: FormProps) => {
     try {
@@ -50,6 +50,7 @@ export const CreateReview = () => {
         setReviews([...reviews, newReview]);
       }
 
+      reset();
       onClose();
     } catch (error) {
       console.error(error);

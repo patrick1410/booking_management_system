@@ -71,7 +71,12 @@ export const BookingsPage = () => {
         />
         <CreateBooking />
       </Box>
-      <SimpleGrid columns={1} gap={8} overflow="auto">
+      <SimpleGrid
+        sx={{ mt: "8px !important" }}
+        columns={2}
+        gap={8}
+        overflow="auto"
+      >
         {orderedBookings.map((booking) => (
           <Card key={booking.id}>
             <CardBody>

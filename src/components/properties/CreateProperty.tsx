@@ -42,7 +42,7 @@ export const CreateProperty = () => {
   } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit } = useForm<FormProps>({});
+  const { register, handleSubmit, reset } = useForm<FormProps>({});
 
   const createProperty = async (property: FormProps) => {
     try {
@@ -61,6 +61,7 @@ export const CreateProperty = () => {
         setProperties([...properties, newProperty]);
       }
 
+      reset();
       onClose();
     } catch (error) {
       console.error(error);

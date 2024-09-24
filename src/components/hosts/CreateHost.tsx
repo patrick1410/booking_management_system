@@ -38,7 +38,7 @@ export const CreateHost = () => {
   const { hosts = [], setHosts = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit } = useForm<FormProps>({});
+  const { register, handleSubmit, reset } = useForm<FormProps>({});
   const [show, setShow] = useState<boolean>(false);
 
   const createHost = async (host: FormProps) => {
@@ -58,6 +58,7 @@ export const CreateHost = () => {
         setHosts([...hosts, newHost]);
       }
 
+      reset();
       onClose();
     } catch (error) {
       console.error(error);

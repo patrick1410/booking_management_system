@@ -26,7 +26,7 @@ export const CreateBooking = () => {
   const { bookings = [], setBookings = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit } = useForm<FormProps>({});
+  const { register, handleSubmit, reset } = useForm<FormProps>({});
 
   const createBooking = async (booking: FormProps) => {
     try {
@@ -51,6 +51,7 @@ export const CreateBooking = () => {
         setBookings([...bookings, newBooking]);
       }
 
+      reset();
       onClose();
     } catch (error) {
       console.error(error);

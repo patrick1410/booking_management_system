@@ -36,7 +36,7 @@ export const CreateUser = () => {
   const { users = [], setUsers = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit } = useForm<FormProps>({});
+  const { register, handleSubmit, reset } = useForm<FormProps>({});
   const [show, setShow] = useState<boolean>(false);
 
   const createUser = async (user: FormProps) => {
@@ -56,6 +56,7 @@ export const CreateUser = () => {
         setUsers([...users, newUser]);
       }
 
+      reset();
       onClose();
     } catch (error) {
       console.error(error);
