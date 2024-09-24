@@ -10,7 +10,8 @@ import { HostsPage } from "./pages/hosts/HostsPage";
 import { HostPage } from "./pages/hosts/HostPage";
 import { UsersPage } from "./pages/UsersPage";
 import { ReviewsPage } from "./pages/ReviewsPage";
-import { PropertiesPage } from "./pages/PropertiesPage";
+import { PropertiesPage } from "./pages/properties/PropertiesPage";
+import { PropertyPage } from "./pages/properties/PropertyPage";
 import { DataProvider } from "./components/DataProvider";
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/properties",
         element: <PropertiesPage />,
+      },
+      {
+        path: "/properties/:id",
+        element: <PropertyPage />,
       },
       {
         path: "/reviews",

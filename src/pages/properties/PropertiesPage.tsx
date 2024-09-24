@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../components/DataProvider";
+import { DataContext } from "../../components/DataProvider";
 import {
   Box,
   Card,
@@ -9,11 +9,12 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
-import { CreateProperty } from "../components/properties/CreateProperty";
-import { EditProperty } from "../components/properties/EditProperty";
-import { SearchBar } from "../components/UI/SearchBar";
-import { filterData } from "../utils/filterData";
-import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { CreateProperty } from "../../components/properties/CreateProperty";
+import { EditProperty } from "../../components/properties/EditProperty";
+import { SearchBar } from "../../components/UI/SearchBar";
+import { filterData } from "../../utils/filterData";
+import { useResetSearchTerm } from "../../hooks/ResetSearchTerm";
+import { Link } from "react-router-dom";
 // import { createAmenityMap } from "../utils/amenityMapper";
 
 export const PropertiesPage = () => {
@@ -77,25 +78,29 @@ export const PropertiesPage = () => {
         {filteredProperties.map((property) => (
           <Card key={property.id}>
             <CardBody>
-              <Text>id: {property.id}</Text>
-              <Text>title: {property.title}</Text>
-              <Text>description: {property.description}</Text>
-              <Text>location: {property.location}</Text>
-              <Text>
-                pricePerNight:{" "}
-                {property.pricePerNight.toString().replace(".", ",")}
-              </Text>
-              <Text>bedroomCount: {property.bedroomCount}</Text>
-              <Text>bathRoomCount: {property.bathRoomCount}</Text>
-              <Text>maxGuestCount: {property.maxGuestCount}</Text>
-              <Text>hostId: {property.hostId}</Text>
-              <Text>rating: {property.rating}</Text>
-              <Text>
-                amenities:{" "}
-                {property.amenities.length > 1
-                  ? property.amenities.map((amenity) => amenity.name).join(", ")
-                  : property.amenities.map((amenity) => amenity.name)}
-              </Text>
+              <Link to={`/properties/${property.id}`}>
+                <Text>id: {property.id}</Text>
+                <Text>title: {property.title}</Text>
+                <Text>description: {property.description}</Text>
+                <Text>location: {property.location}</Text>
+                <Text>
+                  pricePerNight:{" "}
+                  {property.pricePerNight.toString().replace(".", ",")}
+                </Text>
+                <Text>bedroomCount: {property.bedroomCount}</Text>
+                <Text>bathRoomCount: {property.bathRoomCount}</Text>
+                <Text>maxGuestCount: {property.maxGuestCount}</Text>
+                <Text>hostId: {property.hostId}</Text>
+                <Text>rating: {property.rating}</Text>
+                <Text>
+                  amenities:{" "}
+                  {property.amenities.length > 1
+                    ? property.amenities
+                        .map((amenity) => amenity.name)
+                        .join(", ")
+                    : property.amenities.map((amenity) => amenity.name)}
+                </Text>
+              </Link>
               <Button onClick={() => deleteProperty(property.id)}>
                 Delete Property
               </Button>
