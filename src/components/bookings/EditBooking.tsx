@@ -64,14 +64,16 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
         },
       });
 
+      // Get the updated booking from the response
       const updatedBooking = await response.json();
 
-      if (setBookings) {
-        setBookings(
-          bookings.map((booking) =>
-            booking.id === updatedBooking.id ? updatedBooking : booking
-          )
-        );
+      if (updatedBooking) {
+        // Fetch all bookings after the update
+        const refresh = await fetch(`http://localhost:3000/bookings`);
+        const newBookings = await refresh.json();
+
+        // Update the bookings state
+        setBookings(newBookings);
       }
 
       onClose();

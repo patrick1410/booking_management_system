@@ -54,14 +54,16 @@ export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
         },
       });
 
+      // Get the updated review from the response
       const updatedReview = await response.json();
 
-      if (setReviews) {
-        setReviews(
-          reviews.map((review) =>
-            review.id === updatedReview.id ? updatedReview : review
-          )
-        );
+      if (updatedReview) {
+        // Fetch all reviews after the update
+        const refresh = await fetch(`http://localhost:3000/reviews`);
+        const newReviews = await refresh.json();
+
+        // Update the reviews state
+        setReviews(newReviews);
       }
 
       onClose();

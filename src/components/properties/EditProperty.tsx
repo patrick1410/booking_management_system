@@ -76,14 +76,16 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
         },
       });
 
+      // Get the updated property from the response
       const updatedProperty = await response.json();
 
-      if (setProperties) {
-        setProperties(
-          properties.map((property) =>
-            property.id === updatedProperty.id ? updatedProperty : property
-          )
-        );
+      if (updatedProperty) {
+        // Fetch all properties after the update
+        const refresh = await fetch(`http://localhost:3000/properties`);
+        const newProperties = await refresh.json();
+
+        // Update the properties state
+        setProperties(newProperties);
       }
 
       onClose();

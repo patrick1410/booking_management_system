@@ -61,12 +61,16 @@ export const EditUser: React.FC<EditUserProps> = ({ id }) => {
         },
       });
 
+      // Get the updated user from the response
       const updatedUser = await response.json();
 
-      if (setUsers) {
-        setUsers(
-          users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
-        );
+      if (updatedUser) {
+        // Fetch all users after the update
+        const refresh = await fetch(`http://localhost:3000/users`);
+        const newUsers = await refresh.json();
+
+        // Update the users state
+        setUsers(newUsers);
       }
 
       onClose();

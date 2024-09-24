@@ -63,12 +63,16 @@ export const EditHost: React.FC<EditHostProps> = ({ id }) => {
         },
       });
 
+      // Get the updated host from the response
       const updatedHost = await response.json();
 
-      if (setHosts) {
-        setHosts(
-          hosts.map((host) => (host.id === updatedHost.id ? updatedHost : host))
-        );
+      if (updatedHost) {
+        // Fetch all hosts after the update
+        const refresh = await fetch(`http://localhost:3000/hosts`);
+        const newHosts = await refresh.json();
+
+        // Update the hosts state
+        setHosts(newHosts);
       }
 
       onClose();

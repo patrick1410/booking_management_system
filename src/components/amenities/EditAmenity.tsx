@@ -47,14 +47,16 @@ export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
         },
       });
 
+      // Get the updated amenity from the response
       const updatedAmenity = await response.json();
 
-      if (setAmenities) {
-        setAmenities(
-          amenities.map((amenity) =>
-            amenity.id === updatedAmenity.id ? updatedAmenity : amenity
-          )
-        );
+      if (updatedAmenity) {
+        // Fetch all amenities after the update
+        const refresh = await fetch(`http://localhost:3000/amenities`);
+        const newAmenities = await refresh.json();
+
+        // Update the bookings state
+        setAmenities(newAmenities);
       }
 
       onClose();
