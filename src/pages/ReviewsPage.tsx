@@ -79,7 +79,7 @@ export const ReviewsPage = () => {
       <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
         {orderedReviews.map((review) => (
           <Card key={review.id}>
-            <CardBody>
+            <CardBody display="flex" flexDir="column" justifyContent="center">
               <Text>
                 <strong>id: </strong>
                 {review.id}
@@ -104,10 +104,12 @@ export const ReviewsPage = () => {
                 <strong>comment: </strong>
                 {review.comment}
               </Text>
-              <Button onClick={() => deleteReview(review.id)}>
-                Delete Review
-              </Button>
-              <EditReview id={review.id} />
+              <Box mt={2}>
+                <Button mr={4} onClick={() => deleteReview(review.id)}>
+                  Delete Review
+                </Button>
+                <EditReview id={review.id} />
+              </Box>
             </CardBody>
           </Card>
         ))}

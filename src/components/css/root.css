@@ -15,6 +15,11 @@
   background-color: #a7d3e0;
 }
 
+.css-p2urg6,
+.css-c6vwei {
+  margin-right: 2rem;
+}
+
 /* Page headers */
 h1,
 h2,
@@ -42,7 +47,8 @@ p {
 }
 
 /* Buttons */
-.chakra-button.css-ez23ye {
+.chakra-button.css-ez23ye,
+.chakra-button.css-x9ig9b {
   background-color: #3182ce;
   color: #ffffff;
 }

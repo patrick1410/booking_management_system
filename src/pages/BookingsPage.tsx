@@ -82,7 +82,7 @@ export const BookingsPage = () => {
       <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
         {orderedBookings.map((booking) => (
           <Card key={booking.id}>
-            <CardBody>
+            <CardBody display="flex" flexDir="column" justifyContent="center">
               <Text>
                 <strong>id: </strong>
                 {booking.id}
@@ -119,10 +119,12 @@ export const BookingsPage = () => {
                 <strong>bookingStatus: </strong>
                 {booking.bookingStatus}
               </Text>
-              <Button onClick={() => deleteBooking(booking.id)}>
-                Delete Booking
-              </Button>
-              <EditBooking id={booking.id} />
+              <Box mt={2}>
+                <Button mr={4} onClick={() => deleteBooking(booking.id)}>
+                  Delete Booking
+                </Button>
+                <EditBooking id={booking.id} />
+              </Box>
             </CardBody>
           </Card>
         ))}

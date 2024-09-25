@@ -42,9 +42,7 @@ export const PropertyPage = () => {
     <Box gridArea="main" display="flex" flexDir="column">
       <SimpleGrid columns={1} overflow="auto">
         <Box display="flex" alignItems="center">
-          <Heading ml="0.5rem" as="h3">
-            {property.title}'s Details:
-          </Heading>
+          <Heading as="h3">{property.title}'s Details:</Heading>
         </Box>
 
         <Box mb={"0.75rem"}>

@@ -89,7 +89,7 @@ export const PropertiesPage = () => {
       <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
         {orderedProperties.map((property) => (
           <Card key={property.id}>
-            <CardBody>
+            <CardBody display="flex" flexDir="column" justifyContent="center">
               <Link to={`/properties/${property.id}`}>
                 <Text>
                   <strong>id: </strong>
@@ -140,10 +140,12 @@ export const PropertiesPage = () => {
                     : property.amenities.map((amenity) => amenity.name)}
                 </Text>
               </Link>
-              <Button onClick={() => deleteProperty(property.id)}>
-                Delete Property
-              </Button>
-              <EditProperty id={property.id} />
+              <Box mt={2}>
+                <Button mr={4} onClick={() => deleteProperty(property.id)}>
+                  Delete Property
+                </Button>
+                <EditProperty id={property.id} />
+              </Box>
             </CardBody>
           </Card>
         ))}

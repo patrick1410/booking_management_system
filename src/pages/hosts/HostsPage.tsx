@@ -82,7 +82,7 @@ export const HostsPage = () => {
       <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
         {orderedHosts.map((host) => (
           <Card key={host.id}>
-            <CardBody>
+            <CardBody display="flex" flexDir="column" justifyContent="center">
               <Link to={`/hosts/${host.id}`}>
                 <Text>
                   <strong>id: </strong>
@@ -117,8 +117,12 @@ export const HostsPage = () => {
                   {host.aboutMe}
                 </Text>{" "}
               </Link>
-              <Button onClick={() => deleteHost(host.id)}>Delete Host</Button>
-              <EditHost id={host.id} />
+              <Box mt={2}>
+                <Button mr={4} onClick={() => deleteHost(host.id)}>
+                  Delete Host
+                </Button>
+                <EditHost id={host.id} />
+              </Box>
             </CardBody>
           </Card>
         ))}

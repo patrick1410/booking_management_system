@@ -82,7 +82,7 @@ export const UsersPage = () => {
       <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
         {orderedUsers.map((user) => (
           <Card key={user.id}>
-            <CardBody>
+            <CardBody display="flex" flexDir="column" justifyContent="center">
               <Link to={`/users/${user.id}`}>
                 <Text>
                   <strong>id: </strong>
@@ -113,8 +113,12 @@ export const UsersPage = () => {
                   {user.profilePicture}
                 </Text>
               </Link>
-              <Button onClick={() => deleteUser(user.id)}>Delete User</Button>
-              <EditUser id={user.id} />
+              <Box mt={2}>
+                <Button mr={4} onClick={() => deleteUser(user.id)}>
+                  Delete User
+                </Button>
+                <EditUser id={user.id} />
+              </Box>
             </CardBody>
           </Card>
         ))}

@@ -75,7 +75,7 @@ export const AmenitiesPage = () => {
       <SimpleGrid mt={2} columns={3} gap={8} overflow="auto">
         {orderedAmenities.map((amenity) => (
           <Card key={amenity.id}>
-            <CardBody>
+            <CardBody display="flex" flexDir="column" justifyContent="center">
               <Text>
                 <strong>id: </strong>
                 {amenity.id}
@@ -84,10 +84,12 @@ export const AmenitiesPage = () => {
                 <strong>name: </strong>
                 {amenity.name}
               </Text>
-              <Button onClick={() => deleteAmenity(amenity.id)}>
-                Delete Amenity
-              </Button>
-              <EditAmenity id={amenity.id} />
+              <Box mt={2}>
+                <Button mr={4} onClick={() => deleteAmenity(amenity.id)}>
+                  Delete Amenity
+                </Button>
+                <EditAmenity id={amenity.id} />
+              </Box>
             </CardBody>
           </Card>
         ))}
