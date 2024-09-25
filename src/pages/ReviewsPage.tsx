@@ -34,7 +34,7 @@ export const ReviewsPage = () => {
 
   // Handle loading state
   if (loading) {
-    return <LoadingComponent />;
+    return <LoadingComponent resource="reviews" />;
   }
 
   const deleteReview = async (id: string) => {

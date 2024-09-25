@@ -2,27 +2,41 @@ import { Heading, Text, Box, SimpleGrid, Avatar } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { convertDate } from "../../utils/convertDate";
+import { LoadingComponent } from "../../components/UI/LoadingComponent";
+import { ErrorComponent } from "../../components/UI/ErrorComponent";
 
 export const UserPage = () => {
   const { id } = useParams(); // Get the ID from the URL
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchHost = async () => {
+      setLoading(true); // Start loading
+      setError(null); // Reset error state
+
       try {
         const response = await fetch(`http://localhost:3000/users/${id}`);
         const userData = await response.json();
         setUser(userData);
       } catch (error) {
         console.error("Error fetching user:", error);
+        setError(`${error}`);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchHost();
   }, []);
 
-  if (!user) {
-    return <div>Loading...</div>; // Show loading state while fetching
+  if (error) {
+    return <ErrorComponent error={error} />;
+  }
+
+  if (loading || !user) {
+    return <LoadingComponent resource="user" />;
   }
 
   return (

@@ -40,7 +40,7 @@ export const PropertiesPage = () => {
 
   // Handle loading state
   if (loading) {
-    return <LoadingComponent />;
+    return <LoadingComponent resource="properties" />;
   }
 
   const deleteProperty = async (id: string) => {

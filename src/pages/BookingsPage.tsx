@@ -35,7 +35,7 @@ export const BookingsPage = () => {
 
   // Handle loading state
   if (loading) {
-    return <LoadingComponent />;
+    return <LoadingComponent resource="bookings" />;
   }
 
   const deleteBooking = async (id: string) => {

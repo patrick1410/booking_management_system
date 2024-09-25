@@ -1,6 +1,12 @@
 import { Box, Text, Spinner } from "@chakra-ui/react";
 
-export const LoadingComponent = () => {
+type LoadingComponentProps = {
+  resource: string;
+};
+
+export const LoadingComponent: React.FC<LoadingComponentProps> = ({
+  resource,
+}) => {
   return (
     <Box
       position="absolute"
@@ -16,7 +22,7 @@ export const LoadingComponent = () => {
         color="blue.500"
         size="xl"
       />
-      <Text>Loading data...</Text>
+      <Text>Loading {resource}...</Text>
     </Box>
   );
 };

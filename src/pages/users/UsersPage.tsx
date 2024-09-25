@@ -34,7 +34,7 @@ export const UsersPage = () => {
 
   // Handle loading state
   if (loading) {
-    return <LoadingComponent />;
+    return <LoadingComponent resource="users" />;
   }
 
   const deleteUser = async (id: string) => {

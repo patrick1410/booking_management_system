@@ -33,7 +33,7 @@ export const AmenitiesPage = () => {
 
   // Handle loading state
   if (loading) {
-    return <LoadingComponent />;
+    return <LoadingComponent resource="amenities" />;
   }
 
   const deleteAmenity = async (id: string) => {

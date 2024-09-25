@@ -34,7 +34,7 @@ export const HostsPage = () => {
 
   // Handle loading state
   if (loading) {
-    return <LoadingComponent />;
+    return <LoadingComponent resource="hosts" />;
   }
 
   const deleteHost = async (id: string) => {
