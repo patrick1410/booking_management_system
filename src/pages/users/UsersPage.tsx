@@ -84,13 +84,34 @@ export const UsersPage = () => {
           <Card key={user.id}>
             <CardBody>
               <Link to={`/users/${user.id}`}>
-                <Text>id: {user.id}</Text>
-                <Text>username: {user.username}</Text>
-                <Text>password {user.password}</Text>
-                <Text>name: {user.name}</Text>
-                <Text>email: {user.email}</Text>
-                <Text>phoneNumber: {user.phoneNumber}</Text>
-                <Text>profilePicture: {user.profilePicture}</Text>
+                <Text>
+                  <strong>id: </strong>
+                  {user.id}
+                </Text>
+                <Text>
+                  <strong>username: </strong>
+                  {user.username}
+                </Text>
+                <Text>
+                  <strong>password: </strong>
+                  {user.password}
+                </Text>
+                <Text>
+                  <strong>name: </strong>
+                  {user.name}
+                </Text>
+                <Text>
+                  <strong>email: </strong>
+                  {user.email}
+                </Text>
+                <Text>
+                  <strong>phoneNumber: </strong>
+                  {user.phoneNumber}
+                </Text>
+                <Text>
+                  <strong>profilePicture: </strong>
+                  {user.profilePicture}
+                </Text>
               </Link>
               <Button onClick={() => deleteUser(user.id)}>Delete User</Button>
               <EditUser id={user.id} />

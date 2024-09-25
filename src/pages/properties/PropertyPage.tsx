@@ -48,23 +48,46 @@ export const PropertyPage = () => {
         </Box>
 
         <Box mb={"0.75rem"}>
-          <Text>id: {property.id}</Text>
-          <Text>description: {property.description}</Text>
-          <Text>location: {property.location}</Text>
           <Text>
-            pricePerNight: {property.pricePerNight.toString().replace(".", ",")}
+            <strong>id: </strong>
+            {property.id}
           </Text>
-          <Text>bedroomCount: {property.bedroomCount}</Text>
-          <Text>bathRoomCount: {property.bathRoomCount}</Text>
-          <Text>maxGuestCount: {property.maxGuestCount}</Text>
+          <Text>
+            <strong>description: </strong>
+            {property.description}
+          </Text>
+          <Text>
+            <strong>location: </strong>
+            {property.location}
+          </Text>
+          <Text>
+            <strong>pricePerNight: </strong>
+            {property.pricePerNight.toString().replace(".", ",")}
+          </Text>
+          <Text>
+            <strong>bedroomCount: </strong>
+            {property.bedroomCount}
+          </Text>
+          <Text>
+            <strong>bathRoomCount: </strong>
+            {property.bathRoomCount}
+          </Text>
+          <Text>
+            <strong>maxGuestCount: </strong>
+            {property.maxGuestCount}
+          </Text>
           <Text>
             <Link to={`/hosts/${property.hostId}`}>
-              hostId: {property.hostId}
+              <strong>hostId: </strong>
+              {property.hostId}
             </Link>
           </Text>
-          <Text>rating: {property.rating}</Text>
           <Text>
-            amenities:{" "}
+            <strong>rating: </strong>
+            {property.rating}
+          </Text>
+          <Text>
+            <strong>amenities: </strong>
             {property.amenities.length > 1
               ? property.amenities.map((amenity) => amenity.name).join(", ")
               : property.amenities.map((amenity) => amenity.name)}
@@ -78,14 +101,24 @@ export const PropertyPage = () => {
             </Heading>
             {property.reviews.map((review, i) => (
               <Box mb={"0.75rem"} key={i}>
-                <Text>id: {review.id}</Text>
+                <Text>
+                  <strong>id: </strong>
+                  {review.id}
+                </Text>
                 <Text>
                   <Link to={`/users/${review.userId}`}>
-                    userId: {review.userId}
+                    <strong>userId: </strong>
+                    {review.userId}
                   </Link>
                 </Text>
-                <Text>rating: {review.rating}</Text>
-                <Text>comment: {review.comment}</Text>
+                <Text>
+                  <strong>rating: </strong>
+                  {review.rating}
+                </Text>
+                <Text>
+                  <strong>comment: </strong>
+                  {review.comment}
+                </Text>
                 <hr />
               </Box>
             ))}
@@ -99,17 +132,34 @@ export const PropertyPage = () => {
             </Heading>
             {property.bookings.map((booking, i) => (
               <Box mb={"0.75rem"} key={i}>
-                <Text>id: {booking.id}</Text>
-                <Link to={`/users/${booking.userId}`}>
-                  userId: {booking.userId}
-                </Link>
-                <Text>checkinDate: {convertDate(booking.checkinDate)}</Text>
-                <Text>checkoutDate: {convertDate(booking.checkoutDate)}</Text>
-                <Text>numberOfGuests: {booking.numberOfGuests}</Text>
                 <Text>
-                  totalPrice: {booking.totalPrice.toString().replace(".", ",")}
+                  <strong>id: </strong>
+                  {booking.id}
                 </Text>
-                <Text>bookingStatus: {booking.bookingStatus}</Text>
+                <Link to={`/users/${booking.userId}`}>
+                  <strong>userId: </strong>
+                  {booking.userId}
+                </Link>
+                <Text>
+                  <strong>checkinDate: </strong>
+                  {convertDate(booking.checkinDate)}
+                </Text>
+                <Text>
+                  <strong>checkoutDate: </strong>
+                  {convertDate(booking.checkoutDate)}
+                </Text>
+                <Text>
+                  <strong>numberOfGuests: </strong>
+                  {booking.numberOfGuests}
+                </Text>
+                <Text>
+                  <strong>totalPrice: </strong>
+                  {booking.totalPrice.toString().replace(".", ",")}
+                </Text>
+                <Text>
+                  <strong>bookingStatus: </strong>
+                  {booking.bookingStatus}
+                </Text>
                 <hr />
               </Box>
             ))}

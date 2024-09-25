@@ -84,14 +84,38 @@ export const HostsPage = () => {
           <Card key={host.id}>
             <CardBody>
               <Link to={`/hosts/${host.id}`}>
-                <Text>id: {host.id}</Text>
-                <Text>username: {host.username}</Text>
-                <Text>password: {host.password}</Text>
-                <Text>name: {host.name}</Text>
-                <Text>email: {host.email}</Text>
-                <Text>phoneNumber: {host.phoneNumber}</Text>
-                <Text>profilePicture: {host.profilePicture}</Text>
-                <Text>aboutMe: {host.aboutMe}</Text>{" "}
+                <Text>
+                  <strong>id: </strong>
+                  {host.id}
+                </Text>
+                <Text>
+                  <strong>username: </strong>
+                  {host.username}
+                </Text>
+                <Text>
+                  <strong>password: </strong>
+                  {host.password}
+                </Text>
+                <Text>
+                  <strong>name: </strong>
+                  {host.name}
+                </Text>
+                <Text>
+                  <strong>email: </strong>
+                  {host.email}
+                </Text>
+                <Text>
+                  <strong>phoneNumber: </strong>
+                  {host.phoneNumber}
+                </Text>
+                <Text>
+                  <strong>profilePicture: </strong>
+                  {host.profilePicture}
+                </Text>
+                <Text>
+                  <strong>aboutMe: </strong>
+                  {host.aboutMe}
+                </Text>{" "}
               </Link>
               <Button onClick={() => deleteHost(host.id)}>Delete Host</Button>
               <EditHost id={host.id} />

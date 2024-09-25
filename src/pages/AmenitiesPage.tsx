@@ -76,8 +76,14 @@ export const AmenitiesPage = () => {
         {orderedAmenities.map((amenity) => (
           <Card key={amenity.id}>
             <CardBody>
-              <Text>id: {amenity.id}</Text>
-              <Text>name: {amenity.name}</Text>
+              <Text>
+                <strong>id: </strong>
+                {amenity.id}
+              </Text>
+              <Text>
+                <strong>name: </strong>
+                {amenity.name}
+              </Text>
               <Button onClick={() => deleteAmenity(amenity.id)}>
                 Delete Amenity
               </Button>

@@ -39,3 +39,7 @@ ul > li.css-0:nth-child(6) {
 ul > li.css-0:nth-child(7) {
   border-color: #8bc34a;
 }
+
+li {
+  color: #1e3a78;
+}

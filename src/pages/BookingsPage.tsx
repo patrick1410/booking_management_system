@@ -83,25 +83,42 @@ export const BookingsPage = () => {
         {orderedBookings.map((booking) => (
           <Card key={booking.id}>
             <CardBody>
-              <Text>id: {booking.id}</Text>
+              <Text>
+                <strong>id: </strong>
+                {booking.id}
+              </Text>
               <Text>
                 <Link to={`/users/${booking.userId}`}>
-                  userId: {booking.userId}
+                  <strong>userId: </strong>
+                  {booking.userId}
                 </Link>
               </Text>
               <Text>
                 <Link to={`/properties/${booking.propertyId}`}>
-                  propertyId: {booking.propertyId}
+                  <strong>propertyId: </strong>
+                  {booking.propertyId}
                 </Link>
               </Text>
-              <Text>checkinDate: {convertDate(booking.checkinDate)}</Text>
-              <Text>checkoutDate: {convertDate(booking.checkoutDate)}</Text>
-              <Text>numberOfGuests: {booking.numberOfGuests}</Text>
               <Text>
-                totalPrice: &euro;
+                <strong>checkinDate: </strong>
+                {convertDate(booking.checkinDate)}
+              </Text>
+              <Text>
+                <strong>checkoutDate: </strong>
+                {convertDate(booking.checkoutDate)}
+              </Text>
+              <Text>
+                <strong>numberOfGuests: </strong>
+                {booking.numberOfGuests}
+              </Text>
+              <Text>
+                <strong>totalPrice: </strong>&euro;
                 {booking.totalPrice.toString().replace(".", ",")}
               </Text>
-              <Text>bookingStatus: {booking.bookingStatus}</Text>
+              <Text>
+                <strong>bookingStatus: </strong>
+                {booking.bookingStatus}
+              </Text>
               <Button onClick={() => deleteBooking(booking.id)}>
                 Delete Booking
               </Button>

@@ -63,7 +63,7 @@ export const PropertiesPage = () => {
 
   const filteredProperties = filterData(properties, searchTerm, [
     "title",
-    "description", // Maybe..
+    "description",
     "location",
     "hostId",
   ]);
@@ -91,21 +91,48 @@ export const PropertiesPage = () => {
           <Card key={property.id}>
             <CardBody>
               <Link to={`/properties/${property.id}`}>
-                <Text>id: {property.id}</Text>
-                <Text>title: {property.title}</Text>
-                <Text>description: {property.description}</Text>
-                <Text>location: {property.location}</Text>
                 <Text>
-                  pricePerNight:{" "}
+                  <strong>id: </strong>
+                  {property.id}
+                </Text>
+                <Text>
+                  <strong>title: </strong>
+                  {property.title}
+                </Text>
+                <Text>
+                  <strong>description: </strong>
+                  {property.description}
+                </Text>
+                <Text>
+                  <strong>location: </strong>
+                  {property.location}
+                </Text>
+                <Text>
+                  <strong>pricePerNight: </strong>
                   {property.pricePerNight.toString().replace(".", ",")}
                 </Text>
-                <Text>bedroomCount: {property.bedroomCount}</Text>
-                <Text>bathRoomCount: {property.bathRoomCount}</Text>
-                <Text>maxGuestCount: {property.maxGuestCount}</Text>
-                <Text>hostId: {property.hostId}</Text>
-                <Text>rating: {property.rating}</Text>
                 <Text>
-                  amenities:{" "}
+                  <strong>bedroomCount: </strong>
+                  {property.bedroomCount}
+                </Text>
+                <Text>
+                  <strong>bathRoomCount: </strong>
+                  {property.bathRoomCount}
+                </Text>
+                <Text>
+                  <strong>maxGuestCount: </strong>
+                  {property.maxGuestCount}
+                </Text>
+                <Text>
+                  <strong>hostId: </strong>
+                  {property.hostId}
+                </Text>
+                <Text>
+                  <strong>rating: </strong>
+                  {property.rating}
+                </Text>
+                <Text>
+                  <strong>amenities: </strong>
                   {property.amenities.length > 1
                     ? property.amenities
                         .map((amenity) => amenity.name)

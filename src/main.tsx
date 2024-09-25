@@ -24,7 +24,9 @@ const theme = extendTheme({
         padding: 0,
         boxSizing: "border-box",
       },
-      // You can add more global styles here if needed
+      a: {
+        color: "#1e3a78",
+      },
     },
   },
 });

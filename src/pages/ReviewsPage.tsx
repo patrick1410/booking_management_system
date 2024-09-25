@@ -80,19 +80,30 @@ export const ReviewsPage = () => {
         {orderedReviews.map((review) => (
           <Card key={review.id}>
             <CardBody>
-              <Text>id: {review.id}</Text>
+              <Text>
+                <strong>id: </strong>
+                {review.id}
+              </Text>
               <Text>
                 <Link to={`/users/${review.userId}`}>
-                  userId: {review.userId}
+                  <strong>userId: </strong>
+                  {review.userId}
                 </Link>
               </Text>
               <Text>
                 <Link to={`/properties/${review.propertyId}`}>
-                  propertyId: {review.propertyId}
+                  <strong>propertyId: </strong>
+                  {review.propertyId}
                 </Link>
               </Text>
-              <Text>rating: {review.rating}</Text>
-              <Text>comment: {review.comment}</Text>
+              <Text>
+                <strong>rating: </strong>
+                {review.rating}
+              </Text>
+              <Text>
+                <strong>comment: </strong>
+                {review.comment}
+              </Text>
               <Button onClick={() => deleteReview(review.id)}>
                 Delete Review
               </Button>

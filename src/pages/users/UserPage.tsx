@@ -49,12 +49,30 @@ export const UserPage = () => {
           </Heading>
         </Box>
         <Box mb={"0.75rem"}>
-          <Text>id: {user.id}</Text>
-          <Text>username: {user.username}</Text>
-          <Text>password {user.password}</Text>
-          <Text>email: {user.email}</Text>
-          <Text>phoneNumber: {user.phoneNumber}</Text>
-          <Text>profilePicture: {user.profilePicture}</Text>
+          <Text>
+            <strong>id: </strong>
+            {user.id}
+          </Text>
+          <Text>
+            <strong>username: </strong>
+            {user.username}
+          </Text>
+          <Text>
+            <strong>password </strong>
+            {user.password}
+          </Text>
+          <Text>
+            <strong>email: </strong>
+            {user.email}
+          </Text>
+          <Text>
+            <strong>phoneNumber: </strong>
+            {user.phoneNumber}
+          </Text>
+          <Text>
+            <strong>profilePicture: </strong>
+            {user.profilePicture}
+          </Text>
         </Box>
 
         {user.Review.length >= 1 && (
@@ -64,10 +82,21 @@ export const UserPage = () => {
             </Heading>
             {user.Review.map((review, i) => (
               <Box mb={"0.75rem"} key={i}>
-                <Text>id: {review.id}</Text>
-                <Text>userId: {review.userId}</Text>
-                <Text>rating: {review.rating}</Text>
-                <Text>comment: {review.comment}</Text>
+                <Text>
+                  <strong>id: </strong>
+                  {review.id}
+                </Text>
+                <Text>
+                  <strong>userId: </strong>
+                  {review.userId}
+                </Text>
+                <Text>
+                  <strong>rating: </strong> {review.rating}
+                </Text>
+                <Text>
+                  <strong>comment: </strong>
+                  {review.comment}
+                </Text>
                 <hr />
               </Box>
             ))}
@@ -82,21 +111,40 @@ export const UserPage = () => {
             </Heading>
             {user.Booking.map((booking, i) => (
               <Box mb={"0.75rem"} key={i}>
-                <Text>id: {booking.id}</Text>
-                <Text>userId: {booking.userId}</Text>
+                <Text>
+                  <strong>id: </strong>
+                  {booking.id}
+                </Text>
+                <Text>
+                  <strong>userId: </strong>
+                  {booking.userId}
+                </Text>
                 <Text>
                   <Link to={`/properties/${booking.propertyId}`}>
-                    propertyId: {booking.propertyId}
+                    <strong>propertyId: </strong>
+                    {booking.propertyId}
                   </Link>
                 </Text>
-                <Text>checkinDate: {convertDate(booking.checkinDate)}</Text>
-                <Text>checkoutDate: {convertDate(booking.checkoutDate)}</Text>
-                <Text>numberOfGuests: {booking.numberOfGuests}</Text>
                 <Text>
-                  totalPrice: &euro;
+                  <strong>checkinDate: </strong>
+                  {convertDate(booking.checkinDate)}
+                </Text>
+                <Text>
+                  <strong>checkoutDate: </strong>
+                  {convertDate(booking.checkoutDate)}
+                </Text>
+                <Text>
+                  <strong>numberOfGuests: </strong>
+                  {booking.numberOfGuests}
+                </Text>
+                <Text>
+                  <strong>totalPrice: </strong>&euro;
                   {booking.totalPrice.toString().replace(".", ",")}
                 </Text>
-                <Text>bookingStatus: {booking.bookingStatus}</Text>
+                <Text>
+                  <strong>bookingStatus: </strong>
+                  {booking.bookingStatus}
+                </Text>
                 <hr />
               </Box>
             ))}
