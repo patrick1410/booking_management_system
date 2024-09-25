@@ -79,12 +79,7 @@ export const HostsPage = () => {
         <CreateHost />
       </Box>
       {/* Scrollable user list */}
-      <SimpleGrid
-        sx={{ mt: "8px !important" }}
-        columns={2}
-        gap={8}
-        overflow="auto"
-      >
+      <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
         {orderedHosts.map((host) => (
           <Card key={host.id}>
             <CardBody>

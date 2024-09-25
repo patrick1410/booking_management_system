@@ -104,7 +104,7 @@ export const EditUser: React.FC<EditUserProps> = ({ id }) => {
                   autoComplete="off"
                   id="password"
                   placeholder="Enter a password..."
-                  pr="2rem !important"
+                  pr="2rem"
                   {...register("password", { required: true })}
                 />
                 <InputRightElement

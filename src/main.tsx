@@ -1,6 +1,6 @@
 // import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./components/Root";
 import { BookingsPage } from "./pages/BookingsPage";
@@ -14,6 +14,20 @@ import { ReviewsPage } from "./pages/ReviewsPage";
 import { PropertiesPage } from "./pages/properties/PropertiesPage";
 import { PropertyPage } from "./pages/properties/PropertyPage";
 import { DataProvider } from "./components/DataProvider";
+
+// Define your theme
+const theme = extendTheme({
+  styles: {
+    global: {
+      "*": {
+        margin: 0,
+        padding: 0,
+        boxSizing: "border-box",
+      },
+      // You can add more global styles here if needed
+    },
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -68,7 +82,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("app")!).render(
   // <StrictMode>
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <DataProvider>
       <RouterProvider router={router} />
     </DataProvider>

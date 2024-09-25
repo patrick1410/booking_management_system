@@ -86,12 +86,7 @@ export const PropertiesPage = () => {
         />
         <CreateProperty />
       </Box>
-      <SimpleGrid
-        sx={{ mt: "8px !important" }}
-        columns={2}
-        gap={8}
-        overflow="auto"
-      >
+      <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
         {orderedProperties.map((property) => (
           <Card key={property.id}>
             <CardBody>

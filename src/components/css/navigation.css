@@ -2,11 +2,11 @@
 
 ul > li.css-0 {
   border-right: 4px solid;
-  margin-right: 2rem !important;
+  margin-right: 2rem;
 }
 
 ul > li.css-0 > a {
-  padding: 0rem 1rem 0rem 0rem !important;
+  padding: 0rem 1rem 0rem 0rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@ ul > li.css-0 > a {
 ul > li.css-0 > a > svg {
   width: 24px;
   height: 24px;
-  margin-left: 0.5rem !important;
+  margin-left: 0.5rem;
 }
 
 ul > li.css-0:nth-child(1) {

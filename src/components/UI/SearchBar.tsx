@@ -16,7 +16,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     <InputGroup w="30%">
       <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
       <Input
-        pl="2rem !important"
+        pl="2rem"
         type="text"
         placeholder={placeholder}
         onChange={onSearchChange}

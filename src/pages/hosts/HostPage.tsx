@@ -43,12 +43,12 @@ export const HostPage = () => {
       <SimpleGrid columns={1} overflow="auto">
         <Box display="flex" alignItems="center">
           <Avatar src={host.profilePicture} name={host.name} />
-          <Heading ml="0.5rem !important" as="h3">
+          <Heading ml="0.5rem" as="h3">
             {host.name}'s Details:
           </Heading>
         </Box>
 
-        <Box sx={{ mb: "0.75rem !important " }}>
+        <Box mb={"0.75rem"}>
           <Text>Id: {host.id}</Text>
           <Text>Username: {host.username}</Text>
           <Text>Email: {host.email}</Text>
@@ -62,7 +62,7 @@ export const HostPage = () => {
               {host.listings.length > 1 ? "Listings:" : "Listing:"}
             </Heading>
             {host.listings.map((listing, i) => (
-              <Box sx={{ mb: "0.75rem !important " }} key={i}>
+              <Box mb={"0.75rem"} key={i}>
                 <Heading as="h5">- {listing.title}</Heading>
                 <Text>id: {listing.id}</Text>
                 <Text>description: {listing.description}</Text>

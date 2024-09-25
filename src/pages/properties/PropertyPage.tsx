@@ -42,12 +42,12 @@ export const PropertyPage = () => {
     <Box gridArea="main" display="flex" flexDir="column">
       <SimpleGrid columns={1} overflow="auto">
         <Box display="flex" alignItems="center">
-          <Heading ml="0.5rem !important" as="h3">
+          <Heading ml="0.5rem" as="h3">
             {property.title}'s Details:
           </Heading>
         </Box>
 
-        <Box sx={{ mb: "0.75rem !important " }}>
+        <Box mb={"0.75rem"}>
           <Text>id: {property.id}</Text>
           <Text>description: {property.description}</Text>
           <Text>location: {property.location}</Text>
@@ -77,7 +77,7 @@ export const PropertyPage = () => {
               {property.reviews.length > 1 ? "Reviews:" : "Review:"}
             </Heading>
             {property.reviews.map((review, i) => (
-              <Box sx={{ mb: "0.75rem !important " }} key={i}>
+              <Box mb={"0.75rem"} key={i}>
                 <Text>id: {review.id}</Text>
                 <Text>
                   <Link to={`/users/${review.userId}`}>
@@ -98,7 +98,7 @@ export const PropertyPage = () => {
               {property.bookings.length > 1 ? "Bookings:" : "Booking"}
             </Heading>
             {property.bookings.map((booking, i) => (
-              <Box sx={{ mb: "0.75rem !important " }} key={i}>
+              <Box mb={"0.75rem"} key={i}>
                 <Text>id: {booking.id}</Text>
                 <Link to={`/users/${booking.userId}`}>
                   userId: {booking.userId}

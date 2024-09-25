@@ -44,11 +44,11 @@ export const UserPage = () => {
       <SimpleGrid columns={1} overflow="auto">
         <Box display="flex" alignItems="center">
           <Avatar src={user.profilePicture} name={user.name} />
-          <Heading ml="0.5rem !important" as="h3">
+          <Heading ml="0.5rem" as="h3">
             {user.name}'s Details:
           </Heading>
         </Box>
-        <Box sx={{ mb: "0.75rem !important " }}>
+        <Box mb={"0.75rem"}>
           <Text>id: {user.id}</Text>
           <Text>username: {user.username}</Text>
           <Text>password {user.password}</Text>
@@ -63,7 +63,7 @@ export const UserPage = () => {
               {user.Review.length > 1 ? "Reviews:" : "Review:"}
             </Heading>
             {user.Review.map((review, i) => (
-              <Box sx={{ mb: "0.75rem !important " }} key={i}>
+              <Box mb={"0.75rem"} key={i}>
                 <Text>id: {review.id}</Text>
                 <Text>userId: {review.userId}</Text>
                 <Text>rating: {review.rating}</Text>
@@ -81,7 +81,7 @@ export const UserPage = () => {
               {user.Booking.length > 1 ? "Bookings:" : "Booking:"}
             </Heading>
             {user.Booking.map((booking, i) => (
-              <Box sx={{ mb: "0.75rem !important " }} key={i}>
+              <Box mb={"0.75rem"} key={i}>
                 <Text>id: {booking.id}</Text>
                 <Text>userId: {booking.userId}</Text>
                 <Text>
