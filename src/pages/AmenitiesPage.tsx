@@ -14,6 +14,8 @@ import { EditAmenity } from "../components/amenities/EditAmenity";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { ErrorComponent } from "../components/UI/ErrorComponent";
+import { LoadingComponent } from "../components/UI/LoadingComponent";
 
 export const AmenitiesPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -21,12 +23,18 @@ export const AmenitiesPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  // Ensure dataContext is not undefined and bookings data is available
-  if (!dataContext || dataContext.amenities.length === 0) {
-    return <div>Loading...</div>;
+  const { amenities, setAmenities, searchTerm, setSearchTerm, error, loading } =
+    dataContext;
+
+  // Handle error starte
+  if (error) {
+    return <ErrorComponent error={error} />;
   }
 
-  const { amenities, setAmenities, searchTerm, setSearchTerm } = dataContext;
+  // Handle loading state
+  if (loading) {
+    return <LoadingComponent />;
+  }
 
   const deleteAmenity = async (id: string) => {
     try {

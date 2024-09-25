@@ -1,11 +1,24 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 
-// MAKE A LOADING AND ERROR STATE IN THIS COMPONENT?!
-
-// Initialize the DataContext with an empty default value
-export const DataContext = createContext<DataContextType | undefined>(
-  undefined
-);
+// Initialize the DataContext with a default value matching the DataContextType structure
+export const DataContext = createContext<DataContextType>({
+  users: [],
+  hosts: [],
+  properties: [],
+  bookings: [],
+  reviews: [],
+  amenities: [],
+  setUsers: () => {},
+  setHosts: () => {},
+  setProperties: () => {},
+  setBookings: () => {},
+  setReviews: () => {},
+  setAmenities: () => {},
+  searchTerm: "",
+  setSearchTerm: () => {},
+  loading: true,
+  error: null,
+});
 
 type DataProviderProps = {
   children: ReactNode; // Accept children as ReactNode (valid JSX content)
@@ -18,10 +31,15 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [amenities, setAmenities] = useState<Amenity[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true); // Start loading
+      setError(null); // Reset error state
+
       try {
         const [
           usersData,
@@ -47,6 +65,9 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         setAmenities(amenitiesData);
       } catch (error) {
         console.error(error);
+        setError(`${error}`);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -70,6 +91,8 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         setAmenities,
         searchTerm,
         setSearchTerm,
+        loading,
+        error,
       }}
     >
       {children}

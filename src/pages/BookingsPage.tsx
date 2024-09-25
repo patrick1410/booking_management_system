@@ -16,6 +16,8 @@ import { filterData } from "../utils/filterData";
 import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 import { convertDate } from "../utils/convertDate";
 import { Link } from "react-router-dom";
+import { LoadingComponent } from "../components/UI/LoadingComponent";
+import { ErrorComponent } from "../components/UI/ErrorComponent";
 
 export const BookingsPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -23,12 +25,18 @@ export const BookingsPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  // Ensure dataContext is not undefined and bookings data is available
-  if (!dataContext || dataContext.bookings.length === 0) {
-    return <div>Loading...</div>;
+  const { bookings, setBookings, searchTerm, setSearchTerm, error, loading } =
+    dataContext;
+
+  // Handle error starte
+  if (error) {
+    return <ErrorComponent error={error} />;
   }
 
-  const { bookings, setBookings, searchTerm, setSearchTerm } = dataContext;
+  // Handle loading state
+  if (loading) {
+    return <LoadingComponent />;
+  }
 
   const deleteBooking = async (id: string) => {
     try {

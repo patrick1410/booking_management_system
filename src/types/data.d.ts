@@ -83,4 +83,6 @@ type DataContextType = {
   setAmenities: React.Dispatch<React.SetStateAction<Amenity[]>>;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  loading: boolean;
+  error: string | null;
 };

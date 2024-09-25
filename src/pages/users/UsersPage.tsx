@@ -15,6 +15,8 @@ import { SearchBar } from "../../components/UI/SearchBar";
 import { filterData } from "../../utils/filterData";
 import { useResetSearchTerm } from "../../hooks/ResetSearchTerm";
 import { Link } from "react-router-dom";
+import { ErrorComponent } from "../../components/UI/ErrorComponent";
+import { LoadingComponent } from "../../components/UI/LoadingComponent";
 
 export const UsersPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
@@ -22,12 +24,18 @@ export const UsersPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  // Ensure dataContext is not undefined and bookings data is available
-  if (!dataContext || dataContext.users.length === 0) {
-    return <div>Loading...</div>;
+  const { users, setUsers, searchTerm, setSearchTerm, error, loading } =
+    dataContext;
+
+  // Handle error starte
+  if (error) {
+    return <ErrorComponent error={error} />;
   }
 
-  const { users, setUsers, searchTerm, setSearchTerm } = dataContext;
+  // Handle loading state
+  if (loading) {
+    return <LoadingComponent />;
+  }
 
   const deleteUser = async (id: string) => {
     try {
