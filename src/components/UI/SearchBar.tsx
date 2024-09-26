@@ -13,7 +13,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder,
 }) => {
   return (
-    <InputGroup w="30%">
+    <InputGroup
+      w={{ base: "100%", sm: "60%", md: "50%", lg: "30%" }}
+      mb={{ base: "10px", lg: "0px" }}
+    >
       <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
       <Input
         pl="2rem"

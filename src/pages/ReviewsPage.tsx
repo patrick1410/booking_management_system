@@ -63,8 +63,9 @@ export const ReviewsPage = () => {
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <Box
-        w="80%"
+        w="100%"
         display="flex"
+        flexDir={{ base: "column", lg: "row" }}
         justifyContent="space-between"
         alignItems="center"
       >
@@ -76,7 +77,12 @@ export const ReviewsPage = () => {
         />
         <CreateReview />
       </Box>
-      <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
+      <SimpleGrid
+        mt={2}
+        columns={{ base: 1, md: 2, xl: 3, "2xl": 4 }}
+        gap={8}
+        overflow="auto"
+      >
         {orderedReviews.map((review) => (
           <Card key={review.id}>
             <CardBody display="flex" flexDir="column" justifyContent="center">

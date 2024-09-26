@@ -21,7 +21,7 @@ import {
   FaBuilding,
 } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa6";
-import { IoMdMenu } from "react-icons/io";
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import "./css/navigation.css";
 
 export const Navigation = () => {
@@ -36,9 +36,9 @@ export const Navigation = () => {
           justifyContent="flex-end"
           mr={8}
         >
-          <IoMdMenu
+          <HamburgerIcon
             color="#1e3a78"
-            size={24}
+            boxSize={6}
             cursor="pointer"
             onClick={onOpen}
           />
@@ -67,37 +67,37 @@ export const Navigation = () => {
                 }}
               >
                 <ListItem>
-                  <Link to={"/login"}>
+                  <Link onClick={onClose} to={"/login"}>
                     Login <FaSignInAlt />
                   </Link>
                 </ListItem>
                 <ListItem>
-                  <Link to={"/"}>
+                  <Link onClick={onClose} to={"/"}>
                     Bookings <FaClipboardList />
                   </Link>
                 </ListItem>
                 <ListItem>
-                  <Link to={"/users"}>
+                  <Link onClick={onClose} to={"/users"}>
                     Users <FaUsers />
                   </Link>
                 </ListItem>
                 <ListItem>
-                  <Link to={"/hosts"}>
+                  <Link onClick={onClose} to={"/hosts"}>
                     Hosts <FaUserTie />
                   </Link>
                 </ListItem>
                 <ListItem>
-                  <Link to={"/properties"}>
+                  <Link onClick={onClose} to={"/properties"}>
                     Properties <FaBuilding />
                   </Link>
                 </ListItem>
                 <ListItem>
-                  <Link to={"/reviews"}>
+                  <Link onClick={onClose} to={"/reviews"}>
                     Reviews <MdRateReview />
                   </Link>
                 </ListItem>
                 <ListItem>
-                  <Link to={"/amenities"}>
+                  <Link onClick={onClose} to={"/amenities"}>
                     Amenities <FaListUl />
                   </Link>
                 </ListItem>
@@ -108,9 +108,9 @@ export const Navigation = () => {
               _active={{ backgroundColor: "none" }}
               as="div"
             >
-              <IoMdMenu
+              <CloseIcon
+                boxSize={4}
                 color="#1e3a78"
-                size={24}
                 cursor="pointer"
                 onClick={onOpen}
               />

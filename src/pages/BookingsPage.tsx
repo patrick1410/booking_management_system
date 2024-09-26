@@ -66,8 +66,9 @@ export const BookingsPage = () => {
     <Box gridArea="main" display="flex" flexDir="column">
       {/* Fixed header with heading and button */}
       <Box
-        w="80%"
+        w="100%"
         display="flex"
+        flexDir={{ base: "column", lg: "row" }}
         justifyContent="space-between"
         alignItems="center"
       >
@@ -79,7 +80,12 @@ export const BookingsPage = () => {
         />
         <CreateBooking />
       </Box>
-      <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
+      <SimpleGrid
+        mt={2}
+        columns={{ base: 1, md: 2, xl: 3, "2xl": 4 }}
+        gap={8}
+        overflow="auto"
+      >
         {orderedBookings.map((booking) => (
           <Card key={booking.id}>
             <CardBody display="flex" flexDir="column" justifyContent="center">

@@ -73,8 +73,9 @@ export const PropertiesPage = () => {
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <Box
-        w="80%"
+        w="100%"
         display="flex"
+        flexDir={{ base: "column", lg: "row" }}
         justifyContent="space-between"
         alignItems="center"
       >
@@ -86,7 +87,12 @@ export const PropertiesPage = () => {
         />
         <CreateProperty />
       </Box>
-      <SimpleGrid mt={2} columns={2} gap={8} overflow="auto">
+      <SimpleGrid
+        mt={2}
+        columns={{ base: 1, md: 2, xl: 3, "2xl": 4 }}
+        gap={8}
+        overflow="auto"
+      >
         {orderedProperties.map((property) => (
           <Card key={property.id}>
             <CardBody display="flex" flexDir="column" justifyContent="center">

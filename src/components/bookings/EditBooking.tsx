@@ -155,7 +155,7 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
               >
                 <option value="pending">Pending</option>
                 <option value="confirmed">Confirmed</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="canceled">Canceled</option>
               </Select>
             </FormControl>
           </ModalBody>
