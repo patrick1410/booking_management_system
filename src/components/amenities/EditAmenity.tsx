@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 import { getJWT } from "../../utils/getJWT";
+import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditAmenityProps = {
   id: string; // The id of the amenity being edited
@@ -26,18 +27,9 @@ type EditAmenityProps = {
 type FormProps = Amenity; // FormProps is set to Amenity type
 
 export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
+  const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const noPermission = () => {
-    toast({
-      title: "Access denied!",
-      description: "You must be logged in to perform this action.",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
 
   const dataContext = useContext(DataContext);
   const { amenities = [], setAmenities = () => {} } = dataContext || {}; // Default to empty array and noop function

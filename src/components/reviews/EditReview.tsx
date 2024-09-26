@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 import { getJWT } from "../../utils/getJWT";
+import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditReviewProps = {
   id: string; // The id of the review being edited
@@ -28,18 +29,9 @@ type EditReviewProps = {
 type FormProps = Review; // FormProps is set to Review type
 
 export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
+  const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const noPermission = () => {
-    toast({
-      title: "Access denied!",
-      description: "You must be logged in to perform this action.",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
 
   const dataContext = useContext(DataContext);
   const { reviews = [], setReviews = () => {} } = dataContext || {}; // Default to empty array and noop function

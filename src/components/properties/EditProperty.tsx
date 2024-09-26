@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 import { getJWT } from "../../utils/getJWT";
+import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditPropertyProps = {
   id: string; // The id of the host being edited
@@ -41,17 +42,8 @@ type FormProps = {
 
 export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
   const toast = useToast();
+  const noPermission = useNoPermission();
   const token = getJWT(); // Get token
-
-  const noPermission = () => {
-    toast({
-      title: "Access denied!",
-      description: "You must be logged in to perform this action.",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
 
   const dataContext = useContext(DataContext);
   const {

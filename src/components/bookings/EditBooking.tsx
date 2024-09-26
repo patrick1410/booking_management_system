@@ -21,6 +21,7 @@ import { DataContext } from "../DataProvider";
 
 import { convertToLocal } from "../../utils/convertToLocal";
 import { getJWT } from "../../utils/getJWT";
+import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditBookingProps = {
   id: string; // The id of the booking being edited
@@ -29,18 +30,9 @@ type EditBookingProps = {
 type FormProps = Booking; // FormProps is set to Booking type
 
 export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
+  const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const noPermission = () => {
-    toast({
-      title: "Access denied!",
-      description: "You must be logged in to perform this action.",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
 
   const dataContext = useContext(DataContext);
   const { bookings = [], setBookings = () => {} } = dataContext || {}; // Default to empty array and noop function
