@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
   UnorderedList,
@@ -10,6 +10,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  useToast,
 } from "@chakra-ui/react";
 
 import { MdRateReview } from "react-icons/md";
@@ -18,13 +19,34 @@ import {
   FaUserTie,
   FaClipboardList,
   FaSignInAlt,
+  FaSignOutAlt,
   FaBuilding,
 } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa6";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import "./css/navigation.css";
 
+import { getJWT } from "../utils/getJWT";
+
 export const Navigation = () => {
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  // Handles logout and removes the JWT from the localStorage
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    navigate("/"); // Redirect to login page this is necessary
+    toast({
+      title: "Logged out!",
+      description: "You have been successfully logged out.",
+      status: "info",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
+  const jwt = getJWT();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -67,9 +89,15 @@ export const Navigation = () => {
                 }}
               >
                 <ListItem>
-                  <Link onClick={onClose} to={"/login"}>
-                    Login <FaSignInAlt />
-                  </Link>
+                  {jwt ? (
+                    <Link to={"/"} onClick={handleLogout}>
+                      Logout <FaSignOutAlt />
+                    </Link>
+                  ) : (
+                    <Link onClick={onClose} to={"/login"}>
+                      Login <FaSignInAlt />
+                    </Link>
+                  )}
                 </ListItem>
                 <ListItem>
                   <Link onClick={onClose} to={"/"}>
@@ -131,9 +159,15 @@ export const Navigation = () => {
         }}
       >
         <ListItem>
-          <Link to={"/login"}>
-            Login <FaSignInAlt />
-          </Link>
+          {jwt ? (
+            <Link to={"/"} onClick={handleLogout}>
+              Logout <FaSignOutAlt />
+            </Link>
+          ) : (
+            <Link onClick={onClose} to={"/login"}>
+              Login <FaSignInAlt />
+            </Link>
+          )}
         </ListItem>
         <ListItem>
           <Link to={"/"}>
