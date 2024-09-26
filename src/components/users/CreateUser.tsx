@@ -23,6 +23,7 @@ import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { DataContext } from "../DataProvider";
 import { getJWT } from "../../utils/getJWT";
+import { useNoPermission } from "../../hooks/useNoPermission";
 
 type FormProps = {
   username: string;
@@ -34,18 +35,9 @@ type FormProps = {
 };
 
 export const CreateUser = () => {
+  const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const noPermission = () => {
-    toast({
-      title: "Access denied!",
-      description: "You must be logged in to perform this action.",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
 
   const dataContext = useContext(DataContext);
   const { users = [], setUsers = () => {} } = dataContext || {}; // Default to empty array and noop function
