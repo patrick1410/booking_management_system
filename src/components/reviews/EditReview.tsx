@@ -13,11 +13,13 @@ import {
   Input,
   Textarea,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type EditReviewProps = {
   id: string; // The id of the review being edited
@@ -26,6 +28,19 @@ type EditReviewProps = {
 type FormProps = Review; // FormProps is set to Review type
 
 export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { reviews = [], setReviews = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -51,6 +66,7 @@ export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
@@ -64,6 +80,13 @@ export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
 
         // Update the reviews state
         setReviews(newReviews);
+        toast({
+          title: "Review updated",
+          description: "Review has been successfully updated!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       onClose();
@@ -74,7 +97,7 @@ export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit Review</Button>
+      <Button onClick={token ? onOpen : noPermission}>Edit Review</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

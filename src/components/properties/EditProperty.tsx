@@ -14,11 +14,13 @@ import {
   Select,
   Box,
   SimpleGrid,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type EditPropertyProps = {
   id: string; // The id of the host being edited
@@ -38,6 +40,19 @@ type FormProps = {
 };
 
 export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const {
     amenities,
@@ -73,6 +88,7 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
@@ -86,6 +102,13 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
 
         // Update the properties state
         setProperties(newProperties);
+        toast({
+          title: "Property updated",
+          description: "Property has been successfully updated!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       onClose();
@@ -96,7 +119,8 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit Property</Button>
+      <Button onClick={token ? onOpen : noPermission}>Edit Property</Button>
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent maxH="80vh" overflow="auto">

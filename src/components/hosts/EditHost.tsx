@@ -15,6 +15,7 @@ import {
   InputGroup,
   Icon,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 
 import { BiShow, BiHide } from "react-icons/bi";
@@ -22,6 +23,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type EditHostProps = {
   id: string; // The id of the host being edited
@@ -30,6 +32,19 @@ type EditHostProps = {
 type FormProps = Host; // FormProps is set to Host type
 
 export const EditHost: React.FC<EditHostProps> = ({ id }) => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { hosts = [], setHosts = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -60,6 +75,7 @@ export const EditHost: React.FC<EditHostProps> = ({ id }) => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
@@ -73,6 +89,13 @@ export const EditHost: React.FC<EditHostProps> = ({ id }) => {
 
         // Update the hosts state
         setHosts(newHosts);
+        toast({
+          title: "Host updated",
+          description: "Host has been successfully updated!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       onClose();
@@ -83,7 +106,7 @@ export const EditHost: React.FC<EditHostProps> = ({ id }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit Host</Button>
+      <Button onClick={token ? onOpen : noPermission}>Edit Host</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

@@ -14,6 +14,7 @@ import {
   InputGroup,
   Icon,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 
 import { BiShow, BiHide } from "react-icons/bi";
@@ -21,6 +22,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type EditUserProps = {
   id: string; // The id of the user being edited
@@ -29,6 +31,19 @@ type EditUserProps = {
 type FormProps = User; // FormProps is set to User type
 
 export const EditUser: React.FC<EditUserProps> = ({ id }) => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { users = [], setUsers = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -58,6 +73,7 @@ export const EditUser: React.FC<EditUserProps> = ({ id }) => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
@@ -71,6 +87,13 @@ export const EditUser: React.FC<EditUserProps> = ({ id }) => {
 
         // Update the users state
         setUsers(newUsers);
+        toast({
+          title: "User updated",
+          description: "User has been successfully updated!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       onClose();
@@ -81,7 +104,7 @@ export const EditUser: React.FC<EditUserProps> = ({ id }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit User</Button>
+      <Button onClick={token ? onOpen : noPermission}>Edit User</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

@@ -12,6 +12,7 @@ import {
   FormLabel,
   Input,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
@@ -19,6 +20,7 @@ import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 
 import { convertToLocal } from "../../utils/convertToLocal";
+import { getJWT } from "../../utils/getJWT";
 
 type EditBookingProps = {
   id: string; // The id of the booking being edited
@@ -27,6 +29,19 @@ type EditBookingProps = {
 type FormProps = Booking; // FormProps is set to Booking type
 
 export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { bookings = [], setBookings = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -61,6 +76,7 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
@@ -74,6 +90,13 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
 
         // Update the bookings state
         setBookings(newBookings);
+        toast({
+          title: "Booking updated",
+          description: "Booking has been successfully updated!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       onClose();
@@ -84,7 +107,7 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit Booking</Button>
+      <Button onClick={token ? onOpen : noPermission}>Edit Booking</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

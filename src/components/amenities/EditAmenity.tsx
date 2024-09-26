@@ -11,11 +11,13 @@ import {
   FormControl,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type EditAmenityProps = {
   id: string; // The id of the amenity being edited
@@ -24,6 +26,19 @@ type EditAmenityProps = {
 type FormProps = Amenity; // FormProps is set to Amenity type
 
 export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { amenities = [], setAmenities = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -44,6 +59,7 @@ export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
@@ -57,6 +73,13 @@ export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
 
         // Update the bookings state
         setAmenities(newAmenities);
+        toast({
+          title: "Amenity updated",
+          description: "Amenity has been successfully updated!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       onClose();
@@ -67,7 +90,7 @@ export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit Amenity</Button>
+      <Button onClick={token ? onOpen : noPermission}>Edit Amenity</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
