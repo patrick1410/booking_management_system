@@ -1,26 +1,15 @@
 import { useContext } from "react";
 import { DataContext } from "../components/DataProvider";
-import {
-  Box,
-  Card,
-  CardBody,
-  Text,
-  SimpleGrid,
-  Heading,
-  Button,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateBooking } from "../components/bookings/CreateBooking";
-import { EditBooking } from "../components/bookings/EditBooking";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearch } from "../hooks/useResetSearch";
-import { convertDate } from "../utils/convertDate";
-import { Link } from "react-router-dom";
 import { LoadingComponent } from "../components/UI/LoadingComponent";
 import { ErrorComponent } from "../components/UI/ErrorComponent";
 import { getJWT } from "../utils/getJWT";
 import { useNoPermission } from "../hooks/useNoPermission";
+import { BookingItem } from "../components/bookings/BookingItem";
 
 export const BookingsPage = () => {
   const noPermission = useNoPermission();
@@ -101,57 +90,13 @@ export const BookingsPage = () => {
         overflow="auto"
       >
         {orderedBookings.map((booking) => (
-          <Card key={booking.id}>
-            <CardBody display="flex" flexDir="column" justifyContent="center">
-              <Text>
-                <strong>id: </strong>
-                {booking.id}
-              </Text>
-              <Text>
-                <Link to={`/users/${booking.userId}`}>
-                  <strong>userId: </strong>
-                  {booking.userId}
-                </Link>
-              </Text>
-              <Text>
-                <Link to={`/properties/${booking.propertyId}`}>
-                  <strong>propertyId: </strong>
-                  {booking.propertyId}
-                </Link>
-              </Text>
-              <Text>
-                <strong>checkinDate: </strong>
-                {convertDate(booking.checkinDate)}
-              </Text>
-              <Text>
-                <strong>checkoutDate: </strong>
-                {convertDate(booking.checkoutDate)}
-              </Text>
-              <Text>
-                <strong>numberOfGuests: </strong>
-                {booking.numberOfGuests}
-              </Text>
-              <Text>
-                <strong>totalPrice: </strong>&euro;
-                {booking.totalPrice.toString().replace(".", ",")}
-              </Text>
-              <Text>
-                <strong>bookingStatus: </strong>
-                {booking.bookingStatus}
-              </Text>
-              <Box mt={2}>
-                <Button
-                  mr={4}
-                  onClick={
-                    token ? () => deleteBooking(booking.id) : noPermission
-                  }
-                >
-                  Delete Booking
-                </Button>
-                <EditBooking id={booking.id} />
-              </Box>
-            </CardBody>
-          </Card>
+          <BookingItem
+            key={booking.id}
+            booking={booking}
+            deleteBooking={deleteBooking}
+            token={token}
+            noPermission={noPermission}
+          />
         ))}
       </SimpleGrid>
     </Box>
