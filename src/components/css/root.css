@@ -18,7 +18,8 @@
 /* Main section (Cards) */
 .css-p2urg6,
 .css-c6vwei,
-.css-1rt4icb {
+.css-1rt4icb,
+.css-b5pxtj {
   margin-right: 2rem;
 }
 
@@ -51,13 +52,15 @@ p {
 /* Buttons */
 .chakra-button.css-ez23ye,
 .chakra-button.css-x9ig9b,
-.chakra-button.css-6fajlz {
+.chakra-button.css-6fajlz,
+.chakra-button.css-11mdsvr {
   background-color: #3182ce;
   color: #ffffff;
 }
 .chakra-button.css-ez23ye:hover,
 .chakra-button.css-x9ig9b:hover,
-chakra-button.css-6fajlz:hover {
+.chakra-button.css-6fajlz:hover,
+.chakra-button.css-11mdsvr:hover {
   background-color: #2b6cb0;
 }
 
