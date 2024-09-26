@@ -14,25 +14,17 @@ import { CreateAmenity } from "../components/amenities/CreateAmenity";
 import { EditAmenity } from "../components/amenities/EditAmenity";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
-import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { useResetSearch } from "../hooks/useResetSearch";
 import { ErrorComponent } from "../components/UI/ErrorComponent";
 import { LoadingComponent } from "../components/UI/LoadingComponent";
 import { getJWT } from "../utils/getJWT";
+import { useNoPermission } from "../hooks/useNoPermission";
 
 export const AmenitiesPage = () => {
-  useResetSearchTerm(); // Reset search term when page is loaded
+  useResetSearch(); // Reset search term when page is loaded
+  const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const noPermission = () => {
-    toast({
-      title: "Access denied!",
-      description: "You must be logged in to perform this action.",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
 
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);

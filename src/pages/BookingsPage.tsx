@@ -14,27 +14,19 @@ import { CreateBooking } from "../components/bookings/CreateBooking";
 import { EditBooking } from "../components/bookings/EditBooking";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
-import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
+import { useResetSearch } from "../hooks/useResetSearch";
 import { convertDate } from "../utils/convertDate";
 import { Link } from "react-router-dom";
 import { LoadingComponent } from "../components/UI/LoadingComponent";
 import { ErrorComponent } from "../components/UI/ErrorComponent";
 import { getJWT } from "../utils/getJWT";
+import { useNoPermission } from "../hooks/useNoPermission";
 
 export const BookingsPage = () => {
-  useResetSearchTerm(); // Reset search term when page is loaded
+  const noPermission = useNoPermission();
+  useResetSearch(); // Reset search term when page is loaded
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const noPermission = () => {
-    toast({
-      title: "Access denied!",
-      description: "You must be logged in to perform this action.",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
 
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
