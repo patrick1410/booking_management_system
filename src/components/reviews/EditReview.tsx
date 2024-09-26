@@ -83,18 +83,18 @@ export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
           <ModalCloseButton />
           <ModalBody>
             <FormControl as="form">
-              <FormLabel htmlFor="userId">UserId:</FormLabel>
+              <FormLabel htmlFor="userId">User Id:</FormLabel>
               <Input
                 type="text"
                 id="userId"
-                placeholder="Enter an userId..."
+                placeholder="Enter an user id..."
                 {...register("userId", { required: true })}
               />
-              <FormLabel htmlFor="propertyId">PropertyId:</FormLabel>
+              <FormLabel htmlFor="propertyId">Property Id:</FormLabel>
               <Input
                 type="text"
                 id="propertyId"
-                placeholder="Enter a propertyId..."
+                placeholder="Enter a property id..."
                 {...register("propertyId", { required: true })}
               />
 

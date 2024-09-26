@@ -45,7 +45,7 @@ export const Navigation = () => {
     });
   };
 
-  const jwt = getJWT();
+  const token = getJWT();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -89,7 +89,7 @@ export const Navigation = () => {
                 }}
               >
                 <ListItem>
-                  {jwt ? (
+                  {token ? (
                     <Link to={"/"} onClick={handleLogout}>
                       Logout <FaSignOutAlt />
                     </Link>
@@ -159,7 +159,7 @@ export const Navigation = () => {
         }}
       >
         <ListItem>
-          {jwt ? (
+          {token ? (
             <Link to={"/"} onClick={handleLogout}>
               Logout <FaSignOutAlt />
             </Link>

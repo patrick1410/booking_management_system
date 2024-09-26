@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Heading,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { CreateBooking } from "../components/bookings/CreateBooking";
 import { EditBooking } from "../components/bookings/EditBooking";
@@ -18,9 +19,22 @@ import { convertDate } from "../utils/convertDate";
 import { Link } from "react-router-dom";
 import { LoadingComponent } from "../components/UI/LoadingComponent";
 import { ErrorComponent } from "../components/UI/ErrorComponent";
+import { getJWT } from "../utils/getJWT";
 
 export const BookingsPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
 
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
@@ -43,10 +57,18 @@ export const BookingsPage = () => {
       if (confirm("Are you sure you want to delete the booking?")) {
         const response = await fetch(`http://localhost:3000/bookings/${id}`, {
           method: "DELETE",
+          headers: { Authorization: `${token}` },
         });
 
         if (response.ok) {
           setBookings((prev) => prev.filter((booking) => booking.id !== id));
+          toast({
+            title: "Booking deleted",
+            description: "The booking has been successfully deleted.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       }
     } catch (error) {
@@ -126,7 +148,12 @@ export const BookingsPage = () => {
                 {booking.bookingStatus}
               </Text>
               <Box mt={2}>
-                <Button mr={4} onClick={() => deleteBooking(booking.id)}>
+                <Button
+                  mr={4}
+                  onClick={
+                    token ? () => deleteBooking(booking.id) : noPermission
+                  }
+                >
                   Delete Booking
                 </Button>
                 <EditBooking id={booking.id} />

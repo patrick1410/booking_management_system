@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Heading,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { CreateProperty } from "../../components/properties/CreateProperty";
 import { EditProperty } from "../../components/properties/EditProperty";
@@ -17,9 +18,22 @@ import { useResetSearchTerm } from "../../hooks/ResetSearchTerm";
 import { Link } from "react-router-dom";
 import { ErrorComponent } from "../../components/UI/ErrorComponent";
 import { LoadingComponent } from "../../components/UI/LoadingComponent";
+import { getJWT } from "../../utils/getJWT";
 
 export const PropertiesPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
 
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
@@ -48,12 +62,20 @@ export const PropertiesPage = () => {
       if (confirm("Are you sure you want to delete the property?")) {
         const response = await fetch(`http://localhost:3000/properties/${id}`, {
           method: "DELETE",
+          headers: { Authorization: `${token}` },
         });
 
         if (response.ok) {
           setProperties((prev) =>
             prev.filter((property) => property.id !== id)
           );
+          toast({
+            title: "Property deleted",
+            description: "The property has been successfully deleted.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       }
     } catch (error) {
@@ -147,7 +169,12 @@ export const PropertiesPage = () => {
                 </Text>
               </Link>
               <Box mt={2}>
-                <Button mr={4} onClick={() => deleteProperty(property.id)}>
+                <Button
+                  mr={4}
+                  onClick={
+                    token ? () => deleteProperty(property.id) : noPermission
+                  }
+                >
                   Delete Property
                 </Button>
                 <EditProperty id={property.id} />

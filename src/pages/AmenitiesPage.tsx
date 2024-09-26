@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Heading,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { CreateAmenity } from "../components/amenities/CreateAmenity";
 import { EditAmenity } from "../components/amenities/EditAmenity";
@@ -16,9 +17,22 @@ import { filterData } from "../utils/filterData";
 import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 import { ErrorComponent } from "../components/UI/ErrorComponent";
 import { LoadingComponent } from "../components/UI/LoadingComponent";
+import { getJWT } from "../utils/getJWT";
 
 export const AmenitiesPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
 
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
@@ -41,10 +55,18 @@ export const AmenitiesPage = () => {
       if (confirm("Are you sure you want to delete the amenity?")) {
         const response = await fetch(`http://localhost:3000/amenities/${id}`, {
           method: "DELETE",
+          headers: { Authorization: `${token}` },
         });
 
         if (response.ok) {
           setAmenities((prev) => prev.filter((amenity) => amenity.id !== id));
+          toast({
+            title: "Amenity deleted",
+            description: "The amenity has been successfully deleted.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       }
     } catch (error) {
@@ -91,7 +113,12 @@ export const AmenitiesPage = () => {
                 {amenity.name}
               </Text>
               <Box mt={2}>
-                <Button mr={4} onClick={() => deleteAmenity(amenity.id)}>
+                <Button
+                  mr={4}
+                  onClick={
+                    token ? () => deleteAmenity(amenity.id) : noPermission
+                  }
+                >
                   Delete Amenity
                 </Button>
                 <EditAmenity id={amenity.id} />

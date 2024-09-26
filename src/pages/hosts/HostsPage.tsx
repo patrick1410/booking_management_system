@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Heading,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { CreateHost } from "../../components/hosts/CreateHost";
 import { EditHost } from "../../components/hosts/EditHost";
@@ -17,9 +18,22 @@ import { useResetSearchTerm } from "../../hooks/ResetSearchTerm";
 import { Link } from "react-router-dom";
 import { ErrorComponent } from "../../components/UI/ErrorComponent";
 import { LoadingComponent } from "../../components/UI/LoadingComponent";
+import { getJWT } from "../../utils/getJWT";
 
 export const HostsPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
 
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
@@ -42,10 +56,18 @@ export const HostsPage = () => {
       if (confirm("Are you sure you want to delete the host?")) {
         const response = await fetch(`http://localhost:3000/hosts/${id}`, {
           method: "DELETE",
+          headers: { Authorization: `${token}` },
         });
 
         if (response.ok) {
           setHosts((prev) => prev.filter((host) => host.id !== id));
+          toast({
+            title: "Host deleted",
+            description: "The host has been successfully deleted.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       }
     } catch (error) {
@@ -124,7 +146,10 @@ export const HostsPage = () => {
                 </Text>{" "}
               </Link>
               <Box mt={2}>
-                <Button mr={4} onClick={() => deleteHost(host.id)}>
+                <Button
+                  mr={4}
+                  onClick={token ? () => deleteHost(host.id) : noPermission}
+                >
                   Delete Host
                 </Button>
                 <EditHost id={host.id} />

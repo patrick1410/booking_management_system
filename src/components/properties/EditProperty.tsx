@@ -174,11 +174,11 @@ export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
                 })}
               />
 
-              <FormLabel htmlFor="hostId">Host ID:</FormLabel>
+              <FormLabel htmlFor="hostId">Host Id:</FormLabel>
               <Input
                 type="text"
                 id="hostId"
-                placeholder="Enter the host ID..."
+                placeholder="Enter the host id..."
                 {...register("hostId", { required: true })}
               />
 

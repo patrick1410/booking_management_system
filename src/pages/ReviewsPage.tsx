@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Heading,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { CreateReview } from "../components/reviews/CreateReview";
 import { EditReview } from "../components/reviews/EditReview";
@@ -17,9 +18,22 @@ import { useResetSearchTerm } from "../hooks/ResetSearchTerm";
 import { Link } from "react-router-dom";
 import { ErrorComponent } from "../components/UI/ErrorComponent";
 import { LoadingComponent } from "../components/UI/LoadingComponent";
+import { getJWT } from "../utils/getJWT";
 
 export const ReviewsPage = () => {
   useResetSearchTerm(); // Reset search term when page is loaded
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
 
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
@@ -42,10 +56,18 @@ export const ReviewsPage = () => {
       if (confirm("Are you sure you want to delete the review?")) {
         const response = await fetch(`http://localhost:3000/reviews/${id}`, {
           method: "DELETE",
+          headers: { Authorization: `${token}` },
         });
 
         if (response.ok) {
           setReviews((prev) => prev.filter((review) => review.id !== id));
+          toast({
+            title: "Review deleted",
+            description: "The review has been successfully deleted.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       }
     } catch (error) {
@@ -111,7 +133,10 @@ export const ReviewsPage = () => {
                 {review.comment}
               </Text>
               <Box mt={2}>
-                <Button mr={4} onClick={() => deleteReview(review.id)}>
+                <Button
+                  mr={4}
+                  onClick={token ? () => deleteReview(review.id) : noPermission}
+                >
                   Delete Review
                 </Button>
                 <EditReview id={review.id} />
