@@ -1,25 +1,15 @@
 import { useContext } from "react";
 import { DataContext } from "../../components/DataProvider";
-import {
-  Box,
-  Card,
-  CardBody,
-  Text,
-  SimpleGrid,
-  Heading,
-  Button,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateUser } from "../../components/users/CreateUser";
-import { EditUser } from "../../components/users/EditUser";
 import { SearchBar } from "../../components/UI/SearchBar";
 import { filterData } from "../../utils/filterData";
 import { useResetSearch } from "../../hooks/useResetSearch";
-import { Link } from "react-router-dom";
 import { ErrorComponent } from "../../components/UI/ErrorComponent";
 import { LoadingComponent } from "../../components/UI/LoadingComponent";
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
+import { UserItem } from "../../components/users/UserItem";
 
 export const UsersPage = () => {
   useResetSearch(); // Reset search term when page is loaded
@@ -101,49 +91,13 @@ export const UsersPage = () => {
         overflow="auto"
       >
         {orderedUsers.map((user) => (
-          <Card key={user.id}>
-            <CardBody display="flex" flexDir="column" justifyContent="center">
-              <Link to={`/users/${user.id}`}>
-                <Text>
-                  <strong>id: </strong>
-                  {user.id}
-                </Text>
-                <Text>
-                  <strong>username: </strong>
-                  {user.username}
-                </Text>
-                <Text>
-                  <strong>password: </strong>
-                  {user.password}
-                </Text>
-                <Text>
-                  <strong>name: </strong>
-                  {user.name}
-                </Text>
-                <Text>
-                  <strong>email: </strong>
-                  {user.email}
-                </Text>
-                <Text>
-                  <strong>phoneNumber: </strong>
-                  {user.phoneNumber}
-                </Text>
-                <Text>
-                  <strong>profilePicture: </strong>
-                  {user.profilePicture}
-                </Text>
-              </Link>
-              <Box mt={2}>
-                <Button
-                  mr={4}
-                  onClick={token ? () => deleteUser(user.id) : noPermission}
-                >
-                  Delete User
-                </Button>
-                <EditUser id={user.id} />
-              </Box>
-            </CardBody>
-          </Card>
+          <UserItem
+            key={user.id}
+            user={user}
+            deleteUser={deleteUser}
+            token={token}
+            noPermission={noPermission}
+          />
         ))}
       </SimpleGrid>
     </Box>
