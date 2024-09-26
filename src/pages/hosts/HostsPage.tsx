@@ -1,25 +1,15 @@
 import { useContext } from "react";
 import { DataContext } from "../../components/DataProvider";
-import {
-  Box,
-  Card,
-  CardBody,
-  Text,
-  SimpleGrid,
-  Heading,
-  Button,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateHost } from "../../components/hosts/CreateHost";
-import { EditHost } from "../../components/hosts/EditHost";
 import { SearchBar } from "../../components/UI/SearchBar";
 import { filterData } from "../../utils/filterData";
 import { useResetSearch } from "../../hooks/useResetSearch";
-import { Link } from "react-router-dom";
 import { ErrorComponent } from "../../components/UI/ErrorComponent";
 import { LoadingComponent } from "../../components/UI/LoadingComponent";
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
+import { HostItem } from "../../components/hosts/HostItem";
 
 export const HostsPage = () => {
   useResetSearch(); // Reset search term when page is loaded
@@ -101,53 +91,13 @@ export const HostsPage = () => {
         overflow="auto"
       >
         {orderedHosts.map((host) => (
-          <Card key={host.id}>
-            <CardBody display="flex" flexDir="column" justifyContent="center">
-              <Link to={`/hosts/${host.id}`}>
-                <Text>
-                  <strong>id: </strong>
-                  {host.id}
-                </Text>
-                <Text>
-                  <strong>username: </strong>
-                  {host.username}
-                </Text>
-                <Text>
-                  <strong>password: </strong>
-                  {host.password}
-                </Text>
-                <Text>
-                  <strong>name: </strong>
-                  {host.name}
-                </Text>
-                <Text>
-                  <strong>email: </strong>
-                  {host.email}
-                </Text>
-                <Text>
-                  <strong>phoneNumber: </strong>
-                  {host.phoneNumber}
-                </Text>
-                <Text>
-                  <strong>profilePicture: </strong>
-                  {host.profilePicture}
-                </Text>
-                <Text>
-                  <strong>aboutMe: </strong>
-                  {host.aboutMe}
-                </Text>{" "}
-              </Link>
-              <Box mt={2}>
-                <Button
-                  mr={4}
-                  onClick={token ? () => deleteHost(host.id) : noPermission}
-                >
-                  Delete Host
-                </Button>
-                <EditHost id={host.id} />
-              </Box>
-            </CardBody>
-          </Card>
+          <HostItem
+            key={host.id}
+            host={host}
+            deleteHost={deleteHost}
+            token={token}
+            noPermission={noPermission}
+          />
         ))}
       </SimpleGrid>
     </Box>
