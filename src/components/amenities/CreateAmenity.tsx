@@ -11,17 +11,32 @@ import {
   FormControl,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type FormProps = {
   name: string;
 };
 
 export const CreateAmenity = () => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { amenities = [], setAmenities = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -37,12 +52,20 @@ export const CreateAmenity = () => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
       const newAmenity = await response.json();
       if (setAmenities) {
         setAmenities([...amenities, newAmenity]);
+        toast({
+          title: "Amenity created",
+          description: "Amenity has been successfully created!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       reset();
@@ -54,7 +77,7 @@ export const CreateAmenity = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Create Amenity</Button>
+      <Button onClick={token ? onOpen : noPermission}>Create Amenity</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

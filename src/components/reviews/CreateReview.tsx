@@ -13,11 +13,13 @@ import {
   Input,
   Select,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type FormProps = {
   userId: string;
@@ -27,6 +29,19 @@ type FormProps = {
 };
 
 export const CreateReview = () => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { reviews = [], setReviews = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -42,12 +57,20 @@ export const CreateReview = () => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
       const newReview = await response.json();
       if (setReviews) {
         setReviews([...reviews, newReview]);
+        toast({
+          title: "Review created",
+          description: "Review has been successfully created!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       reset();
@@ -59,7 +82,7 @@ export const CreateReview = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Create Review</Button>
+      <Button onClick={token ? onOpen : noPermission}>Create Review</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

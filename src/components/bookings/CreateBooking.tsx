@@ -12,16 +12,31 @@ import {
   FormLabel,
   Input,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
 import { convertToLocal } from "../../utils/convertToLocal";
+import { getJWT } from "../../utils/getJWT";
 
 type FormProps = Booking;
 
 export const CreateBooking = () => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { bookings = [], setBookings = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -43,12 +58,20 @@ export const CreateBooking = () => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
       const newBooking = await response.json();
       if (setBookings) {
         setBookings([...bookings, newBooking]);
+        toast({
+          title: "Booking created",
+          description: "Booking has been successfully created!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       reset();
@@ -60,7 +83,7 @@ export const CreateBooking = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Create Booking</Button>
+      <Button onClick={token ? onOpen : noPermission}>Create Booking</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

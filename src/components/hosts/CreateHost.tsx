@@ -15,6 +15,7 @@ import {
   InputGroup,
   Icon,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 
 import { BiShow, BiHide } from "react-icons/bi";
@@ -22,6 +23,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type FormProps = {
   username: string;
@@ -34,6 +36,19 @@ type FormProps = {
 };
 
 export const CreateHost = () => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const { hosts = [], setHosts = () => {} } = dataContext || {}; // Default to empty array and noop function
 
@@ -50,12 +65,20 @@ export const CreateHost = () => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
       const newHost = await response.json();
       if (setHosts) {
         setHosts([...hosts, newHost]);
+        toast({
+          title: "Host created",
+          description: "Host has been successfully created!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       reset();
@@ -67,7 +90,7 @@ export const CreateHost = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Create Host</Button>
+      <Button onClick={token ? onOpen : noPermission}>Create Host</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

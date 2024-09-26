@@ -14,11 +14,13 @@ import {
   Select,
   Box,
   SimpleGrid,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider";
+import { getJWT } from "../../utils/getJWT";
 
 type FormProps = {
   title: string;
@@ -34,6 +36,19 @@ type FormProps = {
 };
 
 export const CreateProperty = () => {
+  const toast = useToast();
+  const token = getJWT(); // Get token
+
+  const noPermission = () => {
+    toast({
+      title: "Access denied!",
+      description: "You must be logged in to perform this action.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   const dataContext = useContext(DataContext);
   const {
     amenities,
@@ -53,12 +68,20 @@ export const CreateProperty = () => {
         }),
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          Authorization: `${token}`,
         },
       });
 
       const newProperty = await response.json();
       if (setProperties) {
         setProperties([...properties, newProperty]);
+        toast({
+          title: "Property created",
+          description: "Property has been successfully created!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       reset();
@@ -70,7 +93,7 @@ export const CreateProperty = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Create Property</Button>
+      <Button onClick={token ? onOpen : noPermission}>Create Property</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent maxH="80vh" overflow="auto">
