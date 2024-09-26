@@ -1,17 +1,7 @@
 import { useContext } from "react";
 import { DataContext } from "../components/DataProvider";
-import {
-  Box,
-  Card,
-  CardBody,
-  Text,
-  SimpleGrid,
-  Heading,
-  Button,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateAmenity } from "../components/amenities/CreateAmenity";
-import { EditAmenity } from "../components/amenities/EditAmenity";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearch } from "../hooks/useResetSearch";
@@ -19,6 +9,7 @@ import { ErrorComponent } from "../components/UI/ErrorComponent";
 import { LoadingComponent } from "../components/UI/LoadingComponent";
 import { getJWT } from "../utils/getJWT";
 import { useNoPermission } from "../hooks/useNoPermission";
+import { AmenityItem } from "../components/amenities/AmenityItem";
 
 export const AmenitiesPage = () => {
   useResetSearch(); // Reset search term when page is loaded
@@ -94,29 +85,13 @@ export const AmenitiesPage = () => {
         overflow="auto"
       >
         {orderedAmenities.map((amenity) => (
-          <Card key={amenity.id}>
-            <CardBody display="flex" flexDir="column" justifyContent="center">
-              <Text>
-                <strong>id: </strong>
-                {amenity.id}
-              </Text>
-              <Text>
-                <strong>name: </strong>
-                {amenity.name}
-              </Text>
-              <Box mt={2}>
-                <Button
-                  mr={4}
-                  onClick={
-                    token ? () => deleteAmenity(amenity.id) : noPermission
-                  }
-                >
-                  Delete Amenity
-                </Button>
-                <EditAmenity id={amenity.id} />
-              </Box>
-            </CardBody>
-          </Card>
+          <AmenityItem
+            key={amenity.id}
+            amenity={amenity}
+            deleteAmenity={deleteAmenity}
+            token={token}
+            noPermission={noPermission}
+          />
         ))}
       </SimpleGrid>
     </Box>
