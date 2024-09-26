@@ -1,25 +1,15 @@
 import { useContext } from "react";
 import { DataContext } from "../components/DataProvider";
-import {
-  Box,
-  Card,
-  CardBody,
-  Text,
-  SimpleGrid,
-  Heading,
-  Button,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateReview } from "../components/reviews/CreateReview";
-import { EditReview } from "../components/reviews/EditReview";
 import { SearchBar } from "../components/UI/SearchBar";
 import { filterData } from "../utils/filterData";
 import { useResetSearch } from "../hooks/useResetSearch";
-import { Link } from "react-router-dom";
 import { ErrorComponent } from "../components/UI/ErrorComponent";
 import { LoadingComponent } from "../components/UI/LoadingComponent";
 import { getJWT } from "../utils/getJWT";
 import { useNoPermission } from "../hooks/useNoPermission";
+import { ReviewItem } from "../components/reviews/ReviewItem";
 
 export const ReviewsPage = () => {
   useResetSearch(); // Reset search term when page is loaded
@@ -98,43 +88,13 @@ export const ReviewsPage = () => {
         overflow="auto"
       >
         {orderedReviews.map((review) => (
-          <Card key={review.id}>
-            <CardBody display="flex" flexDir="column" justifyContent="center">
-              <Text>
-                <strong>id: </strong>
-                {review.id}
-              </Text>
-              <Text>
-                <Link to={`/users/${review.userId}`}>
-                  <strong>userId: </strong>
-                  {review.userId}
-                </Link>
-              </Text>
-              <Text>
-                <Link to={`/properties/${review.propertyId}`}>
-                  <strong>propertyId: </strong>
-                  {review.propertyId}
-                </Link>
-              </Text>
-              <Text>
-                <strong>rating: </strong>
-                {review.rating}
-              </Text>
-              <Text>
-                <strong>comment: </strong>
-                {review.comment}
-              </Text>
-              <Box mt={2}>
-                <Button
-                  mr={4}
-                  onClick={token ? () => deleteReview(review.id) : noPermission}
-                >
-                  Delete Review
-                </Button>
-                <EditReview id={review.id} />
-              </Box>
-            </CardBody>
-          </Card>
+          <ReviewItem
+            key={review.id}
+            review={review}
+            deleteReview={deleteReview}
+            token={token}
+            noPermission={noPermission}
+          />
         ))}
       </SimpleGrid>
     </Box>
