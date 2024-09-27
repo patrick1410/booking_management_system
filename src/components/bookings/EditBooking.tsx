@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../DataProvider";
 
 import { convertToLocal } from "../../utils/convertToLocal";
@@ -52,6 +52,10 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
       bookingStatus: booking?.bookingStatus,
     },
   });
+
+  const [numberOfGuestsCount, setnumberOfGuestsCount] = useState<
+    number | undefined
+  >(booking?.numberOfGuests);
 
   const editBooking = async (booking: FormProps) => {
     try {
@@ -140,14 +144,20 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
                 {...register("checkoutDate", { required: true })}
               />
 
-              <FormLabel htmlFor="numberOfGuests">Number of Guests:</FormLabel>
-              <Input
-                type="number"
+              <FormLabel htmlFor="numberOfGuests">
+                Number of Guests: {numberOfGuestsCount}
+              </FormLabel>
+              <input
+                type="range"
+                min={1}
+                max={20}
                 id="numberOfGuests"
                 placeholder="Enter the number of guests..."
                 {...register("numberOfGuests", {
                   required: true,
                   valueAsNumber: true,
+                  onChange: (e) =>
+                    setnumberOfGuestsCount(e.target.valueAsNumber),
                 })}
               />
 
