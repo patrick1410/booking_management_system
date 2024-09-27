@@ -79,8 +79,8 @@ export const ReviewsPage = () => {
   };
 
   const filteredReviews = filterData(reviews, searchTerm, [
-    "userId",
-    "propertyId",
+    "comment",
+    "rating",
   ]);
 
   const orderedReviews = [...filteredReviews].reverse(); // New reviews first!
