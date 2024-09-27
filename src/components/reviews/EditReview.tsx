@@ -17,24 +17,25 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import { DataContext } from "../DataProvider";
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditReviewProps = {
   id: string; // The id of the review being edited
+  reviews: Review[];
+  setReviews: (reviews: Review[]) => void;
 };
 
 type FormProps = Review; // FormProps is set to Review type
 
-export const EditReview: React.FC<EditReviewProps> = ({ id }) => {
+export const EditReview: React.FC<EditReviewProps> = ({
+  id,
+  reviews,
+  setReviews,
+}) => {
   const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const { reviews = [], setReviews = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   // Find the review by id
   const review = reviews.find((review) => review.id === id);

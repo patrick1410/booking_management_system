@@ -7,6 +7,8 @@ type ReviewItemProps = {
   deleteReview: (id: string) => void;
   token: string | null;
   noPermission: () => void;
+  reviews: Review[];
+  setReviews: (reviews: Review[]) => void;
 };
 
 export const ReviewItem: React.FC<ReviewItemProps> = ({
@@ -14,6 +16,8 @@ export const ReviewItem: React.FC<ReviewItemProps> = ({
   deleteReview,
   token,
   noPermission,
+  reviews,
+  setReviews,
 }) => {
   return (
     <Card key={review.id}>
@@ -49,7 +53,11 @@ export const ReviewItem: React.FC<ReviewItemProps> = ({
           >
             Delete Review
           </Button>
-          <EditReview id={review.id} />
+          <EditReview
+            reviews={reviews}
+            setReviews={setReviews}
+            id={review.id}
+          />
         </Box>
       </CardBody>
     </Card>

@@ -72,14 +72,14 @@ type DataContextType = {
   users: User[];
   hosts: Host[];
   bookings: Booking[];
-  reviews: Review[];
+
   amenities: Amenity[];
   properties: Property[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   setHosts: React.Dispatch<React.SetStateAction<Host[]>>;
   setProperties: React.Dispatch<React.SetStateAction<Property[]>>;
   setBookings: React.Dispatch<React.SetStateAction<Booking[]>>;
-  setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
+
   setAmenities: React.Dispatch<React.SetStateAction<Amenity[]>>;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../components/DataProvider";
 import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateReview } from "../components/reviews/CreateReview";
@@ -20,8 +20,29 @@ export const ReviewsPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  const { reviews, setReviews, searchTerm, setSearchTerm, error, loading } =
-    dataContext;
+  const { searchTerm, setSearchTerm } = dataContext;
+
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch("http://localhost:3000/reviews");
+        const reviews = await response.json();
+        setReviews(reviews);
+      } catch (error) {
+        console.error(error);
+        setError(`${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Handle error starte
   if (error) {
@@ -81,7 +102,7 @@ export const ReviewsPage = () => {
           onSearchChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Reviews..."
         />
-        <CreateReview />
+        <CreateReview reviews={reviews} setReviews={setReviews} />
       </Box>
       <SimpleGrid
         mt={2}
@@ -96,6 +117,8 @@ export const ReviewsPage = () => {
             deleteReview={deleteReview}
             token={token}
             noPermission={noPermission}
+            reviews={reviews}
+            setReviews={setReviews}
           />
         ))}
       </SimpleGrid>

@@ -6,13 +6,13 @@ export const DataContext = createContext<DataContextType>({
   hosts: [],
   properties: [],
   bookings: [],
-  reviews: [],
+
   amenities: [],
   setUsers: () => {},
   setHosts: () => {},
   setProperties: () => {},
   setBookings: () => {},
-  setReviews: () => {},
+
   setAmenities: () => {},
   searchTerm: "",
   setSearchTerm: () => {},
@@ -29,7 +29,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [hosts, setHosts] = useState<Host[]>([]);
   const [properties, setProperties] = useState<Property[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
-  const [reviews, setReviews] = useState<Review[]>([]);
+
   const [amenities, setAmenities] = useState<Amenity[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
@@ -46,14 +46,14 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
           hostsData,
           propertiesData,
           bookingsData,
-          reviewsData,
+
           amenitiesData,
         ] = await Promise.all([
           fetch("http://localhost:3000/users").then((res) => res.json()),
           fetch("http://localhost:3000/hosts").then((res) => res.json()),
           fetch("http://localhost:3000/properties").then((res) => res.json()),
           fetch("http://localhost:3000/bookings").then((res) => res.json()),
-          fetch("http://localhost:3000/reviews").then((res) => res.json()),
+
           fetch("http://localhost:3000/amenities").then((res) => res.json()),
         ]);
 
@@ -61,7 +61,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         setHosts(hostsData);
         setProperties(propertiesData);
         setBookings(bookingsData);
-        setReviews(reviewsData);
+
         setAmenities(amenitiesData);
       } catch (error) {
         console.error(error);
@@ -81,13 +81,13 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         hosts,
         properties,
         bookings,
-        reviews,
+
         amenities,
         setUsers,
         setHosts,
         setProperties,
         setBookings,
-        setReviews,
+
         setAmenities,
         searchTerm,
         setSearchTerm,

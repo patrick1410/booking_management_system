@@ -17,10 +17,14 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import { DataContext } from "../DataProvider";
+
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
+
+type CreateReviewProps = {
+  reviews: Review[];
+  setReviews: (reviews: Review[]) => void;
+};
 
 type FormProps = {
   userId: string;
@@ -29,13 +33,13 @@ type FormProps = {
   comment: string;
 };
 
-export const CreateReview = () => {
+export const CreateReview: React.FC<CreateReviewProps> = ({
+  reviews,
+  setReviews,
+}) => {
   const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const { reviews = [], setReviews = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset } = useForm<FormProps>({});
