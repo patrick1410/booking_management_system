@@ -69,11 +69,9 @@ type Property = {
 
 // Define the context type
 type DataContextType = {
-  hosts: Host[];
   bookings: Booking[];
   amenities: Amenity[];
   properties: Property[];
-  setHosts: React.Dispatch<React.SetStateAction<Host[]>>;
   setProperties: React.Dispatch<React.SetStateAction<Property[]>>;
   setBookings: React.Dispatch<React.SetStateAction<Booking[]>>;
   setAmenities: React.Dispatch<React.SetStateAction<Amenity[]>>;

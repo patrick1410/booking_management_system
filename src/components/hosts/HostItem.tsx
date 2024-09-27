@@ -7,6 +7,8 @@ type HostItemProps = {
   deleteHost: (id: string) => void;
   token: string | null;
   noPermission: () => void;
+  hosts: Host[];
+  setHosts: (hosts: Host[]) => void;
 };
 
 export const HostItem: React.FC<HostItemProps> = ({
@@ -14,6 +16,8 @@ export const HostItem: React.FC<HostItemProps> = ({
   deleteHost,
   token,
   noPermission,
+  hosts,
+  setHosts,
 }) => {
   return (
     <Card key={host.id}>
@@ -59,7 +63,7 @@ export const HostItem: React.FC<HostItemProps> = ({
           >
             Delete Host
           </Button>
-          <EditHost id={host.id} />
+          <EditHost hosts={hosts} setHosts={setHosts} id={host.id} />
         </Box>
       </CardBody>
     </Card>

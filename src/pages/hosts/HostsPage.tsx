@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../components/DataProvider";
 import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateHost } from "../../components/hosts/CreateHost";
@@ -20,8 +20,29 @@ export const HostsPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  const { hosts, setHosts, searchTerm, setSearchTerm, error, loading } =
-    dataContext;
+  const { searchTerm, setSearchTerm } = dataContext;
+
+  const [hosts, setHosts] = useState<Host[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch("http://localhost:3000/hosts");
+        const hosts = await response.json();
+        setHosts(hosts);
+      } catch (error) {
+        console.error(error);
+        setError(`${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Handle error starte
   if (error) {
@@ -83,7 +104,7 @@ export const HostsPage = () => {
           onSearchChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Hosts..."
         />
-        <CreateHost />
+        <CreateHost hosts={hosts} setHosts={setHosts} />
       </Box>
       {/* Scrollable user list */}
       <SimpleGrid
@@ -99,6 +120,8 @@ export const HostsPage = () => {
             deleteHost={deleteHost}
             token={token}
             noPermission={noPermission}
+            hosts={hosts}
+            setHosts={setHosts}
           />
         ))}
       </SimpleGrid>

@@ -2,11 +2,9 @@ import { createContext, useState, useEffect, ReactNode } from "react";
 
 // Initialize the DataContext with a default value matching the DataContextType structure
 export const DataContext = createContext<DataContextType>({
-  hosts: [],
   properties: [],
   bookings: [],
   amenities: [],
-  setHosts: () => {},
   setProperties: () => {},
   setBookings: () => {},
   setAmenities: () => {},
@@ -21,7 +19,6 @@ type DataProviderProps = {
 };
 
 export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
-  const [hosts, setHosts] = useState<Host[]>([]);
   const [properties, setProperties] = useState<Property[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [amenities, setAmenities] = useState<Amenity[]>([]);
@@ -35,15 +32,14 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       setError(null); // Reset error state
 
       try {
-        const [hostsData, propertiesData, bookingsData, amenitiesData] =
-          await Promise.all([
-            fetch("http://localhost:3000/hosts").then((res) => res.json()),
+        const [propertiesData, bookingsData, amenitiesData] = await Promise.all(
+          [
             fetch("http://localhost:3000/properties").then((res) => res.json()),
             fetch("http://localhost:3000/bookings").then((res) => res.json()),
             fetch("http://localhost:3000/amenities").then((res) => res.json()),
-          ]);
+          ]
+        );
 
-        setHosts(hostsData);
         setProperties(propertiesData);
         setBookings(bookingsData);
         setAmenities(amenitiesData);
@@ -61,11 +57,9 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   return (
     <DataContext.Provider
       value={{
-        hosts,
         properties,
         bookings,
         amenities,
-        setHosts,
         setProperties,
         setBookings,
         setAmenities,

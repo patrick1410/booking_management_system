@@ -21,10 +21,15 @@ import {
 import { BiShow, BiHide } from "react-icons/bi";
 
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
-import { DataContext } from "../DataProvider";
+import { useState } from "react";
+
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
+
+type CreateHostProps = {
+  hosts: Host[];
+  setHosts: (hosts: Host[]) => void;
+};
 
 type FormProps = {
   username: string;
@@ -36,13 +41,10 @@ type FormProps = {
   aboutMe: string;
 };
 
-export const CreateHost = () => {
+export const CreateHost: React.FC<CreateHostProps> = ({ hosts, setHosts }) => {
   const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const { hosts = [], setHosts = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset } = useForm<FormProps>({});
