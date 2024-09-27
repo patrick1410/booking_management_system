@@ -2,12 +2,10 @@ import { createContext, useState, useEffect, ReactNode } from "react";
 
 // Initialize the DataContext with a default value matching the DataContextType structure
 export const DataContext = createContext<DataContextType>({
-  properties: [],
   bookings: [],
-  amenities: [],
-  setProperties: () => {},
+
   setBookings: () => {},
-  setAmenities: () => {},
+
   searchTerm: "",
   setSearchTerm: () => {},
   loading: true,
@@ -19,9 +17,8 @@ type DataProviderProps = {
 };
 
 export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
-  const [properties, setProperties] = useState<Property[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
-  const [amenities, setAmenities] = useState<Amenity[]>([]);
+
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,17 +29,10 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       setError(null); // Reset error state
 
       try {
-        const [propertiesData, bookingsData, amenitiesData] = await Promise.all(
-          [
-            fetch("http://localhost:3000/properties").then((res) => res.json()),
-            fetch("http://localhost:3000/bookings").then((res) => res.json()),
-            fetch("http://localhost:3000/amenities").then((res) => res.json()),
-          ]
-        );
+        const response = await fetch("http://localhost:3000/bookings");
+        const bookings = await response.json();
 
-        setProperties(propertiesData);
-        setBookings(bookingsData);
-        setAmenities(amenitiesData);
+        setBookings(bookings);
       } catch (error) {
         console.error(error);
         setError(`${error}`);
@@ -57,12 +47,10 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   return (
     <DataContext.Provider
       value={{
-        properties,
         bookings,
-        amenities,
-        setProperties,
+
         setBookings,
-        setAmenities,
+
         searchTerm,
         setSearchTerm,
         loading,

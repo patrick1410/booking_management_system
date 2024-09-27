@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../components/DataProvider";
 import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateProperty } from "../../components/properties/CreateProperty";
@@ -20,14 +20,35 @@ export const PropertiesPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  const {
-    properties,
-    setProperties,
-    searchTerm,
-    setSearchTerm,
-    error,
-    loading,
-  } = dataContext;
+  const { searchTerm, setSearchTerm } = dataContext;
+
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [amenities, setAmenities] = useState<Amenity[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true); // Start loading
+      setError(null); // Reset error state
+
+      try {
+        const [propertiesData, amenitiesData] = await Promise.all([
+          fetch("http://localhost:3000/properties").then((res) => res.json()),
+          fetch("http://localhost:3000/amenities").then((res) => res.json()),
+        ]);
+        setProperties(propertiesData);
+        setAmenities(amenitiesData);
+      } catch (error) {
+        console.error(error);
+        setError(`${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // Handle error starte
   if (error) {
@@ -91,7 +112,11 @@ export const PropertiesPage = () => {
           onSearchChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Properties..."
         />
-        <CreateProperty />
+        <CreateProperty
+          amenities={amenities}
+          properties={properties}
+          setProperties={setProperties}
+        />
       </Box>
       <SimpleGrid
         mt={2}
@@ -106,6 +131,9 @@ export const PropertiesPage = () => {
             deleteProperty={deleteProperty}
             token={token}
             noPermission={noPermission}
+            amenities={amenities}
+            properties={properties}
+            setProperties={setProperties}
           />
         ))}
       </SimpleGrid>

@@ -16,15 +16,16 @@ import {
   SimpleGrid,
   useToast,
 } from "@chakra-ui/react";
-
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
-import { DataContext } from "../DataProvider";
+import { useState } from "react";
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditPropertyProps = {
   id: string; // The id of the host being edited
+  amenities: Amenity[];
+  properties: Property[];
+  setProperties: (properties: Property[]) => void;
 };
 
 type FormProps = {
@@ -40,17 +41,15 @@ type FormProps = {
   amenityIds: string[];
 };
 
-export const EditProperty: React.FC<EditPropertyProps> = ({ id }) => {
+export const EditProperty: React.FC<EditPropertyProps> = ({
+  id,
+  amenities,
+  properties,
+  setProperties,
+}) => {
   const toast = useToast();
   const noPermission = useNoPermission();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const {
-    amenities,
-    properties = [],
-    setProperties = () => {},
-  } = dataContext || {}; // Default to empty array and noop function
 
   // Find the host by id
   const property = properties.find((property) => property.id === id);

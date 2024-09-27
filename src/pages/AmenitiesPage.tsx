@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../components/DataProvider";
 import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateAmenity } from "../components/amenities/CreateAmenity";
@@ -20,8 +20,29 @@ export const AmenitiesPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  const { amenities, setAmenities, searchTerm, setSearchTerm, error, loading } =
-    dataContext;
+  const { searchTerm, setSearchTerm } = dataContext;
+
+  const [amenities, setAmenities] = useState<Amenity[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch("http://localhost:3000/amenities");
+        const amenities = await response.json();
+        setAmenities(amenities);
+      } catch (error) {
+        console.error(error);
+        setError(`${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Handle error starte
   if (error) {
@@ -78,7 +99,7 @@ export const AmenitiesPage = () => {
           onSearchChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Amenities..."
         />
-        <CreateAmenity />
+        <CreateAmenity amenities={amenities} setAmenities={setAmenities} />
       </Box>
       <SimpleGrid
         mt={2}
@@ -93,6 +114,8 @@ export const AmenitiesPage = () => {
             deleteAmenity={deleteAmenity}
             token={token}
             noPermission={noPermission}
+            amenities={amenities}
+            setAmenities={setAmenities}
           />
         ))}
       </SimpleGrid>

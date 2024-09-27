@@ -6,6 +6,8 @@ type AmenityItemProps = {
   deleteAmenity: (id: string) => void;
   token: string | null;
   noPermission: () => void;
+  amenities: Amenity[];
+  setAmenities: (amenities: Amenity[]) => void;
 };
 
 export const AmenityItem: React.FC<AmenityItemProps> = ({
@@ -13,6 +15,8 @@ export const AmenityItem: React.FC<AmenityItemProps> = ({
   deleteAmenity,
   token,
   noPermission,
+  amenities,
+  setAmenities,
 }) => {
   return (
     <Card>
@@ -32,7 +36,11 @@ export const AmenityItem: React.FC<AmenityItemProps> = ({
           >
             Delete Amenity
           </Button>
-          <EditAmenity id={amenity.id} />
+          <EditAmenity
+            amenities={amenities}
+            setAmenities={setAmenities}
+            id={amenity.id}
+          />
         </Box>
       </CardBody>
     </Card>

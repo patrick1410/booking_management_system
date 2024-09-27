@@ -15,22 +15,25 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import { DataContext } from "../DataProvider";
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
+
+type CreateAmenityProps = {
+  amenities: Amenity[];
+  setAmenities: (amenities: Amenity[]) => void;
+};
 
 type FormProps = {
   name: string;
 };
 
-export const CreateAmenity = () => {
+export const CreateAmenity: React.FC<CreateAmenityProps> = ({
+  amenities,
+  setAmenities,
+}) => {
   const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const { amenities = [], setAmenities = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset } = useForm<FormProps>({});

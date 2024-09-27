@@ -15,24 +15,25 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import { DataContext } from "../DataProvider";
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditAmenityProps = {
   id: string; // The id of the amenity being edited
+  amenities: Amenity[];
+  setAmenities: (amenities: Amenity[]) => void;
 };
 
 type FormProps = Amenity; // FormProps is set to Amenity type
 
-export const EditAmenity: React.FC<EditAmenityProps> = ({ id }) => {
+export const EditAmenity: React.FC<EditAmenityProps> = ({
+  id,
+  amenities,
+  setAmenities,
+}) => {
   const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const { amenities = [], setAmenities = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   // Find the amenity by id
   const amenity = amenities.find((amenity) => amenity.id === id);

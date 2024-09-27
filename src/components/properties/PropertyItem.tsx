@@ -7,6 +7,9 @@ type PropertyItemProps = {
   deleteProperty: (id: string) => void;
   token: string | null;
   noPermission: () => void;
+  amenities: Amenity[];
+  properties: Property[];
+  setProperties: (properties: Property[]) => void;
 };
 
 export const PropertyItem: React.FC<PropertyItemProps> = ({
@@ -14,6 +17,9 @@ export const PropertyItem: React.FC<PropertyItemProps> = ({
   deleteProperty,
   token,
   noPermission,
+  amenities,
+  properties,
+  setProperties,
 }) => {
   return (
     <Card key={property.id}>
@@ -73,7 +79,12 @@ export const PropertyItem: React.FC<PropertyItemProps> = ({
           >
             Delete Property
           </Button>
-          <EditProperty id={property.id} />
+          <EditProperty
+            amenities={amenities}
+            properties={properties}
+            setProperties={setProperties}
+            id={property.id}
+          />
         </Box>
       </CardBody>
     </Card>
