@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../components/DataProvider";
 import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateUser } from "../../components/users/CreateUser";
@@ -20,8 +20,29 @@ export const UsersPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  const { users, setUsers, searchTerm, setSearchTerm, error, loading } =
-    dataContext;
+  const { searchTerm, setSearchTerm } = dataContext;
+
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch("http://localhost:3000/users");
+        const users = await response.json();
+        setUsers(users);
+      } catch (error) {
+        console.error(error);
+        setError(`${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Handle error starte
   if (error) {
@@ -83,7 +104,7 @@ export const UsersPage = () => {
           onSearchChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Users..."
         />
-        <CreateUser />
+        <CreateUser users={users} setUsers={setUsers} />
       </Box>
       {/* Scrollable user list */}
       <SimpleGrid
@@ -99,6 +120,8 @@ export const UsersPage = () => {
             deleteUser={deleteUser}
             token={token}
             noPermission={noPermission}
+            users={users}
+            setUsers={setUsers}
           />
         ))}
       </SimpleGrid>

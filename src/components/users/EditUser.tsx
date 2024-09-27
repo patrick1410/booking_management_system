@@ -20,24 +20,23 @@ import {
 import { BiShow, BiHide } from "react-icons/bi";
 
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
-import { DataContext } from "../DataProvider";
+import { useState } from "react";
+
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditUserProps = {
   id: string; // The id of the user being edited
+  users: User[];
+  setUsers: (users: User[]) => void;
 };
 
 type FormProps = User; // FormProps is set to User type
 
-export const EditUser: React.FC<EditUserProps> = ({ id }) => {
+export const EditUser: React.FC<EditUserProps> = ({ id, users, setUsers }) => {
   const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const { users = [], setUsers = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   // Find the user by id
   const user = users.find((user) => user.id === id);

@@ -7,6 +7,8 @@ type UserItemProps = {
   deleteUser: (id: string) => void;
   token: string | null;
   noPermission: () => void;
+  users: User[];
+  setUsers: (users: User[]) => void;
 };
 
 export const UserItem: React.FC<UserItemProps> = ({
@@ -14,6 +16,8 @@ export const UserItem: React.FC<UserItemProps> = ({
   deleteUser,
   token,
   noPermission,
+  users,
+  setUsers,
 }) => {
   return (
     <Card key={user.id}>
@@ -55,7 +59,7 @@ export const UserItem: React.FC<UserItemProps> = ({
           >
             Delete User
           </Button>
-          <EditUser id={user.id} />
+          <EditUser users={users} setUsers={setUsers} id={user.id} />
         </Box>
       </CardBody>
     </Card>
