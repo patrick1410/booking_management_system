@@ -53,7 +53,7 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
     },
   });
 
-  const [numberOfGuestsCount, setnumberOfGuestsCount] = useState<
+  const [numberOfGuestsCount, setNumberOfGuestsCount] = useState<
     number | undefined
   >(booking?.numberOfGuests);
 
@@ -150,14 +150,14 @@ export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
               <input
                 type="range"
                 min={1}
+                step={1}
                 max={20}
                 id="numberOfGuests"
-                placeholder="Enter the number of guests..."
                 {...register("numberOfGuests", {
                   required: true,
                   valueAsNumber: true,
                   onChange: (e) =>
-                    setnumberOfGuestsCount(e.target.valueAsNumber),
+                    setNumberOfGuestsCount(e.target.valueAsNumber),
                 })}
               />
 

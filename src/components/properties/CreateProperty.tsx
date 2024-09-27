@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../DataProvider";
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
@@ -50,6 +50,9 @@ export const CreateProperty = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset } = useForm<FormProps>({});
+  const [bedroomCount, setBedroomCount] = useState<number>(1);
+  const [bathRoomCount, setBathRoomCount] = useState<number>(1);
+  const [maxGuestCount, setMaxGuestCount] = useState<number>(1);
 
   const createProperty = async (property: FormProps) => {
     try {
@@ -130,36 +133,54 @@ export const CreateProperty = () => {
                 })}
               />
 
-              <FormLabel htmlFor="bedroomCount">Bedroom Count:</FormLabel>
-              <Input
-                type="number"
+              <FormLabel htmlFor="bedroomCount">
+                Bedroom Count: {bedroomCount}
+              </FormLabel>
+              <input
+                defaultValue={1}
+                min={1}
+                max={10}
+                step={1}
+                type="range"
                 id="bedroomCount"
-                placeholder="Enter the number of bedrooms..."
                 {...register("bedroomCount", {
                   required: true,
                   valueAsNumber: true,
+                  onChange: (e) => setBedroomCount(e.target.valueAsNumber),
                 })}
               />
 
-              <FormLabel htmlFor="bathRoomCount">Bathroom Count:</FormLabel>
-              <Input
-                type="number"
+              <FormLabel htmlFor="bathRoomCount">
+                Bathroom Count: {bathRoomCount}
+              </FormLabel>
+              <input
+                defaultValue={1}
+                min={1}
+                max={10}
+                step={1}
+                type="range"
                 id="bathRoomCount"
-                placeholder="Enter the number of bathrooms..."
                 {...register("bathRoomCount", {
                   required: true,
                   valueAsNumber: true,
+                  onChange: (e) => setBathRoomCount(e.target.valueAsNumber),
                 })}
               />
 
-              <FormLabel htmlFor="maxGuestCount">Max Guest Count:</FormLabel>
-              <Input
-                type="number"
+              <FormLabel htmlFor="maxGuestCount">
+                Max Guest Count: {maxGuestCount}
+              </FormLabel>
+              <input
+                type="range"
+                defaultValue={1}
+                min={1}
+                max={20}
+                step={1}
                 id="maxGuestCount"
-                placeholder="Enter the maximum number of guests..."
                 {...register("maxGuestCount", {
                   required: true,
                   valueAsNumber: true,
+                  onChange: (e) => setMaxGuestCount(e.target.valueAsNumber),
                 })}
               />
 

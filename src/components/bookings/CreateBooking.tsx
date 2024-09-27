@@ -34,7 +34,7 @@ export const CreateBooking = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset } = useForm<FormProps>({});
-  const [numberOfGuestsCount, setnumberOfGuestsCount] = useState<number>(1);
+  const [numberOfGuestsCount, setNumberOfGuestsCount] = useState<number>(1);
 
   const createBooking = async (booking: FormProps) => {
     try {
@@ -130,7 +130,7 @@ export const CreateBooking = () => {
                   required: true,
                   valueAsNumber: true,
                   onChange: (e) =>
-                    setnumberOfGuestsCount(e.target.valueAsNumber),
+                    setNumberOfGuestsCount(e.target.valueAsNumber),
                 })}
               />
               <FormLabel htmlFor="totalPrice">Total Price:</FormLabel>
