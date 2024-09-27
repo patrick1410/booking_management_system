@@ -16,21 +16,26 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
-import { DataContext } from "../DataProvider";
+import { useState } from "react";
+
 import { convertToLocal } from "../../utils/convertToLocal";
 import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
+type CreateBookingProps = {
+  bookings: Booking[];
+  setBookings: (bookings: Booking[]) => void;
+};
+
 type FormProps = Booking;
 
-export const CreateBooking = () => {
+export const CreateBooking: React.FC<CreateBookingProps> = ({
+  bookings,
+  setBookings,
+}) => {
   const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const { bookings = [], setBookings = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset } = useForm<FormProps>({});

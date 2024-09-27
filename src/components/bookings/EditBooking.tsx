@@ -16,8 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
-import { DataContext } from "../DataProvider";
+import { useState } from "react";
 
 import { convertToLocal } from "../../utils/convertToLocal";
 import { getJWT } from "../../utils/getJWT";
@@ -25,17 +24,20 @@ import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditBookingProps = {
   id: string; // The id of the booking being edited
+  bookings: Booking[];
+  setBookings: (bookings: Booking[]) => void;
 };
 
 type FormProps = Booking; // FormProps is set to Booking type
 
-export const EditBooking: React.FC<EditBookingProps> = ({ id }) => {
+export const EditBooking: React.FC<EditBookingProps> = ({
+  id,
+  bookings,
+  setBookings,
+}) => {
   const noPermission = useNoPermission();
   const toast = useToast();
   const token = getJWT(); // Get token
-
-  const dataContext = useContext(DataContext);
-  const { bookings = [], setBookings = () => {} } = dataContext || {}; // Default to empty array and noop function
 
   // Find the booking by id
   const booking = bookings.find((booking) => booking.id === id);

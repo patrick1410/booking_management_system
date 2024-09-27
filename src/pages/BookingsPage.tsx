@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../components/DataProvider";
 import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateBooking } from "../components/bookings/CreateBooking";
@@ -20,8 +20,29 @@ export const BookingsPage = () => {
   // Use the useContext hook to access context data
   const dataContext = useContext(DataContext);
 
-  const { bookings, setBookings, searchTerm, setSearchTerm, error, loading } =
-    dataContext;
+  const { searchTerm, setSearchTerm } = dataContext;
+
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch("http://localhost:3000/bookings");
+        const bookings = await response.json();
+        setBookings(bookings);
+      } catch (error) {
+        console.error(error);
+        setError(`${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Handle error starte
   if (error) {
@@ -83,7 +104,7 @@ export const BookingsPage = () => {
           onSearchChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Bookings..."
         />
-        <CreateBooking />
+        <CreateBooking bookings={bookings} setBookings={setBookings} />
       </Box>
       <SimpleGrid
         mt={2}
@@ -98,6 +119,8 @@ export const BookingsPage = () => {
             deleteBooking={deleteBooking}
             token={token}
             noPermission={noPermission}
+            bookings={bookings}
+            setBookings={setBookings}
           />
         ))}
       </SimpleGrid>

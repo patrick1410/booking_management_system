@@ -8,6 +8,8 @@ type BookingItemProps = {
   deleteBooking: (id: string) => void;
   token: string | null;
   noPermission: () => void;
+  bookings: Booking[];
+  setBookings: (bookings: Booking[]) => void;
 };
 
 export const BookingItem: React.FC<BookingItemProps> = ({
@@ -15,6 +17,8 @@ export const BookingItem: React.FC<BookingItemProps> = ({
   deleteBooking,
   token,
   noPermission,
+  bookings,
+  setBookings,
 }) => {
   return (
     <Card key={booking.id}>
@@ -62,7 +66,11 @@ export const BookingItem: React.FC<BookingItemProps> = ({
           >
             Delete Booking
           </Button>
-          <EditBooking id={booking.id} />
+          <EditBooking
+            bookings={bookings}
+            setBookings={setBookings}
+            id={booking.id}
+          />
         </Box>
       </CardBody>
     </Card>

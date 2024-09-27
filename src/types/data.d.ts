@@ -69,12 +69,6 @@ type Property = {
 
 // Define the context type
 type DataContextType = {
-  bookings: Booking[];
-
-  setBookings: React.Dispatch<React.SetStateAction<Booking[]>>;
-
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  loading: boolean;
-  error: string | null;
 };
