@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../DataProvider";
 import { convertToLocal } from "../../utils/convertToLocal";
 import { getJWT } from "../../utils/getJWT";
@@ -34,6 +34,7 @@ export const CreateBooking = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset } = useForm<FormProps>({});
+  const [numberOfGuestsCount, setnumberOfGuestsCount] = useState<number>(1);
 
   const createBooking = async (booking: FormProps) => {
     try {
@@ -115,18 +116,23 @@ export const CreateBooking = () => {
                 placeholder="Select the check-out date..."
                 {...register("checkoutDate", { required: true })}
               />
-
-              <FormLabel htmlFor="numberOfGuests">Number of Guests:</FormLabel>
-              <Input
-                type="number"
+              <FormLabel htmlFor="numberOfGuests">
+                Number of Guests: {numberOfGuestsCount}
+              </FormLabel>
+              <input
+                type="range"
+                defaultValue={1}
+                min={1}
+                max={20}
+                step={1}
                 id="numberOfGuests"
-                placeholder="Enter the number of guests..."
                 {...register("numberOfGuests", {
                   required: true,
                   valueAsNumber: true,
+                  onChange: (e) =>
+                    setnumberOfGuestsCount(e.target.valueAsNumber),
                 })}
               />
-
               <FormLabel htmlFor="totalPrice">Total Price:</FormLabel>
               <Input
                 type="number"
