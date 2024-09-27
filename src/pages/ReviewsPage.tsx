@@ -73,7 +73,9 @@ export const ReviewsPage = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Heading as="h2">Reviews Page</Heading>
+        <Heading as="h2" mt={{ base: 2.5, sm: 0 }}>
+          Reviews Page
+        </Heading>
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={(e) => setSearchTerm(e.target.value)}

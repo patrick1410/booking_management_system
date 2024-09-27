@@ -70,7 +70,9 @@ export const AmenitiesPage = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Heading as="h2">Amenities Page</Heading>
+        <Heading as="h2" mt={{ base: 2.5, sm: 0 }}>
+          Amenities Page
+        </Heading>
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={(e) => setSearchTerm(e.target.value)}
