@@ -13,7 +13,7 @@ import { UserPage } from "./pages/users/UserPage";
 import { ReviewsPage } from "./pages/ReviewsPage";
 import { PropertiesPage } from "./pages/properties/PropertiesPage";
 import { PropertyPage } from "./pages/properties/PropertyPage";
-import { DataProvider } from "./components/DataProvider";
+import { SearchProvider } from "./components/SearchProvider";
 
 // Define your theme
 const theme = extendTheme({
@@ -85,9 +85,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("app")!).render(
   // <StrictMode>
   <ChakraProvider theme={theme}>
-    <DataProvider>
+    <SearchProvider>
       <RouterProvider router={router} />
-    </DataProvider>
+    </SearchProvider>
   </ChakraProvider>
   // </StrictMode>
 );

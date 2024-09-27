@@ -1,26 +1,26 @@
 import { createContext, useState, ReactNode } from "react";
 
 // Initialize the DataContext with a default value matching the DataContextType structure
-export const DataContext = createContext<DataContextType>({
+export const SearchContext = createContext<SearchContextType>({
   searchTerm: "",
   setSearchTerm: () => {},
 });
 
-type DataProviderProps = {
+type SearchProviderProps = {
   children: ReactNode; // Accept children as ReactNode (valid JSX content)
 };
 
-export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
+export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   return (
-    <DataContext.Provider
+    <SearchContext.Provider
       value={{
         searchTerm,
         setSearchTerm,
       }}
     >
       {children}
-    </DataContext.Provider>
+    </SearchContext.Provider>
   );
 };

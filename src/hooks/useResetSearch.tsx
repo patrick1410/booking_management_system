@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
-import { DataContext } from "../components/DataProvider";
+import { SearchContext } from "../components/SearchProvider";
 
 export const useResetSearch = () => {
   const location = useLocation();
-  const context = useContext(DataContext);
+  const context = useContext(SearchContext);
 
   // Ensure context is available
   if (!context) {

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { DataContext } from "../../components/DataProvider";
+import { SearchContext } from "../../components/SearchProvider";
 import { Box, SimpleGrid, Heading, useToast } from "@chakra-ui/react";
 import { CreateProperty } from "../../components/properties/CreateProperty";
 import { SearchBar } from "../../components/UI/SearchBar";
@@ -18,9 +18,9 @@ export const PropertiesPage = () => {
   const token = getJWT(); // Get token
 
   // Use the useContext hook to access context data
-  const dataContext = useContext(DataContext);
+  const searchContext = useContext(SearchContext);
 
-  const { searchTerm, setSearchTerm } = dataContext;
+  const { searchTerm, setSearchTerm } = searchContext;
 
   const [properties, setProperties] = useState<Property[]>([]);
   const [amenities, setAmenities] = useState<Amenity[]>([]);

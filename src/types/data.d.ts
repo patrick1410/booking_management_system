@@ -68,7 +68,7 @@ type Property = {
 };
 
 // Define the context type
-type DataContextType = {
+type SearchContextType = {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 };
