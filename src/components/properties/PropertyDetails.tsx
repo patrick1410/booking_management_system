@@ -29,7 +29,7 @@ export const PropertyDetails: React.FC<PropertyDetailsProps> = ({
         </Text>
         <Text>
           <strong>pricePerNight: </strong>
-          {property.pricePerNight.toString().replace(".", ",")}
+          &euro;{property.pricePerNight.toString().replace(".", ",")}
         </Text>
         <Text>
           <strong>bedroomCount: </strong>

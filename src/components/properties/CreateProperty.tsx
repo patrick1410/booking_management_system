@@ -83,6 +83,9 @@ export const CreateProperty: React.FC<CreatePropertyProps> = ({
       }
 
       reset();
+      setBedroomCount(1);
+      setBathRoomCount(1);
+      setMaxGuestCount(1);
       onClose();
     } catch (error) {
       console.error(error);

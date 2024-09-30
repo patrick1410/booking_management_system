@@ -38,7 +38,7 @@ export const PropertyBookings: React.FC<PropertyBookingsProps> = ({
           </Text>
           <Text>
             <strong>totalPrice: </strong>
-            {booking.totalPrice.toString().replace(".", ",")}
+            &euro;{booking.totalPrice.toString().replace(".", ",")}
           </Text>
           <Text>
             <strong>bookingStatus: </strong>

@@ -27,7 +27,7 @@ export const HostListings: React.FC<HostListingsProps> = ({ host }) => {
           </Text>
           <Text>
             <strong>pricePerNight: </strong>
-            {listing.pricePerNight.toString().replace(".", ",")}
+            &euro;{listing.pricePerNight.toString().replace(".", ",")}
           </Text>
           <Text>
             <strong>bedroomCount: </strong>

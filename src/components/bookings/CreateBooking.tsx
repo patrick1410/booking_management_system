@@ -73,6 +73,7 @@ export const CreateBooking: React.FC<CreateBookingProps> = ({
       }
 
       reset();
+      setNumberOfGuestsCount(1);
       onClose();
     } catch (error) {
       console.error(error);
