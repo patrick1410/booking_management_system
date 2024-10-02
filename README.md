@@ -14,7 +14,7 @@ npm run dev
 The app allows users to login and create new user accounts. Logged-in users can perform CRUD operations on resources and search them. <br/>
 Guests can view resources, search resources, but they cannot create, update, or delete resources.
 
-[Click here to have a look at the app](LINK)
+[Click here to have a look at the app](https://booking-management-system.netlify.app/)
 
 ### Login
 
