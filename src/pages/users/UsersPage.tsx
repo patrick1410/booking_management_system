@@ -29,7 +29,9 @@ export const UsersPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("http://localhost:3000/users");
+        const response = await fetch(
+          "https://booking-api-vtw8.onrender.com/users"
+        );
         const users = await response.json();
         setUsers(users);
       } catch (error) {
@@ -53,10 +55,13 @@ export const UsersPage = () => {
   const deleteUser = async (id: string) => {
     try {
       if (confirm("Are you sure you want to delete the user?")) {
-        const response = await fetch(`http://localhost:3000/users/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `${token}` },
-        });
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/users/${id}`,
+          {
+            method: "DELETE",
+            headers: { Authorization: `${token}` },
+          }
+        );
 
         if (response.ok) {
           setUsers((prev) => prev.filter((user) => user.id !== id));

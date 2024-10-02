@@ -32,8 +32,12 @@ export const PropertiesPage = () => {
 
       try {
         const [propertiesData, amenitiesData] = await Promise.all([
-          fetch("http://localhost:3000/properties").then((res) => res.json()),
-          fetch("http://localhost:3000/amenities").then((res) => res.json()),
+          fetch("https://booking-api-vtw8.onrender.com/properties").then(
+            (res) => res.json()
+          ),
+          fetch("https://booking-api-vtw8.onrender.com/amenities").then((res) =>
+            res.json()
+          ),
         ]);
         setProperties(propertiesData);
         setAmenities(amenitiesData);
@@ -59,10 +63,13 @@ export const PropertiesPage = () => {
   const deleteProperty = async (id: string) => {
     try {
       if (confirm("Are you sure you want to delete the property?")) {
-        const response = await fetch(`http://localhost:3000/properties/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `${token}` },
-        });
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/properties/${id}`,
+          {
+            method: "DELETE",
+            headers: { Authorization: `${token}` },
+          }
+        );
 
         if (response.ok) {
           setProperties((prev) =>

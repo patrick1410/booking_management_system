@@ -29,7 +29,9 @@ export const BookingsPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("http://localhost:3000/bookings");
+        const response = await fetch(
+          "https://booking-api-vtw8.onrender.com/bookings"
+        );
         const bookings = await response.json();
         setBookings(bookings);
       } catch (error) {
@@ -53,10 +55,13 @@ export const BookingsPage = () => {
   const deleteBooking = async (id: string) => {
     try {
       if (confirm("Are you sure you want to delete the booking?")) {
-        const response = await fetch(`http://localhost:3000/bookings/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `${token}` },
-        });
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/bookings/${id}`,
+          {
+            method: "DELETE",
+            headers: { Authorization: `${token}` },
+          }
+        );
 
         if (response.ok) {
           setBookings((prev) => prev.filter((booking) => booking.id !== id));

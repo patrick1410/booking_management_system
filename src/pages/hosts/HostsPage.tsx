@@ -29,7 +29,9 @@ export const HostsPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("http://localhost:3000/hosts");
+        const response = await fetch(
+          "https://booking-api-vtw8.onrender.com/hosts"
+        );
         const hosts = await response.json();
         setHosts(hosts);
       } catch (error) {
@@ -53,10 +55,13 @@ export const HostsPage = () => {
   const deleteHost = async (id: string) => {
     try {
       if (confirm("Are you sure you want to delete the host?")) {
-        const response = await fetch(`http://localhost:3000/hosts/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `${token}` },
-        });
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/hosts/${id}`,
+          {
+            method: "DELETE",
+            headers: { Authorization: `${token}` },
+          }
+        );
 
         if (response.ok) {
           setHosts((prev) => prev.filter((host) => host.id !== id));

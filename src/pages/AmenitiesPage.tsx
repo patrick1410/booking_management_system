@@ -29,7 +29,9 @@ export const AmenitiesPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("http://localhost:3000/amenities");
+        const response = await fetch(
+          "https://booking-api-vtw8.onrender.com/amenities"
+        );
         const amenities = await response.json();
         setAmenities(amenities);
       } catch (error) {
@@ -53,10 +55,13 @@ export const AmenitiesPage = () => {
   const deleteAmenity = async (id: string) => {
     try {
       if (confirm("Are you sure you want to delete the amenity?")) {
-        const response = await fetch(`http://localhost:3000/amenities/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `${token}` },
-        });
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/amenities/${id}`,
+          {
+            method: "DELETE",
+            headers: { Authorization: `${token}` },
+          }
+        );
 
         if (response.ok) {
           setAmenities((prev) => prev.filter((amenity) => amenity.id !== id));

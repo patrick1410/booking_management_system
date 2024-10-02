@@ -18,7 +18,9 @@ export const HostPage = () => {
       setError(null);
 
       try {
-        const response = await fetch(`http://localhost:3000/hosts/${id}`);
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/hosts/${id}`
+        );
         const hostData = await response.json();
         setHost(hostData);
       } catch (error) {

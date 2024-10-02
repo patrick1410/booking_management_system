@@ -29,7 +29,9 @@ export const ReviewsPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("http://localhost:3000/reviews");
+        const response = await fetch(
+          "https://booking-api-vtw8.onrender.com/reviews"
+        );
         const reviews = await response.json();
         setReviews(reviews);
       } catch (error) {
@@ -53,10 +55,13 @@ export const ReviewsPage = () => {
   const deleteReview = async (id: string) => {
     try {
       if (confirm("Are you sure you want to delete the review?")) {
-        const response = await fetch(`http://localhost:3000/reviews/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `${token}` },
-        });
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/reviews/${id}`,
+          {
+            method: "DELETE",
+            headers: { Authorization: `${token}` },
+          }
+        );
 
         if (response.ok) {
           setReviews((prev) => prev.filter((review) => review.id !== id));

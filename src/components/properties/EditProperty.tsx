@@ -82,23 +82,28 @@ export const EditProperty: React.FC<EditPropertyProps> = ({
 
   const editProperty = async (property: FormProps) => {
     try {
-      const response = await fetch(`http://localhost:3000/properties/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-          ...property,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://booking-api-vtw8.onrender.com/properties/${id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            ...property,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       // Get the updated property from the response
       const updatedProperty = await response.json();
 
       if (updatedProperty) {
         // Fetch all properties after the update
-        const refresh = await fetch(`http://localhost:3000/properties`);
+        const refresh = await fetch(
+          `https://booking-api-vtw8.onrender.com/properties`
+        );
         const newProperties = await refresh.json();
 
         // Update the properties state

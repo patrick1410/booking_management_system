@@ -43,22 +43,25 @@ export const CreateBooking: React.FC<CreateBookingProps> = ({
 
   const createBooking = async (booking: FormProps) => {
     try {
-      const response = await fetch("http://localhost:3000/bookings", {
-        method: "POST",
-        body: JSON.stringify({
-          userId: booking.userId,
-          propertyId: booking.propertyId,
-          checkinDate: convertToLocal(booking.checkinDate),
-          checkoutDate: convertToLocal(booking.checkoutDate),
-          numberOfGuests: booking.numberOfGuests,
-          totalPrice: booking.totalPrice,
-          bookingStatus: booking.bookingStatus,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://booking-api-vtw8.onrender.com/bookings",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            userId: booking.userId,
+            propertyId: booking.propertyId,
+            checkinDate: convertToLocal(booking.checkinDate),
+            checkoutDate: convertToLocal(booking.checkoutDate),
+            numberOfGuests: booking.numberOfGuests,
+            totalPrice: booking.totalPrice,
+            bookingStatus: booking.bookingStatus,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       const newBooking = await response.json();
       if (setBookings) {

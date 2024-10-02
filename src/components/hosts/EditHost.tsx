@@ -59,23 +59,28 @@ export const EditHost: React.FC<EditHostProps> = ({ id, hosts, setHosts }) => {
 
   const editHost = async (host: FormProps) => {
     try {
-      const response = await fetch(`http://localhost:3000/hosts/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-          ...host,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://booking-api-vtw8.onrender.com/hosts/${id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            ...host,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       // Get the updated host from the response
       const updatedHost = await response.json();
 
       if (updatedHost) {
         // Fetch all hosts after the update
-        const refresh = await fetch(`http://localhost:3000/hosts`);
+        const refresh = await fetch(
+          `https://booking-api-vtw8.onrender.com/hosts`
+        );
         const newHosts = await refresh.json();
 
         // Update the hosts state

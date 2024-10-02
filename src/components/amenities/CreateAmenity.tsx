@@ -40,16 +40,19 @@ export const CreateAmenity: React.FC<CreateAmenityProps> = ({
 
   const createAmenity = async (amenity: FormProps) => {
     try {
-      const response = await fetch("http://localhost:3000/amenities", {
-        method: "POST",
-        body: JSON.stringify({
-          ...amenity,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://booking-api-vtw8.onrender.com/amenities",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ...amenity,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       const newAmenity = await response.json();
       if (setAmenities) {

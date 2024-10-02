@@ -57,23 +57,28 @@ export const EditUser: React.FC<EditUserProps> = ({ id, users, setUsers }) => {
 
   const editUser = async (user: FormProps) => {
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-          ...user,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://booking-api-vtw8.onrender.com/users/${id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            ...user,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       // Get the updated user from the response
       const updatedUser = await response.json();
 
       if (updatedUser) {
         // Fetch all users after the update
-        const refresh = await fetch(`http://localhost:3000/users`);
+        const refresh = await fetch(
+          `https://booking-api-vtw8.onrender.com/users`
+        );
         const newUsers = await refresh.json();
 
         // Update the users state

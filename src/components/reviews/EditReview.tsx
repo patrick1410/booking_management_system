@@ -52,23 +52,28 @@ export const EditReview: React.FC<EditReviewProps> = ({
 
   const editReview = async (review: FormProps) => {
     try {
-      const response = await fetch(`http://localhost:3000/reviews/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-          ...review,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://booking-api-vtw8.onrender.com/reviews/${id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            ...review,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       // Get the updated review from the response
       const updatedReview = await response.json();
 
       if (updatedReview) {
         // Fetch all reviews after the update
-        const refresh = await fetch(`http://localhost:3000/reviews`);
+        const refresh = await fetch(
+          `https://booking-api-vtw8.onrender.com/reviews`
+        );
         const newReviews = await refresh.json();
 
         // Update the reviews state

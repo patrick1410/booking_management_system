@@ -19,7 +19,9 @@ export const UserPage = () => {
       setError(null);
 
       try {
-        const response = await fetch(`http://localhost:3000/users/${id}`);
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/users/${id}`
+        );
         const userData = await response.json();
         setUser(userData);
       } catch (error) {

@@ -59,16 +59,19 @@ export const CreateProperty: React.FC<CreatePropertyProps> = ({
 
   const createProperty = async (property: FormProps) => {
     try {
-      const response = await fetch("http://localhost:3000/properties", {
-        method: "POST",
-        body: JSON.stringify({
-          ...property,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://booking-api-vtw8.onrender.com/properties",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ...property,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       const newProperty = await response.json();
       if (setProperties) {

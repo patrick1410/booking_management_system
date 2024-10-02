@@ -45,23 +45,28 @@ export const EditAmenity: React.FC<EditAmenityProps> = ({
 
   const editAmenity = async (amenity: FormProps) => {
     try {
-      const response = await fetch(`http://localhost:3000/amenities/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-          ...amenity,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://booking-api-vtw8.onrender.com/amenities/${id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            ...amenity,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       // Get the updated amenity from the response
       const updatedAmenity = await response.json();
 
       if (updatedAmenity) {
         // Fetch all amenities after the update
-        const refresh = await fetch(`http://localhost:3000/amenities`);
+        const refresh = await fetch(
+          `https://booking-api-vtw8.onrender.com/amenities`
+        );
         const newAmenities = await refresh.json();
 
         // Update the bookings state

@@ -50,16 +50,19 @@ export const CreateUser: React.FC<CreateUserProps> = ({ users, setUsers }) => {
 
   const createUser = async (user: FormProps) => {
     try {
-      const response = await fetch("http://localhost:3000/users", {
-        method: "POST",
-        body: JSON.stringify({
-          ...user,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://booking-api-vtw8.onrender.com/users",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ...user,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       const newUser = await response.json();
       if (setUsers) {

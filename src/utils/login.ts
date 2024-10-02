@@ -1,5 +1,5 @@
 export const login = async (username: string, password: string) => {
-  const response = await fetch("http://localhost:3000/login", {
+  const response = await fetch("https://booking-api-vtw8.onrender.com/login", {
     method: "POST",
     body: JSON.stringify({ username, password }),
     headers: {

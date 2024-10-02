@@ -52,16 +52,19 @@ export const CreateHost: React.FC<CreateHostProps> = ({ hosts, setHosts }) => {
 
   const createHost = async (host: FormProps) => {
     try {
-      const response = await fetch("http://localhost:3000/hosts", {
-        method: "POST",
-        body: JSON.stringify({
-          ...host,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://booking-api-vtw8.onrender.com/hosts",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ...host,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       const newHost = await response.json();
       if (setHosts) {

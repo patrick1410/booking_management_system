@@ -19,7 +19,9 @@ export const PropertyPage = () => {
       setError(null);
 
       try {
-        const response = await fetch(`http://localhost:3000/properties/${id}`);
+        const response = await fetch(
+          `https://booking-api-vtw8.onrender.com/properties/${id}`
+        );
         const propertyData = await response.json();
         setProperty(propertyData);
       } catch (error) {

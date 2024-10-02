@@ -61,29 +61,34 @@ export const EditBooking: React.FC<EditBookingProps> = ({
 
   const editBooking = async (booking: FormProps) => {
     try {
-      const response = await fetch(`http://localhost:3000/bookings/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-          userId: booking.userId,
-          propertyId: booking.propertyId,
-          checkinDate: new Date(convertToLocal(booking.checkinDate)),
-          checkoutDate: new Date(convertToLocal(booking.checkoutDate)),
-          numberOfGuests: booking.numberOfGuests,
-          totalPrice: booking.totalPrice,
-          bookingStatus: booking.bookingStatus,
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://booking-api-vtw8.onrender.com/bookings/${id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            userId: booking.userId,
+            propertyId: booking.propertyId,
+            checkinDate: new Date(convertToLocal(booking.checkinDate)),
+            checkoutDate: new Date(convertToLocal(booking.checkoutDate)),
+            numberOfGuests: booking.numberOfGuests,
+            totalPrice: booking.totalPrice,
+            bookingStatus: booking.bookingStatus,
+          }),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `${token}`,
+          },
+        }
+      );
 
       // Get the updated booking from the response
       const updatedBooking = await response.json();
 
       if (updatedBooking) {
         // Fetch all bookings after the update
-        const refresh = await fetch(`http://localhost:3000/bookings`);
+        const refresh = await fetch(
+          `https://booking-api-vtw8.onrender.com/bookings`
+        );
         const newBookings = await refresh.json();
 
         // Update the bookings state
