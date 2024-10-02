@@ -4,7 +4,7 @@ import { SearchIcon } from "@chakra-ui/icons";
 type SearchBarProps = {
   searchTerm: string;
   onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string; // Allow setting a custom placeholder
+  placeholder: string;
 };
 
 export const SearchBar: React.FC<SearchBarProps> = ({

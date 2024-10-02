@@ -17,9 +17,7 @@ export const BookingsPage = () => {
   const toast = useToast();
   const token = getJWT(); // Get token
 
-  // Use the useContext hook to access context data
   const searchContext = useContext(SearchContext);
-
   const { searchTerm, setSearchTerm } = searchContext;
 
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -44,12 +42,10 @@ export const BookingsPage = () => {
     fetchData();
   }, []);
 
-  // Handle error starte
   if (error) {
     return <ErrorComponent error={error} />;
   }
 
-  // Handle loading state
   if (loading) {
     return <LoadingComponent resource="bookings" />;
   }
@@ -88,7 +84,7 @@ export const BookingsPage = () => {
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      {/* Fixed header with heading and button */}
+      {/* Fixed header with heading, searchbar and create button */}
       <Box
         w="100%"
         display="flex"
@@ -106,6 +102,7 @@ export const BookingsPage = () => {
         />
         <CreateBooking bookings={bookings} setBookings={setBookings} />
       </Box>
+      {/* Scrollable bookings list */}
       <SimpleGrid
         mt={2}
         columns={{ base: 1, md: 2, xl: 3, "2xl": 4 }}

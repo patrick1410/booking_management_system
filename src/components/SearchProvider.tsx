@@ -1,6 +1,5 @@
 import { createContext, useState, ReactNode } from "react";
 
-// Initialize the DataContext with a default value matching the DataContextType structure
 export const SearchContext = createContext<SearchContextType>({
   searchTerm: "",
   setSearchTerm: () => {},

@@ -7,15 +7,15 @@ import { HostDetails } from "../../components/hosts/HostDetails";
 import { HostListings } from "../../components/hosts/HostListings";
 
 export const HostPage = () => {
-  const { id } = useParams(); // Get the ID from the URL
+  const { id } = useParams(); // Get the id from the URL
   const [host, setHost] = useState<Host | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchHost = async () => {
-      setLoading(true); // Start loading
-      setError(null); // Reset error state
+      setLoading(true);
+      setError(null);
 
       try {
         const response = await fetch(`http://localhost:3000/hosts/${id}`);

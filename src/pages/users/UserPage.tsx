@@ -8,15 +8,15 @@ import { UserReviews } from "../../components/users/UserReviews";
 import { UserBookings } from "../../components/users/UserBookings";
 
 export const UserPage = () => {
-  const { id } = useParams(); // Get the ID from the URL
+  const { id } = useParams(); // Get the id from the URL
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchHost = async () => {
-      setLoading(true); // Start loading
-      setError(null); // Reset error state
+      setLoading(true);
+      setError(null);
 
       try {
         const response = await fetch(`http://localhost:3000/users/${id}`);

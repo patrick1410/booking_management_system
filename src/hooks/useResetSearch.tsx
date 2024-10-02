@@ -9,7 +9,7 @@ export const useResetSearch = () => {
 
   // Ensure context is available
   if (!context) {
-    return; // Return early if !context; this should not happen if the hook is used correctly
+    return; // Return early if !context;
   }
 
   // Extract setSearchTerm from context

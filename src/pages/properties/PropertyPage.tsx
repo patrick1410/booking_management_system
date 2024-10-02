@@ -8,15 +8,15 @@ import { PropertyReviews } from "../../components/properties/PropertyReviews";
 import { PropertyBookings } from "../../components/properties/PropertyBookings";
 
 export const PropertyPage = () => {
-  const { id } = useParams(); // Get the ID from the URL
+  const { id } = useParams(); // Get the id from the URL
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchHost = async () => {
-      setLoading(true); // Start loading
-      setError(null); // Reset error state
+      setLoading(true);
+      setError(null);
 
       try {
         const response = await fetch(`http://localhost:3000/properties/${id}`);
@@ -40,6 +40,7 @@ export const PropertyPage = () => {
   if (loading || !property) {
     return <LoadingComponent resource="property" />;
   }
+
   return (
     <Box gridArea="main" display="flex" flexDir="column">
       <SimpleGrid columns={1} overflow="auto">

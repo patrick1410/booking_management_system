@@ -26,12 +26,12 @@ import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditUserProps = {
-  id: string; // The id of the user being edited
+  id: string;
   users: User[];
   setUsers: (users: User[]) => void;
 };
 
-type FormProps = User; // FormProps is set to User type
+type FormProps = User;
 
 export const EditUser: React.FC<EditUserProps> = ({ id, users, setUsers }) => {
   const noPermission = useNoPermission();

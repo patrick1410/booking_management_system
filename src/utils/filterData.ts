@@ -1,4 +1,4 @@
-// Utility function to perform search on any data
+// Function to perform search on any data
 export const filterData = <T>(
   data: T[],
   searchTerm: string,

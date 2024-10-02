@@ -1,4 +1,4 @@
-// import { StrictMode } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -15,7 +15,7 @@ import { PropertiesPage } from "./pages/properties/PropertiesPage";
 import { PropertyPage } from "./pages/properties/PropertyPage";
 import { SearchProvider } from "./components/SearchProvider";
 
-// Define your theme
+// Theme
 const theme = extendTheme({
   styles: {
     global: {
@@ -80,14 +80,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-// StrictMode causes double data render in development
-
 createRoot(document.getElementById("app")!).render(
-  // <StrictMode>
-  <ChakraProvider theme={theme}>
-    <SearchProvider>
-      <RouterProvider router={router} />
-    </SearchProvider>
-  </ChakraProvider>
-  // </StrictMode>
+  <StrictMode>
+    <ChakraProvider theme={theme}>
+      <SearchProvider>
+        <RouterProvider router={router} />
+      </SearchProvider>
+    </ChakraProvider>
+  </StrictMode>
 );

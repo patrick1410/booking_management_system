@@ -35,7 +35,7 @@ export const Navigation = () => {
   // Handles logout and removes the JWT from the localStorage
   const handleLogout = () => {
     localStorage.removeItem("jwt");
-    navigate("/"); // Redirect to login page this is necessary
+    navigate("/"); // Redirect to bookingspage
     toast({
       title: "Logged out!",
       description: "You have been successfully logged out.",

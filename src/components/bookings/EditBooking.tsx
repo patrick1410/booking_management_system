@@ -23,12 +23,12 @@ import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditBookingProps = {
-  id: string; // The id of the booking being edited
+  id: string;
   bookings: Booking[];
   setBookings: (bookings: Booking[]) => void;
 };
 
-type FormProps = Booking; // FormProps is set to Booking type
+type FormProps = Booking;
 
 export const EditBooking: React.FC<EditBookingProps> = ({
   id,

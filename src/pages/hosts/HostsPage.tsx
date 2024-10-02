@@ -17,9 +17,7 @@ export const HostsPage = () => {
   const toast = useToast();
   const token = getJWT(); // Get token
 
-  // Use the useContext hook to access context data
   const searchContext = useContext(SearchContext);
-
   const { searchTerm, setSearchTerm } = searchContext;
 
   const [hosts, setHosts] = useState<Host[]>([]);
@@ -44,12 +42,10 @@ export const HostsPage = () => {
     fetchData();
   }, []);
 
-  // Handle error starte
   if (error) {
     return <ErrorComponent error={error} />;
   }
 
-  // Handle loading state
   if (loading) {
     return <LoadingComponent resource="hosts" />;
   }
@@ -88,7 +84,6 @@ export const HostsPage = () => {
 
   return (
     <Box gridArea="main" display="flex" flexDir="column">
-      {/* Fixed header with heading and button */}
       <Box
         w="100%"
         display="flex"
@@ -106,7 +101,6 @@ export const HostsPage = () => {
         />
         <CreateHost hosts={hosts} setHosts={setHosts} />
       </Box>
-      {/* Scrollable user list */}
       <SimpleGrid
         mt={2}
         columns={{ base: 1, md: 2, xl: 3, "2xl": 4 }}

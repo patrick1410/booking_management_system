@@ -17,9 +17,7 @@ export const PropertiesPage = () => {
   const toast = useToast();
   const token = getJWT(); // Get token
 
-  // Use the useContext hook to access context data
   const searchContext = useContext(SearchContext);
-
   const { searchTerm, setSearchTerm } = searchContext;
 
   const [properties, setProperties] = useState<Property[]>([]);
@@ -29,8 +27,8 @@ export const PropertiesPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // Start loading
-      setError(null); // Reset error state
+      setLoading(true);
+      setError(null);
 
       try {
         const [propertiesData, amenitiesData] = await Promise.all([
@@ -50,12 +48,10 @@ export const PropertiesPage = () => {
     fetchData();
   }, []);
 
-  // Handle error starte
   if (error) {
     return <ErrorComponent error={error} />;
   }
 
-  // Handle loading state
   if (loading) {
     return <LoadingComponent resource="properties" />;
   }

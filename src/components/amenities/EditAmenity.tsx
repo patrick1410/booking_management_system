@@ -19,12 +19,12 @@ import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditAmenityProps = {
-  id: string; // The id of the amenity being edited
+  id: string;
   amenities: Amenity[];
   setAmenities: (amenities: Amenity[]) => void;
 };
 
-type FormProps = Amenity; // FormProps is set to Amenity type
+type FormProps = Amenity;
 
 export const EditAmenity: React.FC<EditAmenityProps> = ({
   id,

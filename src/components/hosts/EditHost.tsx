@@ -27,12 +27,12 @@ import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditHostProps = {
-  id: string; // The id of the host being edited
+  id: string;
   hosts: Host[];
   setHosts: (hosts: Host[]) => void;
 };
 
-type FormProps = Host; // FormProps is set to Host type
+type FormProps = Host;
 
 export const EditHost: React.FC<EditHostProps> = ({ id, hosts, setHosts }) => {
   const noPermission = useNoPermission();

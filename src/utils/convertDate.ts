@@ -1,4 +1,4 @@
-// convertDate functie
+// convertDate function
 export const convertDate = (date: Date | string) => {
   const dateStr = date.toString();
   const slicedDate = dateStr.slice(0, 16); // Slice dateStr to YYYY-MM-DD-TTTT

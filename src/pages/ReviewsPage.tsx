@@ -17,9 +17,7 @@ export const ReviewsPage = () => {
   const toast = useToast();
   const token = getJWT(); // Get token
 
-  // Use the useContext hook to access context data
   const searchContext = useContext(SearchContext);
-
   const { searchTerm, setSearchTerm } = searchContext;
 
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -44,12 +42,10 @@ export const ReviewsPage = () => {
     fetchData();
   }, []);
 
-  // Handle error starte
   if (error) {
     return <ErrorComponent error={error} />;
   }
 
-  // Handle loading state
   if (loading) {
     return <LoadingComponent resource="reviews" />;
   }

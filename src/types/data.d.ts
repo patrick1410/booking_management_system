@@ -1,4 +1,4 @@
-// Define types
+// Types
 type User = {
   id: string;
   username: string;
@@ -67,7 +67,7 @@ type Property = {
   bookings: Booking[];
 };
 
-// Define the context type
+// Context type
 type SearchContextType = {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;

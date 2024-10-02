@@ -21,12 +21,12 @@ import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditReviewProps = {
-  id: string; // The id of the review being edited
+  id: string;
   reviews: Review[];
   setReviews: (reviews: Review[]) => void;
 };
 
-type FormProps = Review; // FormProps is set to Review type
+type FormProps = Review;
 
 export const EditReview: React.FC<EditReviewProps> = ({
   id,

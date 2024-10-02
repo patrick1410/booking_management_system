@@ -17,9 +17,7 @@ export const AmenitiesPage = () => {
   const toast = useToast();
   const token = getJWT(); // Get token
 
-  // Use the useContext hook to access context data
   const searchContext = useContext(SearchContext);
-
   const { searchTerm, setSearchTerm } = searchContext;
 
   const [amenities, setAmenities] = useState<Amenity[]>([]);
@@ -44,12 +42,10 @@ export const AmenitiesPage = () => {
     fetchData();
   }, []);
 
-  // Handle error starte
   if (error) {
     return <ErrorComponent error={error} />;
   }
 
-  // Handle loading state
   if (loading) {
     return <LoadingComponent resource="amenities" />;
   }

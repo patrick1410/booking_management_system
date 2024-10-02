@@ -22,7 +22,7 @@ import { getJWT } from "../../utils/getJWT";
 import { useNoPermission } from "../../hooks/useNoPermission";
 
 type EditPropertyProps = {
-  id: string; // The id of the host being edited
+  id: string;
   amenities: Amenity[];
   properties: Property[];
   setProperties: (properties: Property[]) => void;
@@ -51,7 +51,7 @@ export const EditProperty: React.FC<EditPropertyProps> = ({
   const noPermission = useNoPermission();
   const token = getJWT(); // Get token
 
-  // Find the host by id
+  // Find the property by id
   const property = properties.find((property) => property.id === id);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
